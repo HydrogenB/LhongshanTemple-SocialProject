@@ -855,7 +855,7 @@ const Global1738Section = ({ currentLang, t }) => {
 };
 
 // Cart summary bar (local cart for selected amulets)
-const CartBar = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, onClearCart, imageSize = 'small', t }) => {
+const CartBar = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, onClearCart, imageSize = 'small', t, currentLang }) => {
   const items = Object.values(cart || {});
   const totalPieces = items.reduce((sum, item) => sum + (item.qty || 1), 0);
   const [open, setOpen] = useState(false);
@@ -949,7 +949,11 @@ const CartBar = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, onClearCar
                 {/* Category Header */}
                 <div className="mb-2 px-1">
                   <span className="text-amber-300 font-medium text-sm">
-                    {group.titleTh || group.titleEn || group.titleZh}
+                    {currentLang === 'th' ? (group.titleTh || group.titleEn || group.titleZh) :
+                     currentLang === 'zh' ? (group.titleZh || group.titleEn) :
+                     currentLang === 'ja' ? (group.titleZh || group.titleEn) :
+                     currentLang === 'ko' ? (group.titleZh || group.titleEn) :
+                     (group.titleEn || group.titleZh)}
                   </span>
                 </div>
 
@@ -1676,9 +1680,51 @@ const Footer = ({ t }) => {
   );
 };
 
+// Supported language codes
+const SUPPORTED_LANGS = ['en', 'zh', 'th', 'ja', 'ko'];
+
+// Detect initial language from query param, localStorage, browser locale, or timezone
+const detectInitialLang = () => {
+  // 1. Check query param ?lang=XX
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const queryLang = params.get('lang')?.toLowerCase();
+    if (queryLang) {
+      // Map common aliases
+      const langMap = { 'tw': 'zh', 'cn': 'zh', 'jp': 'ja', 'kr': 'ko', 'us': 'en' };
+      const mapped = langMap[queryLang] || queryLang;
+      if (SUPPORTED_LANGS.includes(mapped)) return mapped;
+    }
+  }
+
+  // 2. Check localStorage for previously selected language
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem('longshan-lang');
+    if (stored && SUPPORTED_LANGS.includes(stored)) return stored;
+  }
+
+  // 3. Use browser language
+  if (typeof navigator !== 'undefined') {
+    const browserLang = (navigator.language || '').toLowerCase();
+    if (browserLang.startsWith('th')) return 'th';
+    if (browserLang.startsWith('ja')) return 'ja';
+    if (browserLang.startsWith('ko')) return 'ko';
+    if (browserLang.startsWith('zh')) return 'zh';
+  }
+
+  // 4. Special rule by timezone (e.g., Taiwan timezone → English for tourists)
+  if (typeof Intl !== 'undefined') {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    if (tz.includes('Taipei')) return 'en';
+  }
+
+  // 5. Default to Thai (primary target audience)
+  return 'th';
+};
+
 // Main App Component
 function App() {
-  const [currentLang, setCurrentLang] = useState('th');
+  const [currentLang, setCurrentLang] = useState(() => detectInitialLang());
   const [cart, setCart] = useState({});
   const [previewItem, setPreviewItem] = useState(null);
   // Default: large on PC, medium on mobile
@@ -1688,6 +1734,12 @@ function App() {
     }
     return 'large';
   });
+
+  // Persist language choice to localStorage
+  useEffect(() => {
+    localStorage.setItem('longshan-lang', currentLang);
+  }, [currentLang]);
+
   const translation = getTranslation(currentLang);
 
   const handleToggleCart = (item) => {
@@ -1886,6 +1938,7 @@ function App() {
         onClearCart={handleClearCart}
         imageSize={imageSize}
         t={translation}
+        currentLang={currentLang}
       />
     </div>
   );
