@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 import TempleGuide from './TempleGuide.jsx';
-import { languages, getTranslation } from './locales.js';
+import { languages, getTranslation, translations } from './locales.js';
 
 // Helper to build a stable cart key per image
 const buildCartKey = (section, categoryId, imageUrl) => `${section}:${categoryId}:${imageUrl}`;
@@ -28,8 +28,8 @@ const summaryThumbSize = {
   large: 'w-28 h-28 sm:w-32 sm:h-32',
 };
 
-// Approximate founding date of Longshan Temple (adjust if official date is known)
-const FOUNDING_DATE = new Date(1738, 0, 1);
+// Approximate founding date of Longshan Temple (18th day of 5th month, Qianlong year 3 = May 18, 1738)
+const FOUNDING_DATE = new Date(1738, 4, 18);
 
 const computeFoundingDuration = () => {
   const now = new Date();
@@ -135,54 +135,15 @@ const GLOBAL_1738_CONTEXTS = [
     ],
   },
 ];
-// Temple blessing categories data
-const blessingCategories = [
+// Helper to get localized blessing categories
+const getBlessingCategories = (t) => [
   {
-    id: 'family',
-    icon: Shield,
-    titleZh: '家內安全',
-    titleEn: 'Family Safety',
-    titleTh: 'ปลอดภัยทั้งครอบครัว',
-    description: 'Sacred charms to protect your entire household from harm and misfortune.',
-    color: 'from-amber-600 to-yellow-500',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/011b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/065.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/032b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/033b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/024b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/081b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/085.jpg',
-    ]
-  },
-  {
-    id: 'traffic',
-    icon: Car,
-    titleZh: '交通安全',
-    titleEn: 'Traffic Safety',
-    titleTh: 'ความปลอดภัยการจราจร',
-    description: 'Divine protection for safe travels on all your journeys.',
-    color: 'from-blue-600 to-cyan-500',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/005b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/006b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/003b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/004b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/027b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/028b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/029b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/047b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/234c.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/235c.jpg',
-    ]
-  },
-  {
-    id: 'study',
+    id: 'education',
     icon: GraduationCap,
-    titleZh: '學業考試',
-    titleEn: 'Academic Success',
-    titleTh: 'การศึกษา',
-    description: 'Blessings for wisdom, focus, and success in examinations.',
+    titleZh: translations.zh.categories.education.title,
+    titleEn: translations.en.categories.education.title,
+    titleTh: translations.th.categories.education.title,
+    description: t.categories.education.description,
     color: 'from-indigo-600 to-purple-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/009b.jpg',
@@ -202,53 +163,12 @@ const blessingCategories = [
     ]
   },
   {
-    id: 'pregnancy',
-    icon: Baby,
-    titleZh: '安產',
-    titleEn: 'Safe Pregnancy',
-    titleTh: 'สตรีมีครรภ์และความปลอดภัยของทารก',
-    description: 'Divine protection for expecting mothers and newborns.',
-    color: 'from-pink-500 to-rose-400',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/012b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/015b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/062.jpg',
-    ]
-  },
-  {
-    id: 'fertility',
-    icon: HeartHandshake,
-    titleZh: '求子',
-    titleEn: 'Fertility Blessing',
-    titleTh: 'ตั้งครรภ์ได้',
-    description: 'Sacred prayers for those hoping to conceive a child.',
-    color: 'from-rose-500 to-pink-400',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/012b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/062.jpg',
-    ]
-  },
-  {
-    id: 'pet',
-    icon: Dog,
-    titleZh: '寵物',
-    titleEn: 'Pet Protection',
-    titleTh: 'สัตว์เลี้ยง',
-    description: 'Blessings for the health and safety of your beloved pets.',
-    color: 'from-orange-500 to-amber-400',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/001b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/239.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/240.jpg',
-    ]
-  },
-  {
     id: 'safety',
     icon: Shield,
-    titleZh: '平安',
-    titleEn: 'General Protection',
-    titleTh: 'ช่วยเหลือ',
-    description: 'All-purpose protection charms for peace and safety.',
+    titleZh: translations.zh.categories.safety.title,
+    titleEn: translations.en.categories.safety.title,
+    titleTh: translations.th.categories.safety.title,
+    description: t.categories.safety.description,
     color: 'from-emerald-600 to-teal-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/050b.jpg',
@@ -272,12 +192,74 @@ const blessingCategories = [
     ]
   },
   {
+    id: 'transport',
+    icon: Car,
+    titleZh: translations.zh.categories.transport.title,
+    titleEn: translations.en.categories.transport.title,
+    titleTh: translations.th.categories.transport.title,
+    description: t.categories.transport.description,
+    color: 'from-blue-600 to-cyan-500',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/005b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/006b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/003b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/004b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/027b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/028b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/029b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/047b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/234c.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/235c.jpg',
+    ]
+  },
+  {
+    id: 'pregnancy',
+    icon: Baby,
+    titleZh: translations.zh.categories.pregnancy.title,
+    titleEn: translations.en.categories.pregnancy.title,
+    titleTh: translations.th.categories.pregnancy.title,
+    description: t.categories.pregnancy.description,
+    color: 'from-pink-500 to-rose-400',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/012b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/015b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/062.jpg',
+    ]
+  },
+  {
+    id: 'fertility',
+    icon: HeartHandshake,
+    titleZh: translations.zh.categories.fertility.title,
+    titleEn: translations.en.categories.fertility.title,
+    titleTh: translations.th.categories.fertility.title,
+    description: t.categories.fertility.description,
+    color: 'from-rose-500 to-pink-400',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/012b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/062.jpg',
+    ]
+  },
+  {
+    id: 'pet',
+    icon: Dog,
+    titleZh: translations.zh.categories.pet.title,
+    titleEn: translations.en.categories.pet.title,
+    titleTh: translations.th.categories.pet.title,
+    description: t.categories.pet.description,
+    color: 'from-orange-500 to-amber-400',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/001b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/239.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/240.jpg',
+    ]
+  },
+  {
     id: 'health',
     icon: Stethoscope,
-    titleZh: '健康',
-    titleEn: 'Health & Wellness',
-    titleTh: 'สุขภาพแข็งแรง',
-    description: 'Divine blessings for physical health and recovery.',
+    titleZh: translations.zh.categories.health.title,
+    titleEn: translations.en.categories.health.title,
+    titleTh: translations.th.categories.health.title,
+    description: t.categories.health.description,
     color: 'from-green-600 to-emerald-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/063.jpg',
@@ -294,10 +276,10 @@ const blessingCategories = [
   {
     id: 'career',
     icon: Briefcase,
-    titleZh: '工作求職',
-    titleEn: 'Career Success',
-    titleTh: 'การงาน',
-    description: 'Blessings for job seekers and career advancement.',
+    titleZh: translations.zh.categories.career.title,
+    titleEn: translations.en.categories.career.title,
+    titleTh: translations.th.categories.career.title,
+    description: t.categories.career.description,
     color: 'from-slate-600 to-gray-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/052b.jpg',
@@ -311,10 +293,10 @@ const blessingCategories = [
   {
     id: 'business',
     icon: Store,
-    titleZh: '生意',
-    titleEn: 'Business Prosperity',
-    titleTh: 'การค้า',
-    description: 'Sacred charms for business success and wealth.',
+    titleZh: translations.zh.categories.business.title,
+    titleEn: translations.en.categories.business.title,
+    titleTh: translations.th.categories.business.title,
+    description: t.categories.business.description,
     color: 'from-yellow-600 to-amber-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/052b.jpg',
@@ -333,10 +315,10 @@ const blessingCategories = [
   {
     id: 'happiness',
     icon: Smile,
-    titleZh: '幸福',
-    titleEn: 'Happiness',
-    titleTh: 'มีความสุข',
-    description: 'Blessings for joy and contentment in life.',
+    titleZh: translations.zh.categories.happiness.title,
+    titleEn: translations.en.categories.happiness.title,
+    titleTh: translations.th.categories.happiness.title,
+    description: t.categories.happiness.description,
     color: 'from-yellow-500 to-orange-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/054b.jpg',
@@ -345,10 +327,10 @@ const blessingCategories = [
   {
     id: 'luck',
     icon: Sparkles,
-    titleZh: '福氣',
-    titleEn: 'Good Fortune',
-    titleTh: 'โชคดี',
-    description: 'Attract good luck and positive energy into your life.',
+    titleZh: translations.zh.categories.luck.title,
+    titleEn: translations.en.categories.luck.title,
+    titleTh: translations.th.categories.luck.title,
+    description: t.categories.luck.description,
     color: 'from-amber-500 to-yellow-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/027b.jpg',
@@ -364,10 +346,10 @@ const blessingCategories = [
   {
     id: 'love',
     icon: Heart,
-    titleZh: '愛情',
-    titleEn: 'Love & Romance',
-    titleTh: 'ความรัก',
-    description: 'Divine blessings for finding and nurturing true love.',
+    titleZh: translations.zh.categories.love.title,
+    titleEn: translations.en.categories.love.title,
+    titleTh: translations.th.categories.love.title,
+    description: t.categories.love.description,
     color: 'from-red-500 to-pink-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/019.jpg',
@@ -384,29 +366,29 @@ const blessingCategories = [
   },
 ];
 
-const souvenirItems = [
+// Helper to get localized souvenir items
+const getSouvenirItems = (t) => [
   {
     id: 'photobook',
-    titleEn: 'Photograph Collection',
-    titleZh: '龍山寺攝影集',
+    titleEn: translations.en.items.photobook.title,
+    titleZh: translations.zh.items.photobook.title,
     image: 'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/305b.jpg',
-    description: 'Photograph Collection of Longshan Temple.'
+    description: t.items.photobook.description,
   },
   {
     id: 'scroll',
-    titleEn: 'Hanging Scroll of Heart Sutra',
-    titleZh: '心經掛軸',
+    titleEn: translations.en.items.scroll.title,
+    titleZh: translations.zh.items.scroll.title,
     image: 'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/288.jpg',
-    description: 'Hanging Scroll of Heart Sutra.'
+    description: t.items.scroll.description,
   },
   {
     id: 'moonblocks',
-    titleEn: 'Moon Blocks',
-    titleZh: '筊杯',
+    titleEn: translations.en.items.moonblocks.title,
+    titleZh: translations.zh.items.moonblocks.title,
     image: 'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/082.jpg',
-    description: 'Moon Blocks used in temple worship.'
+    description: t.items.moonblocks.description,
   },
-
 ];
 
 // Hero Section Component
@@ -414,65 +396,134 @@ const HeroSection = ({ heroText, currentLang, t }) => {
   const founding = useFoundingDuration();
   const chars = ['艋', '舺', '龍', '山', '寺'];
   const segments = heroText?.readingSegments || [];
+  
   return (
-    <section className="relative w-full min-h-[450px] max-h-[520px] flex items-center justify-center overflow-hidden pt-20 pb-12">
+    <section className="relative w-full min-h-[520px] sm:min-h-[580px] flex items-center justify-center overflow-hidden pt-16 pb-8">
       {/* Photo layer */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0">
         <img
           src="https://www.thaifly.com/image/catalog/article/Taiwan/SUN/longshan-temple/longshan-temple%203.jpg"
           alt="Longshan Temple hero"
-          className="max-w-[895px] max-h-[450px] w-full h-auto object-contain opacity-80"
+          className="w-full h-full object-cover opacity-40"
           loading="lazy"
         />
       </div>
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/95 z-10" />
 
-      {/* Animated temple pattern overlay */}
-      <div className="absolute inset-0 opacity-10 z-10">
-        <div className="absolute inset-0 bg-repeat" 
+      {/* Animated gold particles effect */}
+      <div className="absolute inset-0 z-10 opacity-20">
+        <div className="absolute inset-0" 
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 50%),
+                              radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 40%)`
           }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-20 text-center px-4 max-w-5xl mx-auto">
-        <motion.h1 className="font-serif text-glow font-thai-display">
-          <div className="flex justify-center gap-2 sm:gap-3 mb-1">
+      <div className="relative z-20 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
+        {/* Temple Name - Chinese Characters */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-6"
+        >
+          <div className="flex justify-center gap-1 sm:gap-2 mb-2">
             {chars.map((ch, idx) => (
-              <div key={idx} className="flex flex-col items-center leading-none">
-                <span className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="flex flex-col items-center"
+              >
+                <span className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-b from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent drop-shadow-lg"
+                  style={{ textShadow: '0 0 40px rgba(212, 175, 55, 0.5)' }}>
                   {ch}
                 </span>
                 {segments[idx] && (
-                  <span className="mt-1 text-xs sm:text-sm text-amber-100/90 font-thai-body">
+                  <span className="mt-1 text-[10px] sm:text-xs text-amber-200/80 font-light tracking-wider">
                     {segments[idx]}
                   </span>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
-          <span className="block text-lg sm:text-2xl md:text-3xl text-white/90 font-light tracking-[0.2em] mt-1">
-            LONGSHAN TEMPLE
-          </span>
-        </motion.h1>
+          <p className="text-base sm:text-lg md:text-xl text-white/80 font-light tracking-[0.3em] uppercase">
+            Longshan Temple
+          </p>
+        </motion.div>
 
-        
-        <div className="mt-4 flex flex-col items-center gap-1 text-amber-100 font-thai-body">
-          <span className="text-xs sm:text-sm tracking-[0.25em] uppercase text-amber-300">
-            {t?.hero?.badge}
-          </span>
-          <div className="flex items-center gap-2 mt-1 text-base sm:text-lg md:text-xl text-amber-100/90">
-            <span>{t?.hero?.yearsPrefix}</span>
-            <span className="text-3xl sm:text-4xl md:text-5xl font-thai-display text-amber-200">
-              {founding.years}
+        {/* Founding Duration Counter - Elegant Box Design */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-8"
+        >
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 mb-5">
+            <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-xs sm:text-sm text-amber-300 tracking-widest uppercase font-medium">
+              {t?.hero?.badge}
             </span>
-            <span>{t?.hero?.yearsSuffix}</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           </div>
-        </div>
+
+          {/* Duration Display */}
+          <div className="flex justify-center items-stretch gap-2 sm:gap-3">
+            {/* Years */}
+            <div className="flex flex-col items-center">
+              <div className="bg-gradient-to-b from-amber-900/40 to-black/60 backdrop-blur-sm border border-amber-500/30 rounded-xl px-3 sm:px-5 py-3 sm:py-4 min-w-[70px] sm:min-w-[90px]">
+                <span className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-b from-amber-200 to-amber-400 bg-clip-text text-transparent font-thai-display">
+                  {founding.years}
+                </span>
+              </div>
+              <span className="mt-2 text-xs sm:text-sm text-amber-200/70 font-light">
+                {t?.hero?.yearsSuffix}
+              </span>
+            </div>
+
+            {/* Separator */}
+            <div className="flex items-center text-amber-500/50 text-2xl font-light self-start mt-4 sm:mt-5">:</div>
+
+            {/* Months */}
+            <div className="flex flex-col items-center">
+              <div className="bg-gradient-to-b from-amber-900/40 to-black/60 backdrop-blur-sm border border-amber-500/30 rounded-xl px-3 sm:px-5 py-3 sm:py-4 min-w-[70px] sm:min-w-[90px]">
+                <span className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-b from-amber-200 to-amber-400 bg-clip-text text-transparent font-thai-display">
+                  {String(founding.months).padStart(2, '0')}
+                </span>
+              </div>
+              <span className="mt-2 text-xs sm:text-sm text-amber-200/70 font-light">
+                {t?.hero?.monthsLabel}
+              </span>
+            </div>
+
+            {/* Separator */}
+            <div className="flex items-center text-amber-500/50 text-2xl font-light self-start mt-4 sm:mt-5">:</div>
+
+            {/* Days */}
+            <div className="flex flex-col items-center">
+              <div className="bg-gradient-to-b from-amber-900/40 to-black/60 backdrop-blur-sm border border-amber-500/30 rounded-xl px-3 sm:px-5 py-3 sm:py-4 min-w-[70px] sm:min-w-[90px]">
+                <span className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-b from-amber-200 to-amber-400 bg-clip-text text-transparent font-thai-display">
+                  {String(founding.days).padStart(2, '0')}
+                </span>
+              </div>
+              <span className="mt-2 text-xs sm:text-sm text-amber-200/70 font-light">
+                {t?.hero?.daysLabel}
+              </span>
+            </div>
+          </div>
+
+          {/* Founding info text */}
+          <p className="mt-5 text-xs sm:text-sm text-white/50 font-light">
+            {t?.hero?.yearsPrefix} · 初建 乾隆三年五月十八日
+          </p>
+        </motion.div>
       </div>
     </section>
   );
@@ -559,109 +610,93 @@ const Global1738Section = ({ currentLang, t }) => {
   };
 
   return (
-    <section className="py-16 px-4 bg-black/60 border-t border-white/10">
-      <div className="max-w-7xl mx-auto space-y-6">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-thai-display text-white mb-3">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-black/80 to-black/95 border-t border-amber-500/10 overflow-hidden">
+      <div className="max-w-4xl mx-auto">
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8 sm:mb-10"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4">
+            <span className="text-xs text-amber-400 tracking-wider">ค.ศ. 1738 · พ.ศ. 2281</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-thai-display text-white mb-2">
             {t.global1738.heading}
-          </h2>       
-        </div>
+          </h2>
+        </motion.div>
 
-        <div className="mt-10">
-          <div
-            className="relative h-[260px] sm:h-[280px] md:h-[300px] text-sm sm:text-base text-white/85 font-thai-body"
-            onWheel={handleWheel}
+        {/* Single Card Display */}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button
+            onClick={goPrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-amber-500/30 flex items-center justify-center text-amber-400 hover:bg-amber-500/20 hover:border-amber-500/50 transition-all"
           >
-            {contexts.map((ctx, index) => {
-              const Icon = iconById[ctx.id] || Globe;
-              const diff = (index - activeIndex + total) % total;
+            <ChevronUp className="w-5 h-5 sm:w-6 sm:h-6 -rotate-90" />
+          </button>
+          <button
+            onClick={goNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-amber-500/30 flex items-center justify-center text-amber-400 hover:bg-amber-500/20 hover:border-amber-500/50 transition-all"
+          >
+            <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 -rotate-90" />
+          </button>
 
-              let x = 0;
-              let scale = 0.7;
-              let opacity = 0;
-              let rotateY = 0;
-              let zIndex = 0;
-
-              if (diff === 0) {
-                // center card
-                x = 0;
-                scale = 1;
-                opacity = 1;
-                rotateY = 0;
-                zIndex = 30;
-              } else if (diff === 1 || diff === total - 1) {
-                // neighbors left / right
-                const dir = diff === 1 ? 1 : -1;
-                // push side cards further out and slightly shrink
-                // so that blocks don't visually overlap too much
-                x = dir * 220;
-                scale = 0.8;
-                opacity = 0.85;
-                // keep cards visually straight; no Y-tilt
-                rotateY = 0;
-                zIndex = 20;
-              } else {
-                x = 0;
-                scale = 0.6;
-                opacity = 0;
-                rotateY = 0;
-                zIndex = 0;
-              }
-
-              return (
+          {/* Card Container */}
+          <div className="overflow-hidden px-8 sm:px-12" onWheel={handleWheel}>
+            <AnimatePresence mode="wait">
+              {contexts[activeIndex] && (
                 <motion.div
-                  key={ctx.id}
-                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                  initial={false}
-                  animate={{ x, scale, opacity, rotateY, zIndex }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 26 }}
-                  style={{ transformStyle: 'preserve-3d' }}
+                  key={contexts[activeIndex].id}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-gradient-to-br from-amber-950/30 via-black/50 to-black/70 border border-amber-500/20 rounded-2xl p-5 sm:p-6 shadow-2xl"
                 >
-                  <div className="w-[260px] sm:w-[320px] md:w-[360px] bg-black/80 border border-white/12 rounded-2xl p-4 space-y-2 shadow-xl shadow-black/40 pointer-events-auto">
-                    <div className="flex items-center justify-between text-xs sm:text-sm text-amber-200 uppercase tracking-[0.18em]">
-                      <span>{t.global1738.adLabel} {ctx.adYear}</span>
-                      <span>{t.global1738.beLabel} {ctx.beYear}</span>
+                  {/* Card Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl sm:text-3xl">{contexts[activeIndex].flag}</span>
+                      <div>
+                        <h3 className="text-base sm:text-lg font-semibold text-amber-300 font-thai-display">
+                          {contexts[activeIndex].title}
+                        </h3>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      {ctx.flag && (
-                        <span className="text-base sm:text-lg">
-                          {ctx.flag}
-                        </span>
-                      )}
-                      <Icon className="w-4 h-4 text-amber-400" />
-                      <span className="font-semibold text-amber-300 text-sm sm:text-base">
-                        {ctx.title}
-                      </span>
+                    <div className="text-right text-xs text-amber-200/60">
+                      <div>{t.global1738.adLabel} {contexts[activeIndex].adYear || 1738}</div>
+                      <div>{t.global1738.beLabel} {contexts[activeIndex].beYear || 2281}</div>
                     </div>
-                    {ctx.paragraphs.map((para, idx) => (
-                      <p key={idx} className="text-white/80 text-sm leading-relaxed">
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="space-y-3">
+                    {contexts[activeIndex].paragraphs?.map((para, idx) => (
+                      <p key={idx} className="text-sm sm:text-base text-white/75 leading-relaxed font-thai-body">
                         {para}
                       </p>
                     ))}
                   </div>
                 </motion.div>
-              );
-            })}
+              )}
+            </AnimatePresence>
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-4 text-sm sm:text-xs text-white/70">
-            <button
-              type="button"
-              onClick={goPrev}
-              className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10"
-            >
-              <ChevronDown className="w-4 h-4 rotate-90" />
-            </button>
-            <span className="uppercase tracking-[0.2em] text-white/50">
-              {activeIndex + 1} / {total}
-            </span>
-            <button
-              type="button"
-              onClick={goNext}
-              className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10"
-            >
-              <ChevronDown className="w-4 h-4 -rotate-90" />
-            </button>
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-2 mt-6">
+            {contexts.map((ctx, idx) => (
+              <button
+                key={ctx.id}
+                onClick={() => setActiveIndex(idx)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  idx === activeIndex 
+                    ? 'bg-amber-400 w-6' 
+                    : 'bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -1020,7 +1055,7 @@ const ImageModal = ({ category, onClose }) => {
 // Blessings Section - table-like layout (label + images)
 const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', setImageSize, t }) => {
   return (
-    <section id="blessings" className="py-16 px-4 sm:py-20 lg:py-24">
+    <section id="blessings" className="py-16 px-3 sm:px-4 sm:py-20 lg:py-24 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div className="text-center mb-10 sm:mb-8">
@@ -1146,7 +1181,7 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
 // Souvenirs Section
 const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', t }) => {
   return (
-    <section id="souvenirs" className="py-16 px-4 sm:py-20 lg:py-24 bg-gradient-to-b from-transparent via-amber-900/10 to-transparent">
+    <section id="souvenirs" className="py-16 px-3 sm:px-4 sm:py-20 lg:py-24 bg-gradient-to-b from-transparent via-amber-900/10 to-transparent overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div className="text-center mb-16">
@@ -1248,7 +1283,7 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
     <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
       scrolled ? 'bg-black/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-xl flex items-center justify-center">
@@ -1260,97 +1295,44 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
           </div>
         </a>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#blessings" className="text-white/70 hover:text-amber-400 transition-colors">{t?.nav?.blessings || 'Blessings'}</a>
-          <a href="#souvenirs" className="text-white/70 hover:text-amber-400 transition-colors">{t?.nav?.souvenirs || 'Souvenirs'}</a>
-          <a href="#temple-guide" className="text-white/70 hover:text-amber-400 transition-colors">{t?.nav?.templeGuide || 'Temple Guide'}</a>
-          <a href="#about" className="text-white/70 hover:text-amber-400 transition-colors">{t?.nav?.about || 'About'}</a>
-          
-          {/* Language selector */}
-          <div className="relative">
-            <button
-              onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
-            >
-              <Globe className="w-4 h-4 text-amber-400" />
-              <span className="text-white/70">{languages.find(l => l.code === currentLang)?.flag}</span>
-            </button>
-            
-            <AnimatePresence>
-              {langMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute top-full right-0 mt-2 bg-gray-900 border border-white/10 rounded-xl overflow-hidden shadow-xl"
-                >
-                  {languages.map(lang => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setCurrentLang(lang.code);
-                        setLangMenuOpen(false);
-                      }}
-                      className={`w-full px-4 py-2 flex items-center gap-2 hover:bg-white/10 transition-colors ${
-                        currentLang === lang.code ? 'bg-amber-500/20 text-amber-400' : 'text-white/70'
-                      }`}
-                    >
-                      <span>{lang.flag}</span>
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
-        >
-          <Menu className="w-6 h-6 text-white" />
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/95 border-t border-white/10"
+        {/* Language selector (Mobile & Desktop) */}
+        <div className="relative ml-auto">
+          <button
+            onClick={() => setLangMenuOpen(!langMenuOpen)}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            <div className="px-4 py-4 space-y-4">
-              <a href="#blessings" className="block text-white/70 hover:text-amber-400" onClick={() => setIsOpen(false)}>{t?.nav?.blessings || 'Blessings'}</a>
-              <a href="#souvenirs" className="block text-white/70 hover:text-amber-400" onClick={() => setIsOpen(false)}>{t?.nav?.souvenirs || 'Souvenirs'}</a>
-              <a href="#temple-guide" className="block text-white/70 hover:text-amber-400" onClick={() => setIsOpen(false)}>{t?.nav?.templeGuide || 'Temple Guide'}</a>
-              <a href="#about" className="block text-white/70 hover:text-amber-400" onClick={() => setIsOpen(false)}>{t?.nav?.about || 'About'}</a>
-              <div className="pt-4 border-t border-white/10 flex flex-wrap gap-2">
+            <Globe className="w-5 h-5 text-amber-400" />
+            <span className="text-white/90 font-medium">{languages.find(l => l.code === currentLang)?.flag}</span>
+          </button>
+          
+          <AnimatePresence>
+            {langMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute top-full right-0 mt-2 min-w-[160px] bg-gray-900 border border-white/10 rounded-xl overflow-hidden shadow-xl z-50"
+              >
                 {languages.map(lang => (
                   <button
                     key={lang.code}
                     onClick={() => {
                       setCurrentLang(lang.code);
-                      setIsOpen(false);
+                      setLangMenuOpen(false);
                     }}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      currentLang === lang.code 
-                        ? 'bg-amber-500 text-black' 
-                        : 'bg-white/10 text-white/70'
+                    className={`w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors text-left ${
+                      currentLang === lang.code ? 'bg-amber-500/20 text-amber-400' : 'text-white/80'
                     }`}
                   >
-                    {lang.flag} {lang.name}
+                    <span className="text-lg">{lang.flag}</span>
+                    <span className="text-sm font-medium">{lang.name}</span>
                   </button>
                 ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </nav>
   );
 };
@@ -1528,7 +1510,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full overflow-x-hidden">
       <Navigation currentLang={currentLang} setCurrentLang={setCurrentLang} t={translation} />
 
       {/* Top-level credit & disclaimer bar */}

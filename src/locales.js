@@ -24,6 +24,8 @@ export const translations = {
       yearsOfFaith: 'Years of Faith',
       yearsPrefix: 'Founded for',
       yearsSuffix: 'years',
+      monthsLabel: 'months',
+      daysLabel: 'days',
       templeDescription: "An ancient temple in Taipei's Wanhua district, preserving faith for over two and a half centuries.",
       reading: 'Mengjia Longshan Temple',
       readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì']
@@ -107,15 +109,80 @@ export const translations = {
     cart: {
       title: 'Amulet Cart',
       total: 'Total',
-      pieces: 'pieces',
+      pieces: 'pcs',
       items: 'items',
       selected: 'Selected',
       tapToOpen: 'Tap to open full cart',
       helpsWithBlessing: 'Helps with:',
-      helpsWithSouvenir: 'Helps with: Temple souvenir',
+      helpsWithSouvenir: 'Souvenir:',
       removeItem: 'Remove',
-      clearAll: 'Clear all',
-      addToCart: 'Add to cart',
+      clearAll: 'Clear All',
+      addToCart: 'Add to Cart',
+      selectedAlt: 'Selected Amulet',
+    },
+    categories: {
+      education: {
+        title: 'Education',
+        description: 'Blessings for academic success and wisdom.',
+      },
+      safety: {
+        title: 'General Protection',
+        description: 'All-purpose protection charms for peace and safety.',
+      },
+      transport: {
+        title: 'Safe Travel',
+        description: 'Protection for drivers and travelers.',
+      },
+      pregnancy: {
+        title: 'Safe Pregnancy',
+        description: 'Divine protection for expecting mothers and newborns.',
+      },
+      fertility: {
+        title: 'Fertility Blessing',
+        description: 'Sacred prayers for those hoping to conceive a child.',
+      },
+      pet: {
+        title: 'Pet Protection',
+        description: 'Blessings for the health and safety of your beloved pets.',
+      },
+      health: {
+        title: 'Health & Wellness',
+        description: 'Divine blessings for physical health and recovery.',
+      },
+      career: {
+        title: 'Career Success',
+        description: 'Blessings for job seekers and career advancement.',
+      },
+      business: {
+        title: 'Business Prosperity',
+        description: 'Sacred charms for business success and wealth.',
+      },
+      happiness: {
+        title: 'Happiness',
+        description: 'Blessings for joy and contentment in life.',
+      },
+      luck: {
+        title: 'Good Fortune',
+        description: 'Attract good luck and positive energy into your life.',
+      },
+      love: {
+        title: 'Love & Romance',
+        description: 'Divine blessings for finding and nurturing true love.',
+      },
+    },
+    items: {
+      photobook: {
+        title: 'Photograph Collection',
+        description: 'Photograph Collection of Longshan Temple.',
+      },
+      scroll: {
+        title: 'Hanging Scroll of Heart Sutra',
+        description: 'Hanging Scroll of Heart Sutra.',
+      },
+      moonblocks: {
+        title: 'Moon Blocks',
+        description: 'Moon Blocks used in temple worship.',
+      },
     },
     footer: {
       visitUs: 'Visit Us',
@@ -140,7 +207,9 @@ export const translations = {
       badge: '創建於 1738 年 · 龍山寺',
       yearsOfFaith: '年信仰',
       yearsPrefix: '創建至今',
-      yearsSuffix: '年信仰',
+      yearsSuffix: '年',
+      monthsLabel: '個月',
+      daysLabel: '天',
       templeDescription: '位於台北萬華區的古老寺廟，保存信仰已超過兩個半世紀。',
       reading: '艋舺龍山寺 · Měngjiǎ Lóngshān Sì',
       readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì'],
@@ -228,11 +297,76 @@ export const translations = {
       items: '項',
       selected: '已選擇',
       tapToOpen: '點擊打開完整購物車',
-      helpsWithBlessing: '加持：',
-      helpsWithSouvenir: '加持：寺廟紀念品',
+      helpsWithBlessing: '加持:',
+      helpsWithSouvenir: '加持:寺廟紀念品',
       removeItem: '移除',
-      clearAll: '清空全部',
+      clearAll: '清除全部',
       addToCart: '加入購物車',
+      selectedAlt: '選中的護身符',
+    },
+    categories: {
+      education: {
+        title: '學業',
+        description: '學業進步與智慧的加持。',
+      },
+      safety: {
+        title: '平安',
+        description: '保佑平安順遂的全方位護身符。',
+      },
+      transport: {
+        title: '行車安全',
+        description: '保佑駕駛與旅途平安。',
+      },
+      pregnancy: {
+        title: '安產',
+        description: '保佑孕婦與新生兒平安。',
+      },
+      fertility: {
+        title: '求子',
+        description: '為祈求子女的信眾祈福。',
+      },
+      pet: {
+        title: '寵物',
+        description: '保佑心愛寵物的健康與安全。',
+      },
+      health: {
+        title: '健康',
+        description: '保佑身體健康與早日康復。',
+      },
+      career: {
+        title: '工作求職',
+        description: '保佑求職順利與事業高升。',
+      },
+      business: {
+        title: '生意',
+        description: '保佑生意興隆與招財進寶。',
+      },
+      happiness: {
+        title: '幸福',
+        description: '保佑生活幸福美滿。',
+      },
+      luck: {
+        title: '福氣',
+        description: '為生活帶來好運與正能量。',
+      },
+      love: {
+        title: '愛情',
+        description: '保佑尋得良緣與感情長久。',
+      },
+    },
+    items: {
+      photobook: {
+        title: '龍山寺攝影集',
+        description: '龍山寺攝影集。',
+      },
+      scroll: {
+        title: '心經掛軸',
+        description: '心經掛軸。',
+      },
+      moonblocks: {
+        title: '筊杯',
+        description: '寺廟祭拜使用的筊杯。',
+      },
     },
     footer: {
       visitUs: '參訪資訊',
@@ -253,11 +387,12 @@ export const translations = {
       about: 'เกี่ยวกับ',
     },
     hero: {
-      tagline: 'คู่มือภาษาไทยสำหรับเตรียมตัวไปวัดหลงซาน เลือกของไหว้และเครื่องรางได้ตรงใจไม่หลงทาง',
-      badge: 'ก่อตั้ง ค.ศ. 1738 · วัดหลงซาน',
+      badge: 'ก่อตั้ง ค.ศ. 1738',
       yearsOfFaith: 'ปีแห่งศรัทธา',
       yearsPrefix: 'ก่อตั้งมาแล้ว',
       yearsSuffix: 'ปี',
+      monthsLabel: 'เดือน',
+      daysLabel: 'วัน',
       templeDescription: 'ศาลเจ้าเก่าแก่ในย่านเหมิงเจียแห่งไทเป ดำรงศรัทธานี้มายาวนานกว่าสองศตวรรษครึ่ง',
       reading: 'เหมิงเจีย หลงซานซื่อ',
       readingSegments: ['เหมิง', 'เจีย', 'หลง', 'ซาน', 'ซื่อ'],
@@ -350,6 +485,71 @@ export const translations = {
       removeItem: 'ลบรายการ',
       clearAll: 'ล้างทั้งหมด',
       addToCart: 'เพิ่มลงในตะกร้า',
+      selectedAlt: 'เครื่องรางที่เลือก',
+    },
+    categories: {
+      education: {
+        title: 'การเรียน',
+        description: 'ขอพรเพื่อความสำเร็จในการศึกษาและสติปัญญา',
+      },
+      safety: {
+        title: 'ความปลอดภัย',
+        description: 'เครื่องรางป้องกันภัยสารพัดทิศเพื่อความสงบสุขและความปลอดภัย',
+      },
+      transport: {
+        title: 'การเดินทาง',
+        description: 'คุ้มครองผู้ขับขี่และผู้เดินทางให้ปลอดภัย',
+      },
+      pregnancy: {
+        title: 'การตั้งครรภ์',
+        description: 'การคุ้มครองศักดิ์สิทธิ์สำหรับสตรีมีครรภ์และเด็กแรกเกิด',
+      },
+      fertility: {
+        title: 'ขอลูก',
+        description: 'คำอธิษฐานศักดิ์สิทธิ์สำหรับผู้ที่หวังจะมีบุตร',
+      },
+      pet: {
+        title: 'สัตว์เลี้ยง',
+        description: 'ขอพรเพื่อสุขภาพและความปลอดภัยของสัตว์เลี้ยงที่คุณรัก',
+      },
+      health: {
+        title: 'สุขภาพ',
+        description: 'ขอพรศักดิ์สิทธิ์เพื่อสุขภาพร่างกายที่แข็งแรงและการฟื้นฟู',
+      },
+      career: {
+        title: 'การงาน',
+        description: 'ขอพรสำหรับผู้หางานและความก้าวหน้าในอาชีพ',
+      },
+      business: {
+        title: 'ธุรกิจการค้า',
+        description: 'เครื่องรางศักดิ์สิทธิ์เพื่อความสำเร็จทางธุรกิจและความมั่งคั่ง',
+      },
+      happiness: {
+        title: 'ความสุข',
+        description: 'ขอพรเพื่อความปีติยินดีและความพึงพอใจในชีวิต',
+      },
+      luck: {
+        title: 'โชคลาภ',
+        description: 'ดึงดูดโชคดีและพลังงานบวกเข้ามาในชีวิตของคุณ',
+      },
+      love: {
+        title: 'ความรัก',
+        description: 'ขอพรศักดิ์สิทธิ์เพื่อการค้นหาและบ่มเพาะความรักที่แท้จริง',
+      },
+    },
+    items: {
+      photobook: {
+        title: 'สมุดภาพวัดหลงซาน',
+        description: 'คอลเลกชันภาพถ่ายของวัดหลงซาน',
+      },
+      scroll: {
+        title: 'ม้วนภาพปรัชญาปารมิตาหฤทัยสูตร',
+        description: 'ม้วนภาพแขวนจารึกพระสูตรปรัชญาปารมิตาหฤทัยสูตร',
+      },
+      moonblocks: {
+        title: 'ไม้ปัวะโป้ย',
+        description: 'ไม้เสี่ยงทายรูปพระจันทร์เสี้ยวที่ใช้ในการไหว้พระ',
+      },
     },
     footer: {
       visitUs: 'มาเยี่ยมชม',
@@ -374,7 +574,9 @@ export const translations = {
       badge: '創建 1738年 · 龍山寺',
       yearsOfFaith: '年の信仰',
       yearsPrefix: '創建から',
-      yearsSuffix: '年の信仰',
+      yearsSuffix: '年',
+      monthsLabel: 'ヶ月',
+      daysLabel: '日',
       templeDescription: '台北萬華区にある古刹、二世紀半以上にわたり信仰を守り続けています。',
       reading: 'メンジャー・ロンシャン スー',
       readingSegments: ['メン', 'ジャー', 'ロン', 'シャン', 'スー'],
@@ -467,6 +669,71 @@ export const translations = {
       removeItem: '削除',
       clearAll: 'すべてクリア',
       addToCart: 'カートに追加',
+      selectedAlt: '選択されたお守り',
+    },
+    categories: {
+      education: {
+        title: '学業',
+        description: '学業成就と知恵のご利益。',
+      },
+      safety: {
+        title: '平安',
+        description: '平安と安全を守る万能なお守り。',
+      },
+      transport: {
+        title: '交通安全',
+        description: '運転者と旅行者の安全を守る。',
+      },
+      pregnancy: {
+        title: '安産',
+        description: '妊婦と新生児の無事を祈る。',
+      },
+      fertility: {
+        title: '子宝',
+        description: '子供を授かりたい方のための聖なる祈り。',
+      },
+      pet: {
+        title: 'ペットの守護',
+        description: '愛するペットの健康と安全を守る。',
+      },
+      health: {
+        title: '健康',
+        description: '身体の健康と回復を祈るご利益。',
+      },
+      career: {
+        title: '仕事・就職',
+        description: '求職者とキャリアアップのためのご利益。',
+      },
+      business: {
+        title: '商売繁盛',
+        description: 'ビジネスの成功と富をもたらす聖なるお守り。',
+      },
+      happiness: {
+        title: '幸福',
+        description: '人生の喜びと満足をもたらすご利益。',
+      },
+      luck: {
+        title: '開運',
+        description: '幸運とポジティブなエネルギーを引き寄せる。',
+      },
+      love: {
+        title: '縁結び・恋愛',
+        description: '真実の愛を見つけ、育むための聖なるご利益。',
+      },
+    },
+    items: {
+      photobook: {
+        title: '龍山寺写真集',
+        description: '龍山寺の写真コレクション。',
+      },
+      scroll: {
+        title: '般若心経掛け軸',
+        description: '般若心経の掛け軸。',
+      },
+      moonblocks: {
+        title: 'ポエ（聖杯）',
+        description: '寺院の礼拝で使用される三日月形の木片。',
+      },
     },
     footer: {
       visitUs: 'ご参拝',
@@ -491,7 +758,9 @@ export const translations = {
       badge: '창건 1738년 · 룽산사',
       yearsOfFaith: '년의 신앙',
       yearsPrefix: '창건 후',
-      yearsSuffix: '년의 신앙',
+      yearsSuffix: '년',
+      monthsLabel: '개월',
+      daysLabel: '일',
       templeDescription: '타이베이 완화구에 위치한 고찰, 2세기 반 이상 신앙을 지켜왔습니다.',
       reading: '멍자 룽산 스',
       readingSegments: ['멍', '자', '룽', '산', '스'],
@@ -575,15 +844,80 @@ export const translations = {
     cart: {
       title: '부적 장바구니',
       total: '합계',
-      pieces: '개',
+      pieces: '점',
       items: '항목',
       selected: '선택됨',
-      tapToOpen: '탭하여 전체 장바구니 열기',
-      helpsWithBlessing: '효험:',
-      helpsWithSouvenir: '효험: 사원 기념품',
+      tapToOpen: '전체 장바구니 열기',
+      helpsWithBlessing: '효과:',
+      helpsWithSouvenir: '효과: 사원 기념품',
       removeItem: '삭제',
-      clearAll: '모두 비우기',
+      clearAll: '모두 지우기',
       addToCart: '장바구니에 추가',
+      selectedAlt: '선택된 부적',
+    },
+    categories: {
+      education: {
+        title: '학업',
+        description: '학업 성취와 지혜를 위한 축복.',
+      },
+      safety: {
+        title: '평안',
+        description: '평화와 안전을 위한 다목적 부적.',
+      },
+      transport: {
+        title: '교통 안전',
+        description: '운전자와 여행자의 안전을 위한 보호.',
+      },
+      pregnancy: {
+        title: '순산',
+        description: '임산부와 신생아를 위한 신성한 보호.',
+      },
+      fertility: {
+        title: '자녀 기원',
+        description: '자녀를 갖기를 희망하는 분들을 위한 신성한 기도.',
+      },
+      pet: {
+        title: '반려동물 보호',
+        description: '사랑하는 반려동물의 건강과 안전을 위한 축복.',
+      },
+      health: {
+        title: '건강',
+        description: '신체적 건강과 회복을 위한 신성한 축복.',
+      },
+      career: {
+        title: '직업 및 취업',
+        description: '구직자와 경력 발전을 위한 축복.',
+      },
+      business: {
+        title: '사업 번창',
+        description: '사업 성공과 부를 위한 신성한 부적.',
+      },
+      happiness: {
+        title: '행복',
+        description: '삶의 기쁨과 만족을 위한 축복.',
+      },
+      luck: {
+        title: '행운',
+        description: '행운과 긍정적인 에너지를 삶에 불러옵니다.',
+      },
+      love: {
+        title: '사랑',
+        description: '진정한 사랑을 찾고 키우기 위한 신성한 축복.',
+      },
+    },
+    items: {
+      photobook: {
+        title: '룽산사 사진집',
+        description: '룽산사 사진 컬렉션.',
+      },
+      scroll: {
+        title: '반야심경 족자',
+        description: '반야심경이 적힌 족자.',
+      },
+      moonblocks: {
+        title: '점술 도구 (자오베이)',
+        description: '사원 참배에 사용되는 반달 모양의 나무 조각.',
+      },
     },
     footer: {
       visitUs: '방문 안내',
