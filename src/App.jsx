@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Heart, Shield, Car, GraduationCap, Baby, Dog, Stethoscope, 
-  Briefcase, Store, Smile, Sparkles, HeartHandshake, BookOpen,
+  Briefcase, Store, Smile, Sparkles, HeartHandshake, BookOpen, Home,
   ChevronDown, ChevronUp, Globe, X, ZoomIn, CreditCard, MapPin,
   Phone, Clock, Star, Menu, ArrowUp, ShoppingCart, Check, Plus, Minus
 } from 'lucide-react';
@@ -138,11 +138,54 @@ const GLOBAL_1738_CONTEXTS = [
 // Helper to get localized blessing categories
 const getBlessingCategories = (t) => [
   {
+    id: 'family',
+    icon: Home,
+    titleZh: '家內安全',
+    titleEn: 'Household Family Safety',
+    titleTh: 'ความปลอดภัยในครอบครัว',
+    description: t?.categories?.family?.description || 'Protection for the whole family.',
+    color: 'from-amber-600 to-orange-500',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/011b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/065.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/032b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/033b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/024b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/081b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/085.jpg',
+    ]
+  },
+  {
+    id: 'transport',
+    icon: Car,
+    titleZh: '交通安全',
+    titleEn: 'Drivers and Travellers Safety',
+    titleTh: 'ความปลอดภัยในการเดินทาง',
+    description: t?.categories?.transport?.description || 'Safe travel and driving.',
+    color: 'from-blue-600 to-cyan-500',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/005b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/006b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/003b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/004b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/027b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/028b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/029b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/032b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/047b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/081b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/083b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/084b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/234c.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/235c.jpg',
+    ]
+  },
+  {
     id: 'education',
     icon: GraduationCap,
-    titleZh: translations.zh?.categories?.education?.title || '學業',
-    titleEn: translations.en?.categories?.education?.title || 'Education',
-    titleTh: translations.th?.categories?.education?.title || 'การเรียน',
+    titleZh: '學業考試',
+    titleEn: 'Learning and Examination',
+    titleTh: 'การเรียนและการสอบ',
     description: t?.categories?.education?.description || 'Blessings for academic success.',
     color: 'from-indigo-600 to-purple-500',
     images: [
@@ -160,56 +203,6 @@ const getBlessingCategories = (t) => [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/236a.jpg',
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/237a.jpg',
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/259a.jpg',
-    ]
-  },
-  {
-    id: 'safety',
-    icon: Shield,
-    titleZh: translations.zh?.categories?.safety?.title || '平安',
-    titleEn: translations.en?.categories?.safety?.title || 'Safety',
-    titleTh: translations.th?.categories?.safety?.title || 'ความปลอดภัย',
-    description: t?.categories?.safety?.description || 'General protection.',
-    color: 'from-emerald-600 to-teal-500',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/050b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/057b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/033b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/035b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/063.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/065.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/064b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/066.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/067a.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/068b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/131.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/075.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/024b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/092c.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/094e.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/135.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/136.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/137.jpg',
-    ]
-  },
-  {
-    id: 'transport',
-    icon: Car,
-    titleZh: translations.zh?.categories?.transport?.title || '交通',
-    titleEn: translations.en?.categories?.transport?.title || 'Transport',
-    titleTh: translations.th?.categories?.transport?.title || 'การเดินทาง',
-    description: t?.categories?.transport?.description || 'Safe travel.',
-    color: 'from-blue-600 to-cyan-500',
-    images: [
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/005b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/006b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/003b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/004b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/027b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/028b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/029b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/047b.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/234c.jpg',
-      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/235c.jpg',
     ]
   },
   {
@@ -242,9 +235,9 @@ const getBlessingCategories = (t) => [
   {
     id: 'pet',
     icon: Dog,
-    titleZh: translations.zh?.categories?.pet?.title || '寵物',
-    titleEn: translations.en?.categories?.pet?.title || 'Pet',
-    titleTh: translations.th?.categories?.pet?.title || 'สัตว์เลี้ยง',
+    titleZh: '寵物',
+    titleEn: 'Pet',
+    titleTh: 'สัตว์เลี้ยง',
     description: t?.categories?.pet?.description || 'Pet protection.',
     color: 'from-orange-500 to-amber-400',
     images: [
@@ -254,11 +247,47 @@ const getBlessingCategories = (t) => [
     ]
   },
   {
+    id: 'safety',
+    icon: Shield,
+    titleZh: '平安',
+    titleEn: 'Safety',
+    titleTh: 'ความปลอดภัย',
+    description: t?.categories?.safety?.description || 'General protection and safety.',
+    color: 'from-emerald-600 to-teal-500',
+    images: [
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/050b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/057b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/033b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/035b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/063.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/065.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/064b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/066.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/067a.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/068b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/131.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/075.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/024b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/083b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/084b.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/085.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/087.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/092c.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/094e.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/103c.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/108c.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/109c.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/135.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/136.jpg',
+      'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/137.jpg',
+    ]
+  },
+  {
     id: 'health',
     icon: Stethoscope,
-    titleZh: translations.zh?.categories?.health?.title || '健康',
-    titleEn: translations.en?.categories?.health?.title || 'Health',
-    titleTh: translations.th?.categories?.health?.title || 'สุขภาพ',
+    titleZh: '健康',
+    titleEn: 'Good Health',
+    titleTh: 'สุขภาพ',
     description: t?.categories?.health?.description || 'Health blessing.',
     color: 'from-green-600 to-emerald-500',
     images: [
@@ -276,9 +305,9 @@ const getBlessingCategories = (t) => [
   {
     id: 'career',
     icon: Briefcase,
-    titleZh: translations.zh?.categories?.career?.title || '事業',
-    titleEn: translations.en?.categories?.career?.title || 'Career',
-    titleTh: translations.th?.categories?.career?.title || 'อาชีพ',
+    titleZh: '工作求職',
+    titleEn: 'Success in Work and Employment',
+    titleTh: 'ความสำเร็จในการทำงาน',
     description: t?.categories?.career?.description || 'Career success.',
     color: 'from-slate-600 to-gray-500',
     images: [
@@ -293,9 +322,9 @@ const getBlessingCategories = (t) => [
   {
     id: 'business',
     icon: Store,
-    titleZh: translations.zh?.categories?.business?.title || '生意',
-    titleEn: translations.en?.categories?.business?.title || 'Business',
-    titleTh: translations.th?.categories?.business?.title || 'ธุรกิจ',
+    titleZh: '生意',
+    titleEn: 'Success in Business',
+    titleTh: 'ความสำเร็จในธุรกิจ',
     description: t?.categories?.business?.description || 'Business prosperity.',
     color: 'from-yellow-600 to-amber-500',
     images: [
@@ -315,9 +344,9 @@ const getBlessingCategories = (t) => [
   {
     id: 'happiness',
     icon: Smile,
-    titleZh: translations.zh?.categories?.happiness?.title || '幸福',
-    titleEn: translations.en?.categories?.happiness?.title || 'Happiness',
-    titleTh: translations.th?.categories?.happiness?.title || 'ความสุข',
+    titleZh: '幸福',
+    titleEn: 'Happiness',
+    titleTh: 'ความสุข',
     description: t?.categories?.happiness?.description || 'Happiness blessing.',
     color: 'from-yellow-500 to-orange-400',
     images: [
@@ -327,9 +356,9 @@ const getBlessingCategories = (t) => [
   {
     id: 'luck',
     icon: Sparkles,
-    titleZh: translations.zh?.categories?.luck?.title || '好運',
-    titleEn: translations.en?.categories?.luck?.title || 'Luck',
-    titleTh: translations.th?.categories?.luck?.title || 'โชคดี',
+    titleZh: '福氣',
+    titleEn: 'Lucky',
+    titleTh: 'โชคดี',
     description: t?.categories?.luck?.description || 'Good fortune.',
     color: 'from-amber-500 to-yellow-400',
     images: [
@@ -346,9 +375,9 @@ const getBlessingCategories = (t) => [
   {
     id: 'love',
     icon: Heart,
-    titleZh: translations.zh?.categories?.love?.title || '愛情',
-    titleEn: translations.en?.categories?.love?.title || 'Love',
-    titleTh: translations.th?.categories?.love?.title || 'ความรัก',
+    titleZh: '愛情',
+    titleEn: 'Love and Good Relationship',
+    titleTh: 'ความรักและความสัมพันธ์',
     description: t?.categories?.love?.description || 'Love blessing.',
     color: 'from-red-500 to-pink-500',
     images: [
@@ -391,103 +420,174 @@ const getSouvenirItems = (t) => [
   },
 ];
 
-// Hero Section Component - Compact
+// Hero Section Component - Mobile Optimized, Modern Design
 const HeroSection = ({ heroText, currentLang, t }) => {
   const founding = useFoundingDuration();
   const chars = ['艋', '舺', '龍', '山', '寺'];
   const segments = heroText?.readingSegments || [];
   
+  // Count-up animation state
+  const [displayYears, setDisplayYears] = useState(0);
+  const [displayMonths, setDisplayMonths] = useState(0);
+  const [displayDays, setDisplayDays] = useState(0);
+
+  useEffect(() => {
+    // รีเซ็ตทุกครั้งที่ค่า founding เปลี่ยน
+    setDisplayYears(0);
+    setDisplayMonths(0);
+    setDisplayDays(0);
+
+    const duration = 1500; // ทั้งแอนิเมชัน 1.5 วินาที
+    const start = performance.now();
+
+    const easeOut = (x) => 1 - Math.pow(1 - x, 3); // ease-out cubic
+
+    let frameId;
+
+    const tick = (now) => {
+      const elapsed = now - start;
+      const p = Math.min(1, elapsed / duration); // 0 → 1
+
+      // ปีใช้แค่ 50% แรกของเวลา → เสร็จก่อน
+      const yearPhase = Math.min(1, p / 0.5);
+      // เดือนใช้ 75% ของเวลา → เสร็จทีหลังปี
+      const monthPhase = Math.min(1, p / 0.75);
+      // วันใช้ครบ 100% → เสร็จช้าที่สุด
+      const dayPhase = p;
+
+      setDisplayYears(Math.round(founding.years * easeOut(yearPhase)));
+      setDisplayMonths(Math.round(founding.months * easeOut(monthPhase)));
+      setDisplayDays(Math.round(founding.days * easeOut(dayPhase)));
+
+      if (p < 1) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = requestAnimationFrame(tick);
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+    };
+  }, [founding.years, founding.months, founding.days]);
+
   return (
-    <section className="relative w-full flex items-center justify-center overflow-hidden py-12 sm:py-14 px-4">
+    <section className="relative w-full flex items-center justify-center overflow-hidden py-12 sm:py-16 md:py-20 px-4">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src="https://www.thaifly.com/image/catalog/article/Taiwan/SUN/longshan-temple/longshan-temple%203.jpg"
           alt="Longshan Temple"
-          className="w-full h-full object-cover opacity-25"
+          className="w-full h-full object-cover opacity-30"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-3xl mx-auto">
-        {/* Temple Name + Badge inline */}
-        <div className="mb-5">
-          <div className="flex justify-center gap-1.5 sm:gap-2 mb-2">
+      <div className="relative z-10 text-center max-w-4xl mx-auto space-y-8 sm:space-y-10">
+        {/* Temple Name - Large & Impactful */}
+        <div className="space-y-4">
+          <div className="flex justify-center gap-2 sm:gap-3 md:gap-4">
             {chars.map((ch, idx) => (
               <div key={idx} className="flex flex-col items-center">
-                <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400">
+                <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-amber-400 drop-shadow-[0_0_20px_rgba(251,191,36,0.4)]">
                   {ch}
                 </span>
                 {segments[idx] && (
-                  <span className="text-[9px] sm:text-[10px] text-amber-200/60">
+                  <span className="text-sm sm:text-base md:text-lg text-amber-200/80 mt-1 font-medium">
                     {segments[idx]}
                   </span>
                 )}
               </div>
             ))}
           </div>
-          <p className="text-xs sm:text-sm text-white/60 tracking-[0.3em] uppercase">
-            Longshan Temple · <span className="text-amber-300/80">{t?.hero?.badge || 'EST. 1738'}</span>
+          <p className="text-xs sm:text-sm text-white/60 tracking-wide uppercase">
+            Longshan Temple · {t?.hero?.badge || 'ก่อตั้ง ค.ศ. 1738'}
           </p>
         </div>
 
-        {/* Duration Counter - Compact */}
-        <div className="flex justify-center items-end gap-2 sm:gap-3">
-          {/* Years */}
-          <div className="text-center">
-            <div className="bg-black/40 border border-amber-500/25 rounded-lg px-3 py-2 min-w-[60px] sm:min-w-[72px]">
-              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
-                {founding.years}
-              </span>
-            </div>
-            <span className="block mt-1 text-[10px] sm:text-xs text-amber-200/50">
-              {t?.hero?.yearsSuffix || 'years'}
-            </span>
-          </div>
+        {/* Duration Section with Clear Heading */}
+        <div className="space-y-5">
+          {/* Heading for counter */}
+          <h2 className="text-lg sm:text-xl text-amber-200/90 font-medium">
+            {t?.hero?.ageHeading || 'อายุวัดหลงซานจนถึงวันนี้'}
+          </h2>
+          
+          {/* Duration Counter - Modern Glassmorphism */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+            {/* Years */}
+            <motion.div 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 sm:px-8 py-4 sm:py-5 min-w-[100px] sm:min-w-[120px]">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-amber-300">
+                  {displayYears}
+                </span>
+                <span className="block mt-2 text-base sm:text-lg text-amber-200/80 font-semibold">
+                  {t?.hero?.yearsSuffix || 'ปี'}
+                </span>
+              </div>
+            </motion.div>
 
-          <span className="text-amber-500/40 text-lg mb-5">:</span>
+            {/* Months */}
+            <motion.div 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 sm:px-8 py-4 sm:py-5 min-w-[100px] sm:min-w-[120px]">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-amber-300">
+                  {String(displayMonths).padStart(2, '0')}
+                </span>
+                <span className="block mt-2 text-base sm:text-lg text-amber-200/80 font-semibold">
+                  {t?.hero?.monthsLabel || 'เดือน'}
+                </span>
+              </div>
+            </motion.div>
 
-          {/* Months */}
-          <div className="text-center">
-            <div className="bg-black/40 border border-amber-500/25 rounded-lg px-3 py-2 min-w-[60px] sm:min-w-[72px]">
-              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
-                {String(founding.months).padStart(2, '0')}
-              </span>
-            </div>
-            <span className="block mt-1 text-[10px] sm:text-xs text-amber-200/50">
-              {t?.hero?.monthsLabel || 'months'}
-            </span>
-          </div>
-
-          <span className="text-amber-500/40 text-lg mb-5">:</span>
-
-          {/* Days */}
-          <div className="text-center">
-            <div className="bg-black/40 border border-amber-500/25 rounded-lg px-3 py-2 min-w-[60px] sm:min-w-[72px]">
-              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
-                {String(founding.days).padStart(2, '0')}
-              </span>
-            </div>
-            <span className="block mt-1 text-[10px] sm:text-xs text-amber-200/50">
-              {t?.hero?.daysLabel || 'days'}
-            </span>
+            {/* Days */}
+            <motion.div 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 sm:px-8 py-4 sm:py-5 min-w-[100px] sm:min-w-[120px]">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-amber-300">
+                  {String(displayDays).padStart(2, '0')}
+                </span>
+                <span className="block mt-2 text-base sm:text-lg text-amber-200/80 font-semibold">
+                  {t?.hero?.daysLabel || 'วัน'}
+                </span>
+              </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Subtitle */}
-        <p className="mt-4 text-xs text-white/40">
-          {t?.hero?.foundingDate || 'Founded on the 18th day of the 5th month, 3rd year of Qianlong (May 18, 1738)'}
-        </p>
+        {/* Founding Date - Two lines with bold highlight */}
+        <div className="text-center space-y-1">
+          <p className="text-base sm:text-lg text-white/80">
+            {t?.hero?.foundingLine1 || 'เริ่มสร้างเมื่อ'}{' '}
+            <span className="font-bold text-amber-300">{t?.hero?.foundingDateBold || '18 พฤษภาคม ค.ศ. 1738'}</span>
+          </p>
+          <p className="text-sm sm:text-base text-white/50">
+            {t?.hero?.foundingLine2 || 'ตรงกับปีเฉียนหลงที่ 3 ของราชวงศ์ชิง'}
+          </p>
+        </div>
       </div>
     </section>
   );
 };
 
-// Global 1738 Section - 3D Carousel with infinite circular navigation
+// Global 1738 Section - Carousel showing adjacent cards
 const Global1738Section = ({ currentLang, t }) => {
   const contexts = t?.global1738?.contexts || [];
   const total = contexts.length;
+  const [direction, setDirection] = useState(0); // -1 left, 1 right
   
   // Map language to default country
   const langToCountry = {
@@ -513,21 +613,22 @@ const Global1738Section = ({ currentLang, t }) => {
   }, [currentLang, contexts]);
 
   const goNext = () => {
-    if (total > 0) setActiveIndex((prev) => (prev + 1) % total);
+    if (total > 0) {
+      setDirection(1);
+      setActiveIndex((prev) => (prev + 1) % total);
+    }
   };
 
   const goPrev = () => {
-    if (total > 0) setActiveIndex((prev) => (prev - 1 + total) % total);
-  };
-
-  // Handle scroll/swipe
-  const handleWheel = (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      if (e.deltaX > 20) goNext();
-      else if (e.deltaX < -20) goPrev();
+    if (total > 0) {
+      setDirection(-1);
+      setActiveIndex((prev) => (prev - 1 + total) % total);
     }
   };
+
+  // Get adjacent indices (circular)
+  const getPrevIndex = () => (activeIndex - 1 + total) % total;
+  const getNextIndex = () => (activeIndex + 1) % total;
 
   if (!total) return null;
 
@@ -544,14 +645,13 @@ const Global1738Section = ({ currentLang, t }) => {
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-thai-display mb-3">
-            {t?.global1738?.heading || 'Year 1738'}
+            {t?.global1738?.heading || 'ปี 1738 – โลกกำลังอยู่ยุคไหนบ้าง'}
           </h2>
         </div>
 
-        {/* Carousel - Single card view with swipe */}
+        {/* Carousel - Full width card on mobile */}
         <div 
           className="relative"
-          onWheel={handleWheel}
           onTouchStart={(e) => {
             const touch = e.touches[0];
             e.currentTarget.dataset.touchX = touch.clientX;
@@ -564,51 +664,83 @@ const Global1738Section = ({ currentLang, t }) => {
             else if (diff < -50) goNext();
           }}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={contexts[activeIndex]?.id}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.3 }}
-              className="bg-gradient-to-br from-gray-900 to-black border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-xl max-w-2xl mx-auto"
-            >
-              {/* Card Header */}
-              <div className="flex items-start gap-4 mb-5">
-                <span className="text-4xl sm:text-5xl">{contexts[activeIndex]?.flag}</span>
-                <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl text-amber-300 font-semibold mb-1 leading-tight">
-                    {contexts[activeIndex]?.title}
-                  </h3>
-                  <div className="flex gap-3 text-sm text-white/50">
-                    <span>{t?.global1738?.adLabel} {contexts[activeIndex]?.adYear || 1738}</span>
-                    <span>·</span>
-                    <span>{t?.global1738?.beLabel} {contexts[activeIndex]?.beYear || 2281}</span>
+          {/* Full Width Card */}
+          <div className="max-w-2xl mx-auto">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={contexts[activeIndex]?.id}
+                initial={{ opacity: 0, x: direction * 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction * -100 }}
+                transition={{ duration: 0.3 }}
+                className="bg-gradient-to-br from-gray-900/90 to-black border border-amber-500/30 rounded-2xl p-5 sm:p-8 shadow-xl shadow-amber-500/5"
+              >
+                {/* Card Header */}
+                <div className="flex items-start gap-4 mb-5">
+                  <span className="text-5xl sm:text-6xl">{contexts[activeIndex]?.flag}</span>
+                  <div className="flex-1">
+                    <h3 className="text-xl sm:text-2xl text-amber-300 font-semibold mb-2 leading-tight">
+                      {contexts[activeIndex]?.title}
+                    </h3>
+                    <div className="flex gap-2 text-sm text-white/50">
+                      <span>{t?.global1738?.adLabel} {contexts[activeIndex]?.adYear || 1738}</span>
+                      <span>·</span>
+                      <span>{t?.global1738?.beLabel} {contexts[activeIndex]?.beYear || 2281}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mb-5" />
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mb-5" />
 
-              {/* Card Content */}
-              <div className="space-y-4">
-                {contexts[activeIndex]?.paragraphs?.map((para, idx) => (
-                  <p key={idx} className="text-base sm:text-lg text-white/80 leading-relaxed">
-                    {para}
-                  </p>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                {/* Card Content - No max height, show all content */}
+                <div className="space-y-4">
+                  {contexts[activeIndex]?.paragraphs?.map((para, idx) => (
+                    <p key={idx} className="text-base sm:text-lg text-white/80 leading-relaxed">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation Arrows - Desktop only */}
+          <div className="hidden sm:flex items-center justify-between absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 pointer-events-none">
+            <button
+              type="button"
+              onClick={goPrev}
+              className="w-12 h-12 rounded-full bg-black/80 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold pointer-events-auto hover:bg-amber-500/20 transition-colors"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="w-12 h-12 rounded-full bg-black/80 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold pointer-events-auto hover:bg-amber-500/20 transition-colors"
+            >
+              ›
+            </button>
+          </div>
         </div>
 
-        {/* Navigation - Only arrows, no dots */}
-        <div className="flex items-center justify-center mt-6">
-          <span className="text-sm text-white/40">
-            {activeIndex + 1} / {total} · ปัดซ้าย-ขวาเพื่อเปลี่ยน
-          </span>
+        {/* Navigation Dots */}
+        <div className="flex items-center justify-center gap-2 mt-6">
+          {contexts.map((ctx, idx) => (
+            <button
+              key={ctx.id}
+              type="button"
+              onClick={() => {
+                setDirection(idx > activeIndex ? 1 : -1);
+                setActiveIndex(idx);
+              }}
+              className={`w-2 h-2 rounded-full transition-all ${idx === activeIndex ? 'bg-amber-400 w-6' : 'bg-white/30 hover:bg-white/50'}`}
+            />
+          ))}
         </div>
+        <p className="text-center text-xs text-white/40 mt-2">
+          ปัดซ้าย-ขวา หรือกดการ์ดข้างๆ เพื่อเปลี่ยน
+        </p>
       </div>
     </section>
   );
@@ -1026,23 +1158,22 @@ const BlessingsSection = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, o
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
-              className="rounded-2xl border border-white/10 bg-black/40 px-3 py-3 sm:px-4 sm:py-4"
+              className="rounded-2xl border border-white/10 bg-black/40 overflow-hidden"
             >
-              <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                {/* Left column: category title (single language) */}
-                <div className="sm:w-40 flex flex-col gap-1 text-left">
-                  <div className="inline-flex items-center gap-2">
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-amber-500 text-xs font-semibold text-black">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-amber-300 font-serif text-lg">
-                      {getTitle(category)}
-                    </span>
-                  </div>
-                  <span className="text-white/60 text-sm">
+              {/* Sticky category header */}
+              <div className="sticky top-0 z-10 bg-gradient-to-r from-gray-900/95 via-black/95 to-gray-900/95 backdrop-blur-sm border-b border-white/10 px-3 py-3 sm:px-4 sm:py-3">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-amber-300 font-serif text-lg sm:text-xl font-semibold">
+                    {getTitle(category)}
+                  </span>
+                  <span className="text-white/50 text-xs sm:text-sm">
                     {category.description}
                   </span>
                 </div>
+              </div>
+              
+              {/* Images grid */}
+              <div className="px-3 py-3 sm:px-4 sm:py-4">
 
                 {/* Right column: all images for this blessing */}
                 <div className="flex-1 overflow-x-auto">
@@ -1258,53 +1389,42 @@ const SouvenirsSection = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, o
   );
 };
 
-// Navigation Component
+// Navigation Component (re-designed, non-sticky, no CN logo)
 const Navigation = ({ currentLang, setCurrentLang, t }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-      scrolled ? 'bg-black/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-xl flex items-center justify-center">
-            <span className="text-black font-serif font-bold text-lg">龍</span>
-          </div>
-          <div className="hidden sm:block">
-            <span className="text-amber-400 font-serif text-lg">龍山寺</span>
-            <span className="text-white/70 text-xs block">Longshan Temple</span>
-          </div>
-        </a>
+    <header className="w-full bg-black">
+      {/* แถวบน: ชื่อเว็บ + เปลี่ยนภาษา */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-amber-300 text-sm sm:text-base font-thai-display">
+            {t?.header?.title || 'Longshan Temple Amulets'}
+          </span>
+          <span className="text-[11px] sm:text-xs text-white/60">
+            {t?.header?.subtitle || 'ตัวช่วยเลือกเครื่องราง & วิธีไหว้ วัดหลงซาน'}
+          </span>
+        </div>
 
-        {/* Language selector (Mobile & Desktop) */}
-        <div className="relative ml-auto">
+        {/* Language selector */}
+        <div className="relative">
           <button
             onClick={() => setLangMenuOpen(!langMenuOpen)}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 transition-colors"
           >
-            <Globe className="w-5 h-5 text-amber-400" />
-            <span className="text-white/90 font-medium">{languages.find(l => l.code === currentLang)?.flag}</span>
+            <Globe className="w-4 h-4 text-amber-300" />
+            <span className="text-xs sm:text-sm text-white/90">
+              {languages.find(l => l.code === currentLang)?.flag}
+            </span>
           </button>
-          
+
           <AnimatePresence>
             {langMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute top-full right-0 mt-2 min-w-[160px] bg-gray-900 border border-white/10 rounded-xl overflow-hidden shadow-xl z-50"
+                exit={{ opacity: 0, y: 8 }}
+                className="absolute right-0 mt-2 min-w-[160px] bg-gray-900 border border-white/10 rounded-xl overflow-hidden shadow-xl z-50"
               >
                 {languages.map(lang => (
                   <button
@@ -1313,12 +1433,14 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
                       setCurrentLang(lang.code);
                       setLangMenuOpen(false);
                     }}
-                    className={`w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors text-left ${
-                      currentLang === lang.code ? 'bg-amber-500/20 text-amber-400' : 'text-white/80'
+                    className={`w-full px-4 py-2.5 flex items-center gap-2 text-left text-sm transition-colors ${
+                      currentLang === lang.code
+                        ? 'bg-amber-500/20 text-amber-300'
+                        : 'text-white/80 hover:bg-white/10'
                     }`}
                   >
                     <span className="text-lg">{lang.flag}</span>
-                    <span className="text-sm font-medium">{lang.name}</span>
+                    <span className="text-xs sm:text-sm font-medium">{lang.name}</span>
                   </button>
                 ))}
               </motion.div>
@@ -1326,9 +1448,27 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
           </AnimatePresence>
         </div>
       </div>
-    </nav>
+
+      {/* แถวล่าง: เครดิตแหล่งข้อมูล */}
+      <div className="px-3 sm:px-4 pb-3 font-thai-legal">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-black/85 border border-amber-500/40 rounded-lg px-3 py-2 text-[11px] sm:text-xs text-white/70 text-center">
+            {t?.footer?.dataSource || 'อ้างอิงข้อมูลและภาพจากเว็บไซต์ทางการของวัด:'}{' '}
+            <a
+              href="https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t.php#"
+              target="_blank"
+              rel="noreferrer"
+              className="text-amber-300 underline underline-offset-2"
+            >
+              https://lungshan.org.tw/...
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
+
 
 // Footer Component
 const Footer = ({ t }) => {
@@ -1343,13 +1483,12 @@ const Footer = ({ t }) => {
                 <span className="text-black font-serif font-bold text-xl">龍</span>
               </div>
               <div>
-                <h3 className="text-amber-400 font-serif text-xl">艋舺龍山寺</h3>
-                <p className="text-white/50 text-sm">Monga Longshan Temple</p>
+                <h3 className="text-amber-400 font-serif text-xl">{t?.footer?.templeName || '艋舺龍山寺'}</h3>
+                <p className="text-white/50 text-sm">{t?.footer?.templeNameEn || 'Monga Longshan Temple'}</p>
               </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed font-thai-body">
-              Founded in 1738, Longshan Temple is one of Taiwan's most important and beautiful temples, 
-              dedicated to Guanyin, the Goddess of Mercy.
+              {t?.footer?.templeDescription || 'Founded in 1738, Longshan Temple is one of Taiwan\'s most important and beautiful temples, dedicated to Guanyin, the Goddess of Mercy.'}
             </p>
           </div>
 
@@ -1359,7 +1498,7 @@ const Footer = ({ t }) => {
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-white/60 text-sm">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5" />
-                <span>No. 211, Guangzhou Street, Wanhua District, Taipei City 108, Taiwan</span>
+                <span>{t?.footer?.address || 'No. 211, Guangzhou Street, Wanhua District, Taipei City 108, Taiwan'}</span>
               </div>
               <div className="flex items-center gap-3 text-white/60 text-sm">
                 <Phone className="w-5 h-5 text-amber-400" />
@@ -1367,26 +1506,39 @@ const Footer = ({ t }) => {
               </div>
               <div className="flex items-center gap-3 text-white/60 text-sm">
                 <Clock className="w-5 h-5 text-amber-400" />
-                <span>6:00 AM - 10:00 PM Daily</span>
+                <span>{t?.footer?.openingHours || '6:00 AM - 10:00 PM Daily'}</span>
               </div>
             </div>
           </div>
 
-          {/* Features */}
+          {/* Open Source & Site Owner */}
           <div>
-            <h4 className="text-white font-semibold mb-4 font-thai-display">{t?.footer?.features || 'Features'}</h4>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <Star className="w-4 h-4 text-amber-400" />
-                <span>{t?.footer?.authenticBlessings || 'Authentic Temple Blessings'}</span>
+            <h4 className="text-white font-semibold mb-4 font-thai-display">{t?.footer?.openSource || 'Open Source Project'}</h4>
+            <div className="space-y-3">
+              <p className="text-white/60 text-sm">
+                {t?.footer?.openSourceDesc || 'This is an open source project. Feel free to use and contribute.'}
+              </p>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/HydrogenB/LhongshanTemple-SocialProject"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-white/70 hover:text-amber-400 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  <span className="text-sm">GitHub</span>
+                </a>
               </div>
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <CreditCard className="w-4 h-4 text-amber-400" />
-                <span>{t?.footer?.creditCardAccepted || 'Credit Card Accepted'}</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <Globe className="w-4 h-4 text-amber-400" />
-                <span>{t?.footer?.multiLanguage || 'Multi-language Support'}</span>
+              <div className="pt-2">
+                <p className="text-white/50 text-xs mb-1">{t?.footer?.siteOwner || 'Site Owner'}</p>
+                <a
+                  href="https://www.linkedin.com/in/jirads/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium"
+                >
+                  Jirad Srirattana-arporn
+                </a>
               </div>
             </div>
           </div>
@@ -1395,7 +1547,7 @@ const Footer = ({ t }) => {
         {/* Credit & disclaimer */}
         <div className="mt-10 pt-6 border-t border-white/10 text-xs text-white/60 space-y-2 font-thai-legal">
           <p>
-            {t?.footer?.disclaimer || 'This amulet selection tool is created to help devotees choose and note items conveniently. It is not the official temple website.'}
+            {t?.footer?.disclaimer || 'This website is created to help devotees conveniently select and note amulets. It is not the official temple website.'}
           </p>
           <p>
             {t?.footer?.dataSource || 'Content and images are referenced from the official temple website:'}
@@ -1409,11 +1561,6 @@ const Footer = ({ t }) => {
               https://lungshan.org.tw/...
             </a>
           </p>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-6 pt-4 border-t border-white/10 text-center text-white/40 text-sm">
-          <p>{t?.footer?.copyright || '© 2024 Monga Longshan Temple. All sacred items are blessed at the temple.'}</p>
         </div>
       </div>
     </footer>
@@ -1454,7 +1601,13 @@ function App() {
   const [currentLang, setCurrentLang] = useState('th');
   const [cart, setCart] = useState({});
   const [previewItem, setPreviewItem] = useState(null);
-  const [imageSize, setImageSize] = useState('small');
+  // Default: large on PC, medium on mobile
+  const [imageSize, setImageSize] = useState(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      return 'medium';
+    }
+    return 'large';
+  });
   const translation = getTranslation(currentLang);
 
   const handleToggleCart = (item) => {
@@ -1517,23 +1670,6 @@ function App() {
     <div className="min-h-screen w-full overflow-x-hidden">
       <Navigation currentLang={currentLang} setCurrentLang={setCurrentLang} t={translation} />
 
-      {/* Top-level credit & disclaimer bar */}
-      <div className="mt-16 md:mt-20 px-4 font-thai-legal">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-black/80 border border-amber-500/40 rounded-xl px-3 py-2 text-[11px] sm:text-xs text-white/70 text-center">
-            {translation?.footer?.dataSource || 'Content and images are referenced from the official temple website:'}
-            {' '}
-            <a
-              href="https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t.php#"
-              target="_blank"
-              rel="noreferrer"
-              className="text-amber-300 underline underline-offset-2"
-            >
-              https://lungshan.org.tw/...
-            </a>
-          </div>
-        </div>
-      </div>
       
       <HeroSection heroText={translation.hero} currentLang={currentLang} t={translation} />
       
@@ -1561,7 +1697,7 @@ function App() {
         t={translation}
       />
       
-      <TempleGuide />
+      <TempleGuide t={translation} />
       
       <Footer t={translation} />
       
