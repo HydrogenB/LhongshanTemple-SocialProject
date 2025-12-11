@@ -1451,7 +1451,7 @@ const ScrollToTop = () => {
 
 // Main App Component
 function App() {
-  const [currentLang, setCurrentLang] = useState('en');
+  const [currentLang, setCurrentLang] = useState('th');
   const [cart, setCart] = useState({});
   const [previewItem, setPreviewItem] = useState(null);
   const [imageSize, setImageSize] = useState('small');
