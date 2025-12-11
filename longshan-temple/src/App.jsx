@@ -338,6 +338,8 @@ const souvenirItems = [
 // Hero Section Component
 const HeroSection = ({ heroText, currentLang }) => {
   const founding = useFoundingDuration();
+  const chars = ['艋', '舺', '龍', '山', '寺'];
+  const segments = heroText?.readingSegments || [];
   return (
     <section className="relative w-full min-h-[450px] max-h-[520px] flex items-center justify-center overflow-hidden pt-20 pb-12">
       {/* Photo layer */}
@@ -364,17 +366,22 @@ const HeroSection = ({ heroText, currentLang }) => {
 
       {/* Content */}
       <div className="relative z-20 text-center px-4 max-w-5xl mx-auto">
-        <motion.div className="mb-6">
-          <span className="inline-block px-6 py-2 bg-gradient-to-r from-amber-600/20 to-yellow-600/20 backdrop-blur-sm border border-amber-500/30 rounded-full text-amber-400 text-sm tracking-widest uppercase">
-            {heroText?.tagline || "Taiwan's Most Sacred Temple"}
-          </span>
-        </motion.div>
-
         <motion.h1 className="font-serif text-glow font-thai-display">
-          <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mb-4">
-            艋舺龍山寺
-          </span>
-          <span className="block text-lg sm:text-2xl md:text-3xl text-white/90 font-light tracking-[0.2em]">
+          <div className="flex justify-center gap-2 sm:gap-3 mb-1">
+            {chars.map((ch, idx) => (
+              <div key={idx} className="flex flex-col items-center leading-none">
+                <span className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent">
+                  {ch}
+                </span>
+                {segments[idx] && (
+                  <span className="mt-1 text-[10px] sm:text-xs text-amber-100/90 font-thai-body">
+                    {segments[idx]}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+          <span className="block text-lg sm:text-2xl md:text-3xl text-white/90 font-light tracking-[0.2em] mt-1">
             LONGSHAN TEMPLE
           </span>
         </motion.h1>

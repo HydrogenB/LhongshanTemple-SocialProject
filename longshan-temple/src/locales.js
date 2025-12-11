@@ -24,6 +24,8 @@ export const translations = {
       tagline: "Taiwan's Most Sacred Temple",
       primaryCta: 'Explore Blessings',
       secondaryCta: 'View Souvenirs',
+      reading: 'Mengjia Longshan Temple',
+      readingSegments: ['Meng', 'jia', 'Long', 'shan', 'Temple'],
     },
   },
   zh: {
@@ -37,6 +39,8 @@ export const translations = {
       tagline: "Taiwan's Most Sacred Temple",
       primaryCta: 'Explore Blessings',
       secondaryCta: 'View Souvenirs',
+      reading: '艋舺龍山寺 · Měngjiǎ Lóngshān Sì',
+      readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì'],
     },
   },
   th: {
@@ -50,6 +54,8 @@ export const translations = {
       tagline: "Taiwan's Most Sacred Temple",
       primaryCta: 'Explore Blessings',
       secondaryCta: 'View Souvenirs',
+      reading: 'เหมิงเจีย หลงซานซื่อ',
+      readingSegments: ['เหมิง', 'เจีย', 'หลง', 'ซาน', 'ซื่อ'],
     },
   },
   ja: {
@@ -63,6 +69,8 @@ export const translations = {
       tagline: "Taiwan's Most Sacred Temple",
       primaryCta: 'Explore Blessings',
       secondaryCta: 'View Souvenirs',
+      reading: 'メンジャー・ロンシャン スー',
+      readingSegments: ['メン', 'ジャー', 'ロン', 'シャン', 'スー'],
     },
   },
   ko: {
@@ -76,6 +84,8 @@ export const translations = {
       tagline: "Taiwan's Most Sacred Temple",
       primaryCta: 'Explore Blessings',
       secondaryCta: 'View Souvenirs',
+      reading: '멍자 룽산 스',
+      readingSegments: ['멍', '자', '룽', '산', '스'],
     },
   },
 };
