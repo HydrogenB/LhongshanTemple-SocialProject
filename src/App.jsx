@@ -17,9 +17,9 @@ const buildCartKey = (section, categoryId, imageUrl) => `${section}:${categoryId
 const IMAGE_SIZES = ['small', 'medium', 'large'];
 
 const blessingThumbSize = {
-  small: 'w-24 sm:w-28 md:w-32',
-  medium: 'w-28 sm:w-32 md:w-36',
-  large: 'w-40 sm:w-44 md:w-48',
+  small: 'w-[30%] sm:w-24 md:w-28',      // 3 per row on mobile
+  medium: 'w-[48%] sm:w-32 md:w-36',     // 2 per row on mobile
+  large: 'w-full sm:w-44 md:w-48',       // 1 per row on mobile
 };
 
 const summaryThumbSize = {
@@ -615,7 +615,7 @@ const Global1738Section = ({ currentLang, t }) => {
 };
 
 // Cart summary bar (local cart for selected amulets)
-const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'small', t }) => {
+const CartBar = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, onClearCart, imageSize = 'small', t }) => {
   const items = Object.values(cart || {});
   const totalPieces = items.reduce((sum, item) => sum + (item.qty || 1), 0);
   const [open, setOpen] = useState(false);
@@ -675,14 +675,14 @@ const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'sm
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md"
+          className="fixed inset-0 z-50 bg-black"
           onClick={() => setOpen(false)}
         >
           <div
-            className="relative max-w-3xl w-full max-h-[80vh] mx-3 sm:mx-4 bg-black/95 border border-amber-500/40 rounded-2xl p-4 sm:p-6 overflow-y-auto text-sm sm:text-base text-white/80 space-y-3"
+            className="h-full w-full bg-black p-4 overflow-y-auto text-sm sm:text-base text-white/80 space-y-3"
             onClick={e => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2 sticky top-0 bg-black py-2 z-10">
               <div className="flex items-center gap-2">
                 <ShoppingCart className="w-5 h-5 text-amber-400" />
                 <div className="text-sm sm:text-base">
@@ -704,76 +704,60 @@ const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'sm
             {groupedItems.map((group, groupIndex) => (
               <div
                 key={group.key}
-                className={`pt-3 ${groupIndex === 0 ? '' : 'mt-3 border-t border-white/10'}`}
+                className={`${groupIndex === 0 ? '' : 'mt-3 pt-3 border-t border-white/10'}`}
               >
-                <div className="mb-3 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                  <div className="flex flex-col text-left">
-                    {group.titleZh && (
-                      <span className="text-amber-300 font-thai-display text-base sm:text-lg">
-                        {group.titleZh}
-                      </span>
-                    )}
-                    <span className="text-white/80 text-xs sm:text-sm">
-                      {group.titleTh || group.titleEn}
-                    </span>
-                  </div>
+                {/* Category Header */}
+                <div className="mb-2 px-1">
+                  <span className="text-amber-300 font-medium text-sm">
+                    {group.titleTh || group.titleEn || group.titleZh}
+                  </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {group.items.map(item => {
-                    const isBlessing = item.section === 'blessing';
-                    const tagText = isBlessing
-                      ? `${t.cart.helpsWithBlessing} ${item.categoryTitleTh || item.categoryTitleEn || ''}`
-                      : t.cart.helpsWithSouvenir;
-
-                    return (
-                      <div
-                        key={item.key}
-                        className="flex flex-col sm:flex-row items-center gap-3 rounded-2xl bg-white/5 border border-white/10 p-3"
-                      >
-                        <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden bg-white/90 shrink-0">
-                          <img
-                            src={item.imageUrl}
-                            alt={item.categoryTitleEn || item.titleEn || t.cart.selectedAlt}
-                            className="w-full h-full object-contain"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="flex-1 flex flex-col items-center sm:items-end gap-2">
-                          <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-[11px] sm:text-xs text-amber-200">
-                            {tagText}
-                          </span>
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => onChangeQty?.(item, -1)}
-                              disabled={(item.qty || 1) <= 1}
-                              className="w-8 h-8 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/10 disabled:opacity-40 disabled:hover:bg-transparent"
-                            >
-                              <Minus className="w-4 h-4" />
-                            </button>
-                            <span className="px-3 text-white font-semibold text-base sm:text-lg">
-                              x{item.qty || 1}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => onChangeQty?.(item, 1)}
-                              className="w-8 h-8 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/10"
-                            >
-                              <Plus className="w-4 h-4" />
-                            </button>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => onToggleCart(item)}
-                            className="px-2.5 py-1 rounded-full border border-white/30 text-[11px] sm:text-xs text-white/70 hover:bg-white/10"
-                          >
-                            {t.cart.removeItem}
-                          </button>
-                        </div>
+                {/* Items - Compact horizontal rows */}
+                <div className="space-y-2">
+                  {group.items.map(item => (
+                    <div
+                      key={item.key}
+                      className="flex items-center gap-3 rounded-xl bg-white/5 border border-white/10 p-2"
+                    >
+                      {/* Image - Left */}
+                      <div className="w-[160px] h-[160px] rounded-lg overflow-hidden bg-white/90 shrink-0">
+                        <img
+                          src={item.imageUrl}
+                          alt={item.categoryTitleEn || item.titleEn || t.cart.selectedAlt}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
                       </div>
-                    );
-                  })}
+
+                      {/* Quantity controls - Right */}
+                      <div className="flex-1 flex items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if ((item.qty || 1) <= 1) {
+                              onRemoveFromCart(item);
+                            } else {
+                              onChangeQty?.(item, -1);
+                            }
+                          }}
+                          className="w-8 h-8 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="min-w-[40px] text-center text-white font-semibold text-base">
+                          x{item.qty || 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => onChangeQty?.(item, 1)}
+                          className="w-8 h-8 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -963,8 +947,9 @@ const ImageModal = ({ category, onClose }) => {
 };
 
 // Blessings Section - table-like layout (label + images)
-const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', setImageSize, t, currentLang }) => {
+const BlessingsSection = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, onImageClick, imageSize = 'small', setImageSize, t, currentLang }) => {
   const categories = React.useMemo(() => getBlessingCategories(t), [t]);
+  const [floatingAnims, setFloatingAnims] = useState([]); // Array of { id, key, type: '+1' | '-1' }
   
   // Helper to get title based on current language
   const getTitle = (category) => {
@@ -974,6 +959,33 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
       case 'ja': return category.titleZh; // Japanese uses Chinese characters
       case 'ko': return category.titleZh; // Korean uses Chinese characters  
       default: return category.titleEn;
+    }
+  };
+
+  const handleAdd = (e, item, key) => {
+    e.stopPropagation();
+    onToggleCart?.(item);
+    const animId = Date.now() + Math.random();
+    setFloatingAnims(prev => [...prev, { id: animId, key, type: '+1' }]);
+    setTimeout(() => {
+      setFloatingAnims(prev => prev.filter(a => a.id !== animId));
+    }, 600);
+  };
+
+  const handleRemove = (e, item, key) => {
+    e.stopPropagation();
+    const cartItem = cart?.[key];
+    if (cartItem) {
+      if ((cartItem.qty || 1) <= 1) {
+        onRemoveFromCart?.(item);
+      } else {
+        onChangeQty?.(cartItem, -1);
+      }
+      const animId = Date.now() + Math.random();
+      setFloatingAnims(prev => [...prev, { id: animId, key, type: '-1' }]);
+      setTimeout(() => {
+        setFloatingAnims(prev => prev.filter(a => a.id !== animId));
+      }, 600);
     }
   };
   
@@ -1037,21 +1049,21 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
                   <div className="flex flex-wrap gap-2">
                     {category.images.map((img, idx) => {
                       const key = buildCartKey('blessing', category.id, img);
-                      const selected = !!cart?.[key];
+                      const cartItem = cart?.[key];
+                      const qty = cartItem?.qty || 0;
+                      const item = {
+                        section: 'blessing',
+                        categoryId: category.id,
+                        imageUrl: img,
+                        categoryTitleZh: category.titleZh,
+                        categoryTitleEn: category.titleEn,
+                        categoryTitleTh: category.titleTh,
+                      };
                       return (
                         <div
                           key={idx}
-                          className={`relative aspect-square ${blessingThumbSize[imageSize]} rounded-xl overflow-hidden border border-white/15 bg-white flex items-center justify-center cursor-pointer`}
-                          onClick={() =>
-                            onImageClick?.({
-                              section: 'blessing',
-                              categoryId: category.id,
-                              imageUrl: img,
-                              categoryTitleZh: category.titleZh,
-                              categoryTitleEn: category.titleEn,
-                              categoryTitleTh: category.titleTh,
-                            })
-                          }
+                          className={`relative aspect-square ${blessingThumbSize[imageSize]} rounded-xl overflow-hidden border ${qty > 0 ? 'border-amber-500/50' : 'border-white/15'} bg-white flex items-center justify-center cursor-pointer`}
+                          onClick={() => onImageClick?.(item)}
                         >
                           <img
                             src={img}
@@ -1059,31 +1071,46 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
                             className="w-full h-full object-contain"
                             loading="lazy"
                           />
-                          <button
-                            type="button"
-                            onClick={e => {
-                              e.stopPropagation();
-                              onToggleCart?.({
-                                section: 'blessing',
-                                categoryId: category.id,
-                                imageUrl: img,
-                                categoryTitleZh: category.titleZh,
-                                categoryTitleEn: category.titleEn,
-                                categoryTitleTh: category.titleTh,
-                              });
-                            }}
-                            className={`absolute top-1 right-1 w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-colors ${
-                              selected
-                                ? 'bg-emerald-500 border-emerald-300 text-black'
-                                : 'bg-black/60 border-white/60 text-white'
-                            }`}
-                          >
-                            {selected ? (
-                              <Check className="w-4 h-4" />
-                            ) : (
-                              <ShoppingCart className="w-4 h-4" />
+                          
+                          {/* Control buttons - top right */}
+                          <div className="absolute top-1 right-1 flex items-center gap-1">
+                            {/* Minus button - only show if qty > 0 */}
+                            {qty > 0 && (
+                              <button
+                                type="button"
+                                onClick={(e) => handleRemove(e, item, key)}
+                                className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center text-lg font-bold hover:bg-black/80 transition-colors"
+                              >
+                                −
+                              </button>
                             )}
-                          </button>
+                            
+                            {/* Plus/Qty button */}
+                            <button
+                              type="button"
+                              onClick={(e) => handleAdd(e, item, key)}
+                              className={`min-w-[28px] h-7 px-1.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center text-sm font-bold hover:bg-black/80 transition-colors ${qty > 0 ? 'text-amber-300' : ''}`}
+                            >
+                              {qty > 0 ? qty : '+'}
+                            </button>
+                            
+                            {/* Floating +1/-1 animations - MMORPG style (multiple) */}
+                            <AnimatePresence>
+                              {floatingAnims.filter(a => a.key === key).map((anim, i) => (
+                                <motion.span
+                                  key={anim.id}
+                                  initial={{ opacity: 1, y: 0, scale: 1, x: (i % 3 - 1) * 10 }}
+                                  animate={{ opacity: 0, y: -30, scale: 1.3 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{ duration: 0.5 }}
+                                  className={`absolute -top-2 right-0 text-lg font-bold drop-shadow-lg pointer-events-none ${anim.type === '+1' ? 'text-emerald-400' : 'text-red-400'}`}
+                                  style={{ textShadow: '0 0 10px currentColor, 0 0 20px currentColor' }}
+                                >
+                                  {anim.type}
+                                </motion.span>
+                              ))}
+                            </AnimatePresence>
+                          </div>
                         </div>
                       );
                     })}
@@ -1099,8 +1126,36 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
 };
 
 // Souvenirs Section
-const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', t }) => {
+const SouvenirsSection = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, onImageClick, imageSize = 'small', t }) => {
   const items = React.useMemo(() => getSouvenirItems(t), [t]);
+  const [floatingAnims, setFloatingAnims] = useState([]);
+
+  const handleAdd = (e, item, key) => {
+    e.stopPropagation();
+    onToggleCart?.(item);
+    const animId = Date.now() + Math.random();
+    setFloatingAnims(prev => [...prev, { id: animId, key, type: '+1' }]);
+    setTimeout(() => {
+      setFloatingAnims(prev => prev.filter(a => a.id !== animId));
+    }, 600);
+  };
+
+  const handleRemove = (e, item, key) => {
+    e.stopPropagation();
+    const cartItem = cart?.[key];
+    if (cartItem) {
+      if ((cartItem.qty || 1) <= 1) {
+        onRemoveFromCart?.(item);
+      } else {
+        onChangeQty?.(cartItem, -1);
+      }
+      const animId = Date.now() + Math.random();
+      setFloatingAnims(prev => [...prev, { id: animId, key, type: '-1' }]);
+      setTimeout(() => {
+        setFloatingAnims(prev => prev.filter(a => a.id !== animId));
+      }, 600);
+    }
+  };
   
   return (
     <section id="souvenirs" className="py-16 px-3 sm:px-4 sm:py-20 lg:py-24 bg-gradient-to-b from-transparent via-amber-900/10 to-transparent overflow-x-hidden">
@@ -1122,24 +1177,24 @@ const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {items.map((item, index) => {
             const key = buildCartKey('souvenir', item.id, item.image);
-            const selected = !!cart?.[key];
+            const cartItem = cart?.[key];
+            const qty = cartItem?.qty || 0;
+            const souvenirItem = {
+              section: 'souvenir',
+              souvenirId: item.id,
+              imageUrl: item.image,
+              titleZh: item.titleZh,
+              titleEn: item.titleEn,
+            };
             return (
               <motion.div
                 key={item.id}
                 className="group"
               >
-                <div className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-amber-500/50 transition-all duration-500">
+                <div className={`relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-3xl overflow-hidden border ${qty > 0 ? 'border-amber-500/50' : 'border-white/10'} hover:border-amber-500/50 transition-all duration-500`}>
                   <div
                     className="relative aspect-square overflow-hidden cursor-pointer"
-                    onClick={() =>
-                      onImageClick?.({
-                        section: 'souvenir',
-                        souvenirId: item.id,
-                        imageUrl: item.image,
-                        titleZh: item.titleZh,
-                        titleEn: item.titleEn,
-                      })
-                    }
+                    onClick={() => onImageClick?.(souvenirItem)}
                   >
                     <img
                       src={item.image}
@@ -1147,30 +1202,46 @@ const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-                    <button
-                      type="button"
-                      onClick={e => {
-                        e.stopPropagation();
-                        onToggleCart?.({
-                          section: 'souvenir',
-                          souvenirId: item.id,
-                          imageUrl: item.image,
-                          titleZh: item.titleZh,
-                          titleEn: item.titleEn,
-                        });
-                      }}
-                      className={`absolute top-2 right-2 w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-colors ${
-                        selected
-                          ? 'bg-emerald-500 border-emerald-300 text-black'
-                          : 'bg-black/60 border-white/60 text-white'
-                      }`}
-                    >
-                      {selected ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <ShoppingCart className="w-4 h-4" />
+                    
+                    {/* Control buttons - top right */}
+                    <div className="absolute top-2 right-2 flex items-center gap-1">
+                      {/* Minus button - only show if qty > 0 */}
+                      {qty > 0 && (
+                        <button
+                          type="button"
+                          onClick={(e) => handleRemove(e, souvenirItem, key)}
+                          className="w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center text-lg font-bold hover:bg-black/80 transition-colors"
+                        >
+                          −
+                        </button>
                       )}
-                    </button>
+                      
+                      {/* Plus/Qty button */}
+                      <button
+                        type="button"
+                        onClick={(e) => handleAdd(e, souvenirItem, key)}
+                        className={`min-w-[32px] h-8 px-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center text-sm font-bold hover:bg-black/80 transition-colors ${qty > 0 ? 'text-amber-300' : ''}`}
+                      >
+                        {qty > 0 ? qty : '+'}
+                      </button>
+                      
+                      {/* Floating +1/-1 animations - MMORPG style (multiple) */}
+                      <AnimatePresence>
+                        {floatingAnims.filter(a => a.key === key).map((anim, i) => (
+                          <motion.span
+                            key={anim.id}
+                            initial={{ opacity: 1, y: 0, scale: 1, x: (i % 3 - 1) * 10 }}
+                            animate={{ opacity: 0, y: -30, scale: 1.3 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className={`absolute -top-2 right-0 text-lg font-bold drop-shadow-lg pointer-events-none ${anim.type === '+1' ? 'text-emerald-400' : 'text-red-400'}`}
+                            style={{ textShadow: '0 0 10px currentColor, 0 0 20px currentColor' }}
+                          >
+                            {anim.type}
+                          </motion.span>
+                        ))}
+                      </AnimatePresence>
+                    </div>
                   </div>
                   <div className="p-5">
                     <h3 className="text-lg font-serif text-amber-400 font-thai-display">{item.titleZh}</h3>
@@ -1392,11 +1463,22 @@ function App() {
     setCart(prev => {
       const next = { ...prev };
       if (next[key]) {
-        delete next[key];
+        // Item exists - increase quantity instead of removing
+        next[key] = { ...next[key], qty: (next[key].qty || 1) + 1 };
       } else {
-        const existingQty = next[key]?.qty || 1;
-        next[key] = { ...item, key, qty: existingQty };
+        // New item - add with qty 1
+        next[key] = { ...item, key, qty: 1 };
       }
+      return next;
+    });
+  };
+
+  const handleRemoveFromCart = (item) => {
+    const baseId = item.categoryId || item.souvenirId || item.categoryTitleEn || item.titleEn || 'item';
+    const key = item.key || buildCartKey(item.section, baseId, item.imageUrl);
+    setCart(prev => {
+      const next = { ...prev };
+      delete next[key];
       return next;
     });
   };
@@ -1460,6 +1542,8 @@ function App() {
       <BlessingsSection
         cart={cart}
         onToggleCart={handleToggleCart}
+        onRemoveFromCart={handleRemoveFromCart}
+        onChangeQty={handleChangeQty}
         onImageClick={handleImageClick}
         imageSize={imageSize}
         setImageSize={setImageSize}
@@ -1470,6 +1554,8 @@ function App() {
       <SouvenirsSection
         cart={cart}
         onToggleCart={handleToggleCart}
+        onRemoveFromCart={handleRemoveFromCart}
+        onChangeQty={handleChangeQty}
         onImageClick={handleImageClick}
         imageSize={imageSize}
         t={translation}
@@ -1577,6 +1663,7 @@ function App() {
       <CartBar
         cart={cart}
         onToggleCart={handleToggleCart}
+        onRemoveFromCart={handleRemoveFromCart}
         onChangeQty={handleChangeQty}
         onClearCart={handleClearCart}
         imageSize={imageSize}
