@@ -413,6 +413,112 @@ const HeroSection = ({ heroText, currentLang }) => {
   );
 };
 
+// Global context around 1738
+const Global1738Section = () => {
+  return (
+    <section className="py-16 px-4 bg-black/60 border-t border-white/10">
+      <div className="max-w-7xl mx-auto space-y-8">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-thai-display text-white mb-3">
+            EST. 1738 – โลกกำลังอยู่ยุคไหนบ้าง
+          </h2>
+          <p className="text-sm sm:text-base text-white/80 font-thai-body">
+            ปี 1738 คือช่วงกลางศตวรรษที่ 18 วัดหลงซานถือกำเนิดในไทเปภายใต้ราชวงศ์ชิง
+            ขณะที่ภูมิภาคอื่น ๆ รอบโลกก็กำลังเปลี่ยนผ่านยุคประวัติศาสตร์สำคัญของตัวเองไปพร้อมกัน.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-white/85 font-thai-body">
+          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <Globe className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-amber-300">จีนแผ่นดินใหญ่ – ราชวงศ์ชิง (ต้นรัชกาลเฉียนหลง)</span>
+            </div>
+            <p>
+              จีนกำลังเข้าสู่ "High Qing" ยุคเฟื่องฟูด้านเศรษฐกิจและศิลปวัฒนธรรม จักรพรรดิเฉียนหลงเริ่มจัดระบบการค้า
+              กับตะวันตกผ่านพ่อค้า Cohong ที่กวางโจว เมืองท่าใหญ่ของจักรวรรดิจีน.
+            </p>
+            <p className="text-white/70">
+              ตอนที่วัดหลงซานถูกสร้าง ปักกิ่งคือศูนย์กลางจักรวรรดิ และจีนกำลังก้าวสู่ยุคทองของราชวงศ์ชิง.
+            </p>
+          </div>
+
+          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <Globe className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-amber-300">ญี่ปุ่น – ยุคเอโดะ (สมัย Genbun)</span>
+            </div>
+            <p>
+              ญี่ปุ่นปกครองโดยโชกุนตระกูลโทะกุงาวะ เป็นยุคสงบยาวนาน เมืองเอโดะและเกียวโตเฟื่องฟูเรื่องศิลปะและวัฒนธรรม
+              แต่ประเทศยังปิดตนเองภายใต้นโยบาย <span className="italic">sakoku</span>.
+            </p>
+            <p className="text-white/70">
+              ญี่ปุ่นในปี 1738 จึงเป็นยุคที่รุ่งเรืองอย่างเงียบ ๆ ต่างจากไต้หวันที่กำลังเปิดรับผู้อพยพจากฝูเจี้ยนมาสร้างวัดหลงซาน.
+            </p>
+          </div>
+
+          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <MapPin className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-amber-300">ไต้หวัน – ชุมชนชายแดนของจักรวรรดิชิง</span>
+            </div>
+            <p>
+              ไต้หวันอยู่ภายใต้การปกครองของราชวงศ์ชิงในฐานะมณฑลขึ้นกับฝูเจี้ยน มีการอพยพของชาวฮั่นจากฝูเจี้ยนและกวางตุ้งอย่างต่อเนื่อง
+              ปี 1738 กลุ่มผู้อพยพจากฝูเจี้ยนร่วมกันสร้าง "วัดหลงซานแห่งมังเจีย" ในพื้นที่ที่ปัจจุบันคือว่านหัว ไทเป.
+            </p>
+            <p className="text-white/70">
+              ขณะกรุงปักกิ่งคือศูนย์กลางจักรวรรดิ ไทเปยังเป็นชุมชนชายแดน และวัดหลงซานคือหัวใจทางจิตวิญญาณของคนกลุ่มนี้.
+            </p>
+          </div>
+
+          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <Globe className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-amber-300">เกาหลี – ราชวงศ์โชซอน (กษัตริย์ยองโจ)</span>
+            </div>
+            <p>
+              เกาหลียังอยู่ในอาณาจักรโชซอนภายใต้กษัตริย์ยองโจ หนึ่งในกษัตริย์สายปฏิรูปที่สำคัญที่สุดของโชซอน
+              มีความพยายามปรับระบบภาษี ลดความเหลื่อมล้ำ และใช้นโยบาย Tangpyeong เพื่อลดความขัดแย้งของขุนนาง.
+            </p>
+            <p className="text-white/70">
+              ในปีที่ไต้หวันสร้างวัดหลงซาน เกาหลียังคงยึดโครงสร้างรัฐขงจื๊อแบบเคร่งครัดเพื่อรักษาระเบียบสังคม.
+            </p>
+          </div>
+
+          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <MapPin className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-amber-300">สยาม – กรุงศรีอยุธยา (รัชกาลบรมโกศ)</span>
+            </div>
+            <p>
+              สยามอยู่ในช่วงปลายสมัยกรุงศรีอยุธยา ภายใต้พระเจ้าอยู่หัวบรมโกศ ซึ่งมักถูกมองว่าเป็นยุคเฟื่องฟูครั้งสุดท้าย
+              ก่อนเสียกรุงในปี 1767 ทั้งด้านศิลปกรรม พระราชพิธี และความมั่งคั่งของราชธานีริมเจ้าพระยา.
+            </p>
+            <p className="text-white/70">
+              ในขณะที่ไต้หวันสร้างวัดหลงซาน อยุธยากำลังส่องแสงครั้งสุดท้าย ก่อนเปลี่ยนผ่านสู่ยุครัตนโกสินทร์.
+            </p>
+          </div>
+
+          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <Globe className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-amber-300">อเมริกา – อาณานิคมอังกฤษ (ก่อนก่อตั้งสหรัฐฯ)</span>
+            </div>
+            <p>
+              ทวีปอเมริกาเหนือยังเป็นอาณานิคมของอังกฤษ ช่วงปี 1730s–1740s กำลังเกิดคลื่นศาสนาคริสต์ครั้งใหญ่
+              "First Great Awakening" ที่เปลี่ยนภูมิทัศน์ทางศาสนาและการเมืองในอังกฤษและอาณานิคม.
+            </p>
+            <p className="text-white/70">
+              ปี 1738 บาทหลวง George Whitefield เดินทางมาถึงจอร์เจียและเริ่มเทศน์ในอาณานิคม
+              อีกเกือบสี่ทศวรรษกว่าชื่อ "United States" จะปรากฏในปี 1776.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Cart summary bar (local cart for selected amulets)
 const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'small' }) => {
   const items = Object.values(cart || {});
@@ -1243,6 +1349,8 @@ function App() {
       </div>
       
       <HeroSection heroText={translation.hero} currentLang={currentLang} />
+      
+      <Global1738Section />
       
       <BlessingsSection
         cart={cart}
