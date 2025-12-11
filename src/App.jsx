@@ -140,10 +140,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'education',
     icon: GraduationCap,
-    titleZh: translations.zh.categories.education.title,
-    titleEn: translations.en.categories.education.title,
-    titleTh: translations.th.categories.education.title,
-    description: t.categories.education.description,
+    titleZh: translations.zh?.categories?.education?.title || '學業',
+    titleEn: translations.en?.categories?.education?.title || 'Education',
+    titleTh: translations.th?.categories?.education?.title || 'การเรียน',
+    description: t?.categories?.education?.description || 'Blessings for academic success.',
     color: 'from-indigo-600 to-purple-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/009b.jpg',
@@ -165,10 +165,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'safety',
     icon: Shield,
-    titleZh: translations.zh.categories.safety.title,
-    titleEn: translations.en.categories.safety.title,
-    titleTh: translations.th.categories.safety.title,
-    description: t.categories.safety.description,
+    titleZh: translations.zh?.categories?.safety?.title || '平安',
+    titleEn: translations.en?.categories?.safety?.title || 'Safety',
+    titleTh: translations.th?.categories?.safety?.title || 'ความปลอดภัย',
+    description: t?.categories?.safety?.description || 'General protection.',
     color: 'from-emerald-600 to-teal-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/050b.jpg',
@@ -194,10 +194,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'transport',
     icon: Car,
-    titleZh: translations.zh.categories.transport.title,
-    titleEn: translations.en.categories.transport.title,
-    titleTh: translations.th.categories.transport.title,
-    description: t.categories.transport.description,
+    titleZh: translations.zh?.categories?.transport?.title || '交通',
+    titleEn: translations.en?.categories?.transport?.title || 'Transport',
+    titleTh: translations.th?.categories?.transport?.title || 'การเดินทาง',
+    description: t?.categories?.transport?.description || 'Safe travel.',
     color: 'from-blue-600 to-cyan-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/005b.jpg',
@@ -215,10 +215,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'pregnancy',
     icon: Baby,
-    titleZh: translations.zh.categories.pregnancy.title,
-    titleEn: translations.en.categories.pregnancy.title,
-    titleTh: translations.th.categories.pregnancy.title,
-    description: t.categories.pregnancy.description,
+    titleZh: translations.zh?.categories?.pregnancy?.title || '安產',
+    titleEn: translations.en?.categories?.pregnancy?.title || 'Pregnancy',
+    titleTh: translations.th?.categories?.pregnancy?.title || 'การตั้งครรภ์',
+    description: t?.categories?.pregnancy?.description || 'Safe pregnancy.',
     color: 'from-pink-500 to-rose-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/012b.jpg',
@@ -229,10 +229,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'fertility',
     icon: HeartHandshake,
-    titleZh: translations.zh.categories.fertility.title,
-    titleEn: translations.en.categories.fertility.title,
-    titleTh: translations.th.categories.fertility.title,
-    description: t.categories.fertility.description,
+    titleZh: translations.zh?.categories?.fertility?.title || '求子',
+    titleEn: translations.en?.categories?.fertility?.title || 'Fertility',
+    titleTh: translations.th?.categories?.fertility?.title || 'ความอุดมสมบูรณ์',
+    description: t?.categories?.fertility?.description || 'Fertility blessing.',
     color: 'from-rose-500 to-pink-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/012b.jpg',
@@ -242,10 +242,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'pet',
     icon: Dog,
-    titleZh: translations.zh.categories.pet.title,
-    titleEn: translations.en.categories.pet.title,
-    titleTh: translations.th.categories.pet.title,
-    description: t.categories.pet.description,
+    titleZh: translations.zh?.categories?.pet?.title || '寵物',
+    titleEn: translations.en?.categories?.pet?.title || 'Pet',
+    titleTh: translations.th?.categories?.pet?.title || 'สัตว์เลี้ยง',
+    description: t?.categories?.pet?.description || 'Pet protection.',
     color: 'from-orange-500 to-amber-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/001b.jpg',
@@ -256,10 +256,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'health',
     icon: Stethoscope,
-    titleZh: translations.zh.categories.health.title,
-    titleEn: translations.en.categories.health.title,
-    titleTh: translations.th.categories.health.title,
-    description: t.categories.health.description,
+    titleZh: translations.zh?.categories?.health?.title || '健康',
+    titleEn: translations.en?.categories?.health?.title || 'Health',
+    titleTh: translations.th?.categories?.health?.title || 'สุขภาพ',
+    description: t?.categories?.health?.description || 'Health blessing.',
     color: 'from-green-600 to-emerald-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/063.jpg',
@@ -276,10 +276,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'career',
     icon: Briefcase,
-    titleZh: translations.zh.categories.career.title,
-    titleEn: translations.en.categories.career.title,
-    titleTh: translations.th.categories.career.title,
-    description: t.categories.career.description,
+    titleZh: translations.zh?.categories?.career?.title || '事業',
+    titleEn: translations.en?.categories?.career?.title || 'Career',
+    titleTh: translations.th?.categories?.career?.title || 'อาชีพ',
+    description: t?.categories?.career?.description || 'Career success.',
     color: 'from-slate-600 to-gray-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/052b.jpg',
@@ -293,10 +293,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'business',
     icon: Store,
-    titleZh: translations.zh.categories.business.title,
-    titleEn: translations.en.categories.business.title,
-    titleTh: translations.th.categories.business.title,
-    description: t.categories.business.description,
+    titleZh: translations.zh?.categories?.business?.title || '生意',
+    titleEn: translations.en?.categories?.business?.title || 'Business',
+    titleTh: translations.th?.categories?.business?.title || 'ธุรกิจ',
+    description: t?.categories?.business?.description || 'Business prosperity.',
     color: 'from-yellow-600 to-amber-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/052b.jpg',
@@ -315,10 +315,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'happiness',
     icon: Smile,
-    titleZh: translations.zh.categories.happiness.title,
-    titleEn: translations.en.categories.happiness.title,
-    titleTh: translations.th.categories.happiness.title,
-    description: t.categories.happiness.description,
+    titleZh: translations.zh?.categories?.happiness?.title || '幸福',
+    titleEn: translations.en?.categories?.happiness?.title || 'Happiness',
+    titleTh: translations.th?.categories?.happiness?.title || 'ความสุข',
+    description: t?.categories?.happiness?.description || 'Happiness blessing.',
     color: 'from-yellow-500 to-orange-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/054b.jpg',
@@ -327,10 +327,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'luck',
     icon: Sparkles,
-    titleZh: translations.zh.categories.luck.title,
-    titleEn: translations.en.categories.luck.title,
-    titleTh: translations.th.categories.luck.title,
-    description: t.categories.luck.description,
+    titleZh: translations.zh?.categories?.luck?.title || '好運',
+    titleEn: translations.en?.categories?.luck?.title || 'Luck',
+    titleTh: translations.th?.categories?.luck?.title || 'โชคดี',
+    description: t?.categories?.luck?.description || 'Good fortune.',
     color: 'from-amber-500 to-yellow-400',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/027b.jpg',
@@ -346,10 +346,10 @@ const getBlessingCategories = (t) => [
   {
     id: 'love',
     icon: Heart,
-    titleZh: translations.zh.categories.love.title,
-    titleEn: translations.en.categories.love.title,
-    titleTh: translations.th.categories.love.title,
-    description: t.categories.love.description,
+    titleZh: translations.zh?.categories?.love?.title || '愛情',
+    titleEn: translations.en?.categories?.love?.title || 'Love',
+    titleTh: translations.th?.categories?.love?.title || 'ความรัก',
+    description: t?.categories?.love?.description || 'Love blessing.',
     color: 'from-red-500 to-pink-500',
     images: [
       'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/019.jpg',
@@ -370,334 +370,244 @@ const getBlessingCategories = (t) => [
 const getSouvenirItems = (t) => [
   {
     id: 'photobook',
-    titleEn: translations.en.items.photobook.title,
-    titleZh: translations.zh.items.photobook.title,
+    titleEn: translations.en?.items?.photobook?.title || 'Photo Collection',
+    titleZh: translations.zh?.items?.photobook?.title || '相冊',
     image: 'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/305b.jpg',
-    description: t.items.photobook.description,
+    description: t?.items?.photobook?.description || 'Temple photo collection.',
   },
   {
     id: 'scroll',
-    titleEn: translations.en.items.scroll.title,
-    titleZh: translations.zh.items.scroll.title,
+    titleEn: translations.en?.items?.scroll?.title || 'Hanging Scroll',
+    titleZh: translations.zh?.items?.scroll?.title || '掛軸',
     image: 'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/288.jpg',
-    description: t.items.scroll.description,
+    description: t?.items?.scroll?.description || 'Heart Sutra scroll.',
   },
   {
     id: 'moonblocks',
-    titleEn: translations.en.items.moonblocks.title,
-    titleZh: translations.zh.items.moonblocks.title,
+    titleEn: translations.en?.items?.moonblocks?.title || 'Moon Blocks',
+    titleZh: translations.zh?.items?.moonblocks?.title || '筊杯',
     image: 'https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/sg_imgs/082.jpg',
-    description: t.items.moonblocks.description,
+    description: t?.items?.moonblocks?.description || 'Traditional moon blocks.',
   },
 ];
 
-// Hero Section Component
+// Hero Section Component - Compact
 const HeroSection = ({ heroText, currentLang, t }) => {
   const founding = useFoundingDuration();
   const chars = ['艋', '舺', '龍', '山', '寺'];
   const segments = heroText?.readingSegments || [];
   
   return (
-    <section className="relative w-full min-h-[520px] sm:min-h-[580px] flex items-center justify-center overflow-hidden pt-16 pb-8">
-      {/* Photo layer */}
+    <section className="relative w-full flex items-center justify-center overflow-hidden py-12 sm:py-14 px-4">
+      {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src="https://www.thaifly.com/image/catalog/article/Taiwan/SUN/longshan-temple/longshan-temple%203.jpg"
-          alt="Longshan Temple hero"
-          className="w-full h-full object-cover opacity-40"
-          loading="lazy"
+          alt="Longshan Temple"
+          className="w-full h-full object-cover opacity-25"
         />
-      </div>
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/95 z-10" />
-
-      {/* Animated gold particles effect */}
-      <div className="absolute inset-0 z-10 opacity-20">
-        <div className="absolute inset-0" 
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 50%),
-                              radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 50%),
-                              radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 40%)`
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black" />
       </div>
 
       {/* Content */}
-      <div className="relative z-20 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
-        {/* Temple Name - Chinese Characters */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6"
-        >
-          <div className="flex justify-center gap-1 sm:gap-2 mb-2">
+      <div className="relative z-10 text-center max-w-3xl mx-auto">
+        {/* Temple Name + Badge inline */}
+        <div className="mb-5">
+          <div className="flex justify-center gap-1.5 sm:gap-2 mb-2">
             {chars.map((ch, idx) => (
-              <motion.div 
-                key={idx} 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="flex flex-col items-center"
-              >
-                <span className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-b from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent drop-shadow-lg"
-                  style={{ textShadow: '0 0 40px rgba(212, 175, 55, 0.5)' }}>
+              <div key={idx} className="flex flex-col items-center">
+                <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400">
                   {ch}
                 </span>
                 {segments[idx] && (
-                  <span className="mt-1 text-[10px] sm:text-xs text-amber-200/80 font-light tracking-wider">
+                  <span className="text-[9px] sm:text-[10px] text-amber-200/60">
                     {segments[idx]}
                   </span>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
-          <p className="text-base sm:text-lg md:text-xl text-white/80 font-light tracking-[0.3em] uppercase">
-            Longshan Temple
+          <p className="text-xs sm:text-sm text-white/60 tracking-[0.3em] uppercase">
+            Longshan Temple · <span className="text-amber-300/80">{t?.hero?.badge || 'EST. 1738'}</span>
           </p>
-        </motion.div>
+        </div>
 
-        {/* Founding Duration Counter - Elegant Box Design */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-8"
-        >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 mb-5">
-            <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-xs sm:text-sm text-amber-300 tracking-widest uppercase font-medium">
-              {t?.hero?.badge}
+        {/* Duration Counter - Compact */}
+        <div className="flex justify-center items-end gap-2 sm:gap-3">
+          {/* Years */}
+          <div className="text-center">
+            <div className="bg-black/40 border border-amber-500/25 rounded-lg px-3 py-2 min-w-[60px] sm:min-w-[72px]">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
+                {founding.years}
+              </span>
+            </div>
+            <span className="block mt-1 text-[10px] sm:text-xs text-amber-200/50">
+              {t?.hero?.yearsSuffix || 'years'}
             </span>
-            <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           </div>
 
-          {/* Duration Display */}
-          <div className="flex justify-center items-stretch gap-2 sm:gap-3">
-            {/* Years */}
-            <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b from-amber-900/40 to-black/60 backdrop-blur-sm border border-amber-500/30 rounded-xl px-3 sm:px-5 py-3 sm:py-4 min-w-[70px] sm:min-w-[90px]">
-                <span className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-b from-amber-200 to-amber-400 bg-clip-text text-transparent font-thai-display">
-                  {founding.years}
-                </span>
-              </div>
-              <span className="mt-2 text-xs sm:text-sm text-amber-200/70 font-light">
-                {t?.hero?.yearsSuffix}
+          <span className="text-amber-500/40 text-lg mb-5">:</span>
+
+          {/* Months */}
+          <div className="text-center">
+            <div className="bg-black/40 border border-amber-500/25 rounded-lg px-3 py-2 min-w-[60px] sm:min-w-[72px]">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
+                {String(founding.months).padStart(2, '0')}
               </span>
             </div>
-
-            {/* Separator */}
-            <div className="flex items-center text-amber-500/50 text-2xl font-light self-start mt-4 sm:mt-5">:</div>
-
-            {/* Months */}
-            <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b from-amber-900/40 to-black/60 backdrop-blur-sm border border-amber-500/30 rounded-xl px-3 sm:px-5 py-3 sm:py-4 min-w-[70px] sm:min-w-[90px]">
-                <span className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-b from-amber-200 to-amber-400 bg-clip-text text-transparent font-thai-display">
-                  {String(founding.months).padStart(2, '0')}
-                </span>
-              </div>
-              <span className="mt-2 text-xs sm:text-sm text-amber-200/70 font-light">
-                {t?.hero?.monthsLabel}
-              </span>
-            </div>
-
-            {/* Separator */}
-            <div className="flex items-center text-amber-500/50 text-2xl font-light self-start mt-4 sm:mt-5">:</div>
-
-            {/* Days */}
-            <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b from-amber-900/40 to-black/60 backdrop-blur-sm border border-amber-500/30 rounded-xl px-3 sm:px-5 py-3 sm:py-4 min-w-[70px] sm:min-w-[90px]">
-                <span className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-b from-amber-200 to-amber-400 bg-clip-text text-transparent font-thai-display">
-                  {String(founding.days).padStart(2, '0')}
-                </span>
-              </div>
-              <span className="mt-2 text-xs sm:text-sm text-amber-200/70 font-light">
-                {t?.hero?.daysLabel}
-              </span>
-            </div>
+            <span className="block mt-1 text-[10px] sm:text-xs text-amber-200/50">
+              {t?.hero?.monthsLabel || 'months'}
+            </span>
           </div>
 
-          {/* Founding info text */}
-          <p className="mt-5 text-xs sm:text-sm text-white/50 font-light">
-            {t?.hero?.yearsPrefix} · 初建 乾隆三年五月十八日
-          </p>
-        </motion.div>
+          <span className="text-amber-500/40 text-lg mb-5">:</span>
+
+          {/* Days */}
+          <div className="text-center">
+            <div className="bg-black/40 border border-amber-500/25 rounded-lg px-3 py-2 min-w-[60px] sm:min-w-[72px]">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
+                {String(founding.days).padStart(2, '0')}
+              </span>
+            </div>
+            <span className="block mt-1 text-[10px] sm:text-xs text-amber-200/50">
+              {t?.hero?.daysLabel || 'days'}
+            </span>
+          </div>
+        </div>
+
+        {/* Subtitle */}
+        <p className="mt-4 text-xs text-white/40">
+          {t?.hero?.foundingDate || 'Founded on the 18th day of the 5th month, 3rd year of Qianlong (May 18, 1738)'}
+        </p>
       </div>
     </section>
   );
 };
 
-// Global context around 1738
+// Global 1738 Section - 3D Carousel with infinite circular navigation
 const Global1738Section = ({ currentLang, t }) => {
-  const primaryByLang = React.useMemo(
-    () => ({
-      th: 'siam',     // Thai language -> Siam (Ayutthaya)
-      ja: 'japan',    // Japanese -> Japan
-      ko: 'korea',    // Korean -> Korea
-      zh: 'taiwan',   // Chinese -> Taiwan (Longshan's home)
-      en: 'taiwan',   // English -> Taiwan as neutral/global default
-    }),
-    []
-  );
-
-  const contexts = t.global1738.contexts || [];
-  const iconById = React.useMemo(() => {
-    const map = {};
-    GLOBAL_1738_CONTEXTS.forEach(ctx => {
-      map[ctx.id] = ctx.icon;
-    });
-    return map;
-  }, []);
-  const indexById = React.useMemo(() => {
-    const map = {};
-    contexts.forEach((ctx, index) => {
-      map[ctx.id] = index;
-    });
-    return map;
-  }, [contexts]);
-
-  const getInitialIndex = React.useCallback(
-    (langCode) => {
-      const pid = primaryByLang[langCode] || 'taiwan';
-      return indexById[pid] ?? 0;
-    },
-    [indexById, primaryByLang]
-  );
-
-  const [activeIndex, setActiveIndex] = useState(() => getInitialIndex(currentLang));
+  const contexts = t?.global1738?.contexts || [];
   const total = contexts.length;
+  
+  // Map language to default country
+  const langToCountry = {
+    th: 'siam',
+    ja: 'japan', 
+    ko: 'korea',
+    zh: 'taiwan',
+    en: 'taiwan',
+  };
+  
+  // Find initial index based on language
+  const getInitialIndex = () => {
+    const targetId = langToCountry[currentLang] || 'taiwan';
+    const idx = contexts.findIndex(ctx => ctx.id === targetId);
+    return idx >= 0 ? idx : 0;
+  };
+  
+  const [activeIndex, setActiveIndex] = useState(getInitialIndex);
 
-  useEffect(() => {
-    if (!total) return;
-    const targetIndex = getInitialIndex(currentLang);
-    setActiveIndex(targetIndex);
-  }, [currentLang, total, getInitialIndex]);
+  // Update index when language changes
+  React.useEffect(() => {
+    setActiveIndex(getInitialIndex());
+  }, [currentLang, contexts]);
 
-  const goNext = React.useCallback(() => {
-    if (!total) return;
-    setActiveIndex(prev => (prev + 1 + total) % total);
-  }, [total]);
+  const goNext = () => {
+    if (total > 0) setActiveIndex((prev) => (prev + 1) % total);
+  };
 
-  const goPrev = React.useCallback(() => {
-    if (!total) return;
-    setActiveIndex(prev => (prev - 1 + total) % total);
-  }, [total]);
+  const goPrev = () => {
+    if (total > 0) setActiveIndex((prev) => (prev - 1 + total) % total);
+  };
 
-  const handleWheel = (event) => {
-    if (!total) return;
-    const { deltaX, deltaY } = event;
-
-    // Use whichever axis has the stronger intent so both
-    // horizontal (trackpad) and vertical (mouse wheel) can rotate
-    const horizontal = Math.abs(deltaX) >= Math.abs(deltaY);
-
-    if (!horizontal && Math.abs(deltaY) < 5) {
-      return;
-    }
-
-    // Prevent page scroll only when consumed for carousel navigation
-    event.preventDefault();
-
-    const directionValue = horizontal ? deltaX : deltaY;
-
-    if (directionValue > 0) {
-      goNext(); // scroll right / down
-    } else if (directionValue < 0) {
-      goPrev(); // scroll left / up
+  // Handle scroll/swipe
+  const handleWheel = (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      if (e.deltaX > 20) goNext();
+      else if (e.deltaX < -20) goPrev();
     }
   };
 
+  if (!total) return null;
+
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-black/80 to-black/95 border-t border-amber-500/10 overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-        {/* Section Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-8 sm:mb-10"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4">
-            <span className="text-xs text-amber-400 tracking-wider">ค.ศ. 1738 · พ.ศ. 2281</span>
+    <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-black via-amber-950/10 to-black overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-3 px-5 py-2 bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-amber-500/20 rounded-full border border-amber-500/30 mb-5">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-sm sm:text-base text-amber-300 font-medium tracking-wider">
+              ค.ศ. 1738 · พ.ศ. 2281
+            </span>
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           </div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-thai-display text-white mb-2">
-            {t.global1738.heading}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-thai-display mb-3">
+            {t?.global1738?.heading || 'Year 1738'}
           </h2>
-        </motion.div>
+        </div>
 
-        {/* Single Card Display */}
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button
-            onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-amber-500/30 flex items-center justify-center text-amber-400 hover:bg-amber-500/20 hover:border-amber-500/50 transition-all"
-          >
-            <ChevronUp className="w-5 h-5 sm:w-6 sm:h-6 -rotate-90" />
-          </button>
-          <button
-            onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-amber-500/30 flex items-center justify-center text-amber-400 hover:bg-amber-500/20 hover:border-amber-500/50 transition-all"
-          >
-            <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 -rotate-90" />
-          </button>
-
-          {/* Card Container */}
-          <div className="overflow-hidden px-8 sm:px-12" onWheel={handleWheel}>
-            <AnimatePresence mode="wait">
-              {contexts[activeIndex] && (
-                <motion.div
-                  key={contexts[activeIndex].id}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-gradient-to-br from-amber-950/30 via-black/50 to-black/70 border border-amber-500/20 rounded-2xl p-5 sm:p-6 shadow-2xl"
-                >
-                  {/* Card Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl sm:text-3xl">{contexts[activeIndex].flag}</span>
-                      <div>
-                        <h3 className="text-base sm:text-lg font-semibold text-amber-300 font-thai-display">
-                          {contexts[activeIndex].title}
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="text-right text-xs text-amber-200/60">
-                      <div>{t.global1738.adLabel} {contexts[activeIndex].adYear || 1738}</div>
-                      <div>{t.global1738.beLabel} {contexts[activeIndex].beYear || 2281}</div>
-                    </div>
+        {/* Carousel - Single card view with swipe */}
+        <div 
+          className="relative"
+          onWheel={handleWheel}
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            e.currentTarget.dataset.touchX = touch.clientX;
+          }}
+          onTouchEnd={(e) => {
+            const startX = parseFloat(e.currentTarget.dataset.touchX || '0');
+            const endX = e.changedTouches[0].clientX;
+            const diff = endX - startX;
+            if (diff > 50) goPrev();
+            else if (diff < -50) goNext();
+          }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={contexts[activeIndex]?.id}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="bg-gradient-to-br from-gray-900 to-black border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-xl max-w-2xl mx-auto"
+            >
+              {/* Card Header */}
+              <div className="flex items-start gap-4 mb-5">
+                <span className="text-4xl sm:text-5xl">{contexts[activeIndex]?.flag}</span>
+                <div className="flex-1">
+                  <h3 className="text-xl sm:text-2xl text-amber-300 font-semibold mb-1 leading-tight">
+                    {contexts[activeIndex]?.title}
+                  </h3>
+                  <div className="flex gap-3 text-sm text-white/50">
+                    <span>{t?.global1738?.adLabel} {contexts[activeIndex]?.adYear || 1738}</span>
+                    <span>·</span>
+                    <span>{t?.global1738?.beLabel} {contexts[activeIndex]?.beYear || 2281}</span>
                   </div>
+                </div>
+              </div>
 
-                  {/* Card Content */}
-                  <div className="space-y-3">
-                    {contexts[activeIndex].paragraphs?.map((para, idx) => (
-                      <p key={idx} className="text-sm sm:text-base text-white/75 leading-relaxed font-thai-body">
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mb-5" />
 
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-6">
-            {contexts.map((ctx, idx) => (
-              <button
-                key={ctx.id}
-                onClick={() => setActiveIndex(idx)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === activeIndex 
-                    ? 'bg-amber-400 w-6' 
-                    : 'bg-white/20 hover:bg-white/40'
-                }`}
-              />
-            ))}
-          </div>
+              {/* Card Content */}
+              <div className="space-y-4">
+                {contexts[activeIndex]?.paragraphs?.map((para, idx) => (
+                  <p key={idx} className="text-base sm:text-lg text-white/80 leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation - Only arrows, no dots */}
+        <div className="flex items-center justify-center mt-6">
+          <span className="text-sm text-white/40">
+            {activeIndex + 1} / {total} · ปัดซ้าย-ขวาเพื่อเปลี่ยน
+          </span>
         </div>
       </div>
     </section>
@@ -709,8 +619,6 @@ const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'sm
   const items = Object.values(cart || {});
   const totalPieces = items.reduce((sum, item) => sum + (item.qty || 1), 0);
   const [open, setOpen] = useState(false);
-
-  if (!items.length) return null;
 
   const groupedItems = React.useMemo(() => {
     const groups = {};
@@ -739,6 +647,8 @@ const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'sm
 
     return Object.values(groups);
   }, [items]);
+
+  if (!items.length) return null;
 
   return (
     <>
@@ -1053,7 +963,20 @@ const ImageModal = ({ category, onClose }) => {
 };
 
 // Blessings Section - table-like layout (label + images)
-const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', setImageSize, t }) => {
+const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', setImageSize, t, currentLang }) => {
+  const categories = React.useMemo(() => getBlessingCategories(t), [t]);
+  
+  // Helper to get title based on current language
+  const getTitle = (category) => {
+    switch (currentLang) {
+      case 'zh': return category.titleZh;
+      case 'th': return category.titleTh;
+      case 'ja': return category.titleZh; // Japanese uses Chinese characters
+      case 'ko': return category.titleZh; // Korean uses Chinese characters  
+      default: return category.titleEn;
+    }
+  };
+  
   return (
     <section id="blessings" className="py-16 px-3 sm:px-4 sm:py-20 lg:py-24 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
@@ -1088,27 +1011,24 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
 
         {/* Table-like rows: left = label, right = images */}
         <div className="space-y-4 sm:space-y-5">
-          {blessingCategories.map((category, index) => (
+          {categories.map((category, index) => (
             <motion.div
               key={category.id}
               className="rounded-2xl border border-white/10 bg-black/40 px-3 py-3 sm:px-4 sm:py-4"
             >
               <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                {/* Left column: category titles */}
+                {/* Left column: category title (single language) */}
                 <div className="sm:w-40 flex flex-col gap-1 text-left">
                   <div className="inline-flex items-center gap-2">
                     <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-amber-500 text-xs font-semibold text-black">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="text-amber-300 font-serif text-lg">
-                      {category.titleZh}
+                      {getTitle(category)}
                     </span>
                   </div>
-                  <span className="text-white/80 text-sm sm:text-base">
-                    {category.titleEn}
-                  </span>
-                  <span className="text-white/60 text-sm sm:text-sm">
-                    {category.titleTh}
+                  <span className="text-white/60 text-sm">
+                    {category.description}
                   </span>
                 </div>
 
@@ -1180,6 +1100,8 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
 
 // Souvenirs Section
 const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', t }) => {
+  const items = React.useMemo(() => getSouvenirItems(t), [t]);
+  
   return (
     <section id="souvenirs" className="py-16 px-3 sm:px-4 sm:py-20 lg:py-24 bg-gradient-to-b from-transparent via-amber-900/10 to-transparent overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
@@ -1198,7 +1120,7 @@ const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
 
         {/* Souvenirs grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {souvenirItems.map((item, index) => {
+          {items.map((item, index) => {
             const key = buildCartKey('souvenir', item.id, item.image);
             const selected = !!cart?.[key];
             return (
@@ -1542,6 +1464,7 @@ function App() {
         imageSize={imageSize}
         setImageSize={setImageSize}
         t={translation}
+        currentLang={currentLang}
       />
       
       <SouvenirsSection
