@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Analytics } from "@vercel/analytics/next"
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Heart, Shield, Car, GraduationCap, Baby, Dog, Stethoscope, 
