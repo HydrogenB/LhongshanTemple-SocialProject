@@ -3,7 +3,7 @@ import { MapPin, Train, Info, Heart, Shield, BookOpenCheck, Compass, Navigation 
 
 const TempleGuide = () => {
   return (
-    <section id="temple-guide" className="py-16 px-4 bg-black/40 border-t border-white/10">
+    <section id="temple-guide" className="py-16 px-4 bg-black/40 border-t border-white/10 font-thai-body">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Title & intro */}
         <div className="text-center max-w-3xl mx-auto">

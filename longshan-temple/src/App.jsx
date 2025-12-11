@@ -370,7 +370,7 @@ const HeroSection = ({ heroText, currentLang }) => {
           </span>
         </motion.div>
 
-        <motion.h1 className="font-serif text-glow">
+        <motion.h1 className="font-serif text-glow font-thai-display">
           <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mb-4">
             艋舺龍山寺
           </span>
@@ -385,8 +385,21 @@ const HeroSection = ({ heroText, currentLang }) => {
           Discover sacred blessings and authentic temple souvenirs from Taiwan's most revered temple, 
           standing since 1738.
         </motion.p>
-        <div className="mt-2 text-sm text-amber-200">
-          ก่อตั้งมาแล้วประมาณ {founding.years} ปี {founding.months} เดือน {founding.days} วัน
+        <div className="mt-4 flex flex-col items-center gap-1 text-amber-100 font-thai-body">
+          <div className="px-3 py-1 rounded-full border border-amber-500/60 bg-black/60 text-[10px] sm:text-xs tracking-[0.25em] uppercase text-amber-300">
+            EST. 1738 · LONGSHAN TEMPLE
+          </div>
+          <div className="flex items-baseline gap-3 mt-1">
+            <span className="text-3xl sm:text-4xl md:text-5xl font-thai-display text-amber-200">
+              {founding.years}
+            </span>
+            <span className="text-sm sm:text-base md:text-lg text-amber-100/90">
+              ปีแห่งศรัทธา
+            </span>
+          </div>
+          <div className="text-[11px] sm:text-xs text-amber-100/80 mt-1">
+            ศาลเจ้าเก่าแก่ในย่านเหมิงเจียแห่งไทเป ดำรงศรัทธานี้มายาวนานกว่าสองศตวรรษครึ่ง
+          </div>
         </div>
       </div>
     </section>
@@ -542,7 +555,7 @@ const CategoryCard = ({ category, index }) => {
         {/* Content */}
         <div className="p-4 sm:p-6 space-y-3">
           <div>
-            <h3 className="text-xl sm:text-2xl font-serif text-amber-400 mb-1">{category.titleZh}</h3>
+            <h3 className="text-xl sm:text-2xl font-serif text-amber-400 mb-1 font-thai-display">{category.titleZh}</h3>
             <h4 className="text-base sm:text-lg text-white/90 font-medium">{category.titleEn}</h4>
           </div>
 
@@ -696,7 +709,7 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
           <span className="inline-block px-4 py-1 bg-amber-500/10 rounded-full text-amber-400 text-sm tracking-wider uppercase mb-4">
             Sacred Collection
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-3 font-thai-display">
             Temple <span className="text-amber-400">Blessings</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-sm sm:text-base">
@@ -828,7 +841,7 @@ const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
           <span className="inline-block px-4 py-1 bg-amber-500/10 rounded-full text-amber-400 text-sm tracking-wider uppercase mb-4">
             Exclusive Items
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4 font-thai-display">
             Temple <span className="text-amber-400">Souvenirs</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto">
@@ -891,7 +904,7 @@ const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
                     </button>
                   </div>
                   <div className="p-5">
-                    <h3 className="text-lg font-serif text-amber-400">{item.titleZh}</h3>
+                    <h3 className="text-lg font-serif text-amber-400 font-thai-display">{item.titleZh}</h3>
                     <h4 className="text-white/90 text-sm mb-2">{item.titleEn}</h4>
                     <p className="text-white/50 text-xs">{item.description}</p>
                   </div>
@@ -1047,7 +1060,7 @@ const Footer = () => {
                 <p className="text-white/50 text-sm">Monga Longshan Temple</p>
               </div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed">
+            <p className="text-white/60 text-sm leading-relaxed font-thai-body">
               Founded in 1738, Longshan Temple is one of Taiwan's most important and beautiful temples, 
               dedicated to Guanyin, the Goddess of Mercy.
             </p>
@@ -1055,7 +1068,7 @@ const Footer = () => {
 
           {/* Contact info */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Visit Us</h4>
+            <h4 className="text-white font-semibold mb-4 font-thai-display">Visit Us</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-white/60 text-sm">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5" />
@@ -1074,7 +1087,7 @@ const Footer = () => {
 
           {/* Features */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Features</h4>
+            <h4 className="text-white font-semibold mb-4 font-thai-display">Features</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-white/60 text-sm">
                 <Star className="w-4 h-4 text-amber-400" />
@@ -1093,7 +1106,7 @@ const Footer = () => {
         </div>
 
         {/* Credit & disclaimer */}
-        <div className="mt-10 pt-6 border-t border-white/10 text-xs text-white/60 space-y-2">
+        <div className="mt-10 pt-6 border-t border-white/10 text-xs text-white/60 space-y-2 font-thai-legal">
           <p>
             เครื่องมือเลือกเครื่องรางหน้านี้จัดทำขึ้นเพื่อช่วยให้ผู้ศรัทธาเลือกและจดรายการได้สะดวกขึ้น
             ไม่ใช่เว็บไซต์อย่างเป็นทางการของวัด
@@ -1203,7 +1216,7 @@ function App() {
       <Navigation currentLang={currentLang} setCurrentLang={setCurrentLang} t={translation} />
 
       {/* Top-level credit & disclaimer bar */}
-      <div className="mt-16 md:mt-20 px-4">
+      <div className="mt-16 md:mt-20 px-4 font-thai-legal">
         <div className="max-w-7xl mx-auto">
           <div className="bg-black/80 border border-amber-500/40 rounded-xl px-3 py-2 text-[11px] sm:text-xs text-white/70 text-center">
             ข้อมูลเนื้อหาและรูปภาพอ้างอิงและดึงมาจากเว็บไซต์ทางการของวัด:
