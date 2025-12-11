@@ -1,2 +1,8 @@
+node_modules/
+dist/
+.vercel/
+.vite/
+.env
+
 /011b.jpg
 /艋舺龍山寺參拜紀念品.mhtml
