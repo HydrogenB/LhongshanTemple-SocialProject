@@ -34,6 +34,15 @@ export const translations = {
       reading: 'Mengjia Longshan Temple',
       readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì']
     },
+    floatingNav: {
+      choose: 'Choose',
+      one: 'One',
+      hero: 'Home',
+      history: '1738',
+      blessings: 'Amulets',
+      souvenirs: 'Souvenirs',
+      templeGuide: 'Guide',
+    },
     global1738: {
       heading: 'Year 1738 – What Was Happening Around the World?',
       description: '1738 was the mid-18th century. Longshan Temple was founded in Taipei under the Qing Dynasty, while other regions around the world were also going through their own significant historical transitions.',
@@ -270,6 +279,15 @@ export const translations = {
       reading: '艋舺龍山寺 · Měngjiǎ Lóngshān Sì',
       readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì'],
     },
+    floatingNav: {
+      choose: '選擇',
+      one: '區域',
+      hero: '首頁',
+      history: '1738',
+      blessings: '加持品',
+      souvenirs: '紀念品',
+      templeGuide: '指南',
+    },
     global1738: {
       heading: '1738年 – 世界正處於什麼時代？',
       description: '1738年是18世紀中期。龍山寺在清朝統治下的台北創建，而世界其他地區也正經歷各自重要的歷史轉變。',
@@ -504,6 +522,15 @@ export const translations = {
       templeDescription: 'ศาลเจ้าเก่าแก่ในย่านเหมิงเจียแห่งไทเป ดำรงศรัทธานี้มายาวนานกว่าสองศตวรรษครึ่ง',
       reading: 'เหมิงเจีย หลงซานซื่อ',
       readingSegments: ['เหมิง', 'เจีย', 'หลง', 'ซาน', 'ซื่อ'],
+    },
+    floatingNav: {
+      choose: 'เลือก',
+      one: 'หมวด',
+      hero: 'หน้าแรก',
+      history: '1738',
+      blessings: 'เครื่องราง',
+      souvenirs: 'ของที่ระลึก',
+      templeGuide: 'คู่มือ',
     },
     global1738: {
       heading: 'ปี 1738 – โลกกำลังอยู่ยุคไหนบ้าง',
@@ -741,6 +768,15 @@ export const translations = {
       reading: 'メンジャー・ロンシャン スー',
       readingSegments: ['メン', 'ジャー', 'ロン', 'シャン', 'スー'],
     },
+    floatingNav: {
+      choose: '選択',
+      one: 'する',
+      hero: 'ホーム',
+      history: '1738',
+      blessings: 'お守り',
+      souvenirs: 'お土産',
+      templeGuide: 'ガイド',
+    },
     global1738: {
       heading: '1738年 – 世界はどんな時代だったのか？',
       description: '1738年は18世紀半ば。龍山寺は清朝統治下の台北で創建されました。世界の他の地域も、それぞれ重要な歴史的転換期を迎えていました。',
@@ -976,6 +1012,15 @@ export const translations = {
       templeDescription: '타이베이 완화구에 위치한 고찰, 2세기 반 이상 신앙을 지켜왔습니다.',
       reading: '멍자 룽산 스',
       readingSegments: ['멍', '자', '룽', '산', '스'],
+    },
+    floatingNav: {
+      choose: '선택',
+      one: '하기',
+      hero: '홈',
+      history: '1738',
+      blessings: '부적',
+      souvenirs: '기념품',
+      templeGuide: '가이드',
     },
     global1738: {
       heading: '1738년 – 세계는 어떤 시대였을까?',

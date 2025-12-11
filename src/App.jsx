@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Heart, Shield, Car, GraduationCap, Baby, Dog, Stethoscope, 
   Briefcase, Store, Smile, Sparkles, HeartHandshake, BookOpen, Home,
   ChevronDown, ChevronUp, Globe, X, ZoomIn, CreditCard, MapPin,
-  Phone, Clock, Star, Menu, ArrowUp, ShoppingCart, Check, Plus, Minus
+  Phone, Clock, Star, Menu, ArrowUp, ShoppingCart, Check, Plus, Minus,
+  ChevronLeft, ChevronRight
 } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 import TempleGuide from './TempleGuide.jsx';
 import { languages, getTranslation, translations } from './locales.js';
@@ -420,6 +422,109 @@ const getSouvenirItems = (t) => [
   },
 ];
 
+// Floating Navigation Component
+const FloatingNav = ({ t, currentLang }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const categories = React.useMemo(() => getBlessingCategories(t), [t]);
+  
+  const getTitle = (category) => {
+    switch (currentLang) {
+      case 'zh': return category.titleZh;
+      case 'th': return category.titleTh;
+      case 'ja': return category.titleZh;
+      case 'ko': return category.titleZh;
+      default: return category.titleEn;
+    }
+  };
+
+  const sections = [
+    { id: 'hero', label: t?.floatingNav?.hero || 'Home' },
+    { id: 'global1738', label: t?.floatingNav?.history || '1738' },
+    { id: 'blessings', label: t?.floatingNav?.blessings || 'Amulets' },
+    ...categories.map(cat => ({ id: `category-${cat.id}`, label: getTitle(cat), isCategory: true })),
+    { id: 'souvenirs', label: t?.floatingNav?.souvenirs || 'Souvenirs' },
+    { id: 'temple-guide', label: t?.floatingNav?.templeGuide || 'Guide' },
+  ];
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setIsOpen(false);
+  };
+
+  const scrollUp = () => {
+    window.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+  };
+
+  const scrollDown = () => {
+    window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+  };
+
+  return (
+    <div className="fixed right-3 bottom-24 sm:right-4 sm:bottom-28 z-40 flex flex-col items-center gap-2">
+      {/* Scroll Up */}
+      <button
+        onClick={scrollUp}
+        className="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-500/90 to-amber-600/90 backdrop-blur-sm rounded-xl shadow-lg shadow-amber-500/30 flex items-center justify-center hover:from-amber-400/90 hover:to-amber-500/90 hover:shadow-amber-500/50 transition-all border border-amber-400/30"
+        aria-label="Scroll up"
+      >
+        <ChevronUp className="w-6 h-6 text-white" />
+      </button>
+
+      {/* Section Selector */}
+      <div className="relative">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-500/90 to-amber-600/90 backdrop-blur-sm rounded-xl shadow-lg shadow-amber-500/30 flex flex-col items-center justify-center hover:from-amber-400/90 hover:to-amber-500/90 hover:shadow-amber-500/50 transition-all border border-amber-400/30 px-1"
+        >
+          <span className="text-[9px] sm:text-[10px] text-white/90 font-medium leading-tight text-center">
+            {t?.floatingNav?.choose || 'Choose'}
+          </span>
+          <span className="text-[9px] sm:text-[10px] text-white/90 font-medium leading-tight text-center">
+            {t?.floatingNav?.one || 'One'}
+          </span>
+        </button>
+
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.15 }}
+              className="absolute bottom-full right-0 mb-2 w-48 sm:w-56 bg-gradient-to-b from-amber-50/95 to-amber-100/95 backdrop-blur-sm rounded-xl shadow-xl shadow-amber-500/20 border border-amber-200/50 overflow-hidden max-h-[60vh] overflow-y-auto"
+            >
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`w-full px-3 py-2 text-left text-sm hover:bg-amber-200/50 transition-colors border-b border-amber-300/30 last:border-b-0 ${
+                    section.isCategory ? 'pl-5 text-amber-700/80' : 'font-medium text-amber-900'
+                  }`}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Scroll Down */}
+      <button
+        onClick={scrollDown}
+        className="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-500/90 to-amber-600/90 backdrop-blur-sm rounded-xl shadow-lg shadow-amber-500/30 flex items-center justify-center hover:from-amber-400/90 hover:to-amber-500/90 hover:shadow-amber-500/50 transition-all border border-amber-400/30"
+        aria-label="Scroll down"
+      >
+        <ChevronDown className="w-6 h-6 text-white" />
+      </button>
+    </div>
+  );
+};
+
 // Hero Section Component - Mobile Optimized, Modern Design
 const HeroSection = ({ heroText, currentLang, t }) => {
   const founding = useFoundingDuration();
@@ -472,7 +577,7 @@ const HeroSection = ({ heroText, currentLang, t }) => {
   }, [founding.years, founding.months, founding.days]);
 
   return (
-    <section className="relative w-full flex items-center justify-center overflow-hidden py-12 sm:py-16 md:py-20 px-4">
+    <section id="hero" className="relative w-full flex items-center justify-center overflow-hidden py-12 sm:py-16 md:py-20 px-4">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -587,7 +692,6 @@ const HeroSection = ({ heroText, currentLang, t }) => {
 const Global1738Section = ({ currentLang, t }) => {
   const contexts = t?.global1738?.contexts || [];
   const total = contexts.length;
-  const [direction, setDirection] = useState(0); // -1 left, 1 right
   
   // Map language to default country
   const langToCountry = {
@@ -599,41 +703,58 @@ const Global1738Section = ({ currentLang, t }) => {
   };
   
   // Find initial index based on language
-  const getInitialIndex = () => {
+  const getInitialIndex = useCallback(() => {
     const targetId = langToCountry[currentLang] || 'taiwan';
     const idx = contexts.findIndex(ctx => ctx.id === targetId);
     return idx >= 0 ? idx : 0;
-  };
-  
-  const [activeIndex, setActiveIndex] = useState(getInitialIndex);
-
-  // Update index when language changes
-  React.useEffect(() => {
-    setActiveIndex(getInitialIndex());
   }, [currentLang, contexts]);
 
-  const goNext = () => {
-    if (total > 0) {
-      setDirection(1);
-      setActiveIndex((prev) => (prev + 1) % total);
-    }
-  };
+  // Embla Carousel setup - show partial adjacent slides
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'center',
+    startIndex: getInitialIndex(),
+    containScroll: false,
+  });
+  
+  const [selectedIndex, setSelectedIndex] = useState(getInitialIndex());
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const goPrev = () => {
-    if (total > 0) {
-      setDirection(-1);
-      setActiveIndex((prev) => (prev - 1 + total) % total);
-    }
-  };
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index) => emblaApi?.scrollTo(index), [emblaApi]);
 
-  // Get adjacent indices (circular)
-  const getPrevIndex = () => (activeIndex - 1 + total) % total;
-  const getNextIndex = () => (activeIndex + 1) % total;
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Scroll to initial index when language changes
+  useEffect(() => {
+    if (emblaApi) {
+      const targetIndex = getInitialIndex();
+      emblaApi.scrollTo(targetIndex, true);
+    }
+  }, [currentLang, emblaApi, getInitialIndex]);
 
   if (!total) return null;
 
   return (
-    <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-black via-amber-950/10 to-black overflow-hidden">
+    <section id="global1738" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-black via-amber-950/10 to-black overflow-hidden scroll-mt-16">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-14">
@@ -649,77 +770,62 @@ const Global1738Section = ({ currentLang, t }) => {
           </h2>
         </div>
 
-        {/* Carousel - Full width card on mobile */}
-        <div 
-          className="relative"
-          onTouchStart={(e) => {
-            const touch = e.touches[0];
-            e.currentTarget.dataset.touchX = touch.clientX;
-          }}
-          onTouchEnd={(e) => {
-            const startX = parseFloat(e.currentTarget.dataset.touchX || '0');
-            const endX = e.changedTouches[0].clientX;
-            const diff = endX - startX;
-            if (diff > 50) goPrev();
-            else if (diff < -50) goNext();
-          }}
-        >
-          {/* Full Width Card */}
-          <div className="max-w-2xl mx-auto">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={contexts[activeIndex]?.id}
-                initial={{ opacity: 0, x: direction * 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -100 }}
-                transition={{ duration: 0.3 }}
-                className="bg-gradient-to-br from-gray-900/90 to-black border border-amber-500/30 rounded-2xl p-5 sm:p-8 shadow-xl shadow-amber-500/5"
-              >
-                {/* Card Header */}
-                <div className="flex items-start gap-4 mb-5">
-                  <span className="text-5xl sm:text-6xl">{contexts[activeIndex]?.flag}</span>
-                  <div className="flex-1">
-                    <h3 className="text-xl sm:text-2xl text-amber-300 font-semibold mb-2 leading-tight">
-                      {contexts[activeIndex]?.title}
-                    </h3>
-                    <div className="flex gap-2 text-sm text-white/50">
-                      <span>{t?.global1738?.adLabel} {contexts[activeIndex]?.adYear || 1738}</span>
-                      <span>·</span>
-                      <span>{t?.global1738?.beLabel} {contexts[activeIndex]?.beYear || 2281}</span>
+        {/* Embla Carousel */}
+        <div className="relative -mx-4 sm:-mx-6">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {contexts.map((ctx, idx) => (
+                <div key={ctx.id} className="flex-[0_0_85%] sm:flex-[0_0_70%] min-w-0 pl-3 sm:pl-4">
+                  <div className="">
+                    <div className="bg-gradient-to-br from-gray-900/90 to-black border border-amber-500/30 rounded-2xl p-5 sm:p-8 shadow-xl shadow-amber-500/5">
+                      {/* Card Header */}
+                      <div className="flex items-start gap-4 mb-5">
+                        <span className="text-5xl sm:text-6xl">{ctx.flag}</span>
+                        <div className="flex-1">
+                          <h3 className="text-xl sm:text-2xl text-amber-300 font-semibold mb-2 leading-tight">
+                            {ctx.title}
+                          </h3>
+                          <div className="flex gap-2 text-sm text-white/50">
+                            <span>{t?.global1738?.adLabel} {ctx.adYear || 1738}</span>
+                            <span>·</span>
+                            <span>{t?.global1738?.beLabel} {ctx.beYear || 2281}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mb-5" />
+
+                      {/* Card Content */}
+                      <div className="space-y-4">
+                        {ctx.paragraphs?.map((para, pIdx) => (
+                          <p key={pIdx} className="text-base sm:text-lg text-white/80 leading-relaxed">
+                            {para}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mb-5" />
-
-                {/* Card Content - No max height, show all content */}
-                <div className="space-y-4">
-                  {contexts[activeIndex]?.paragraphs?.map((para, idx) => (
-                    <p key={idx} className="text-base sm:text-lg text-white/80 leading-relaxed">
-                      {para}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              ))}
+            </div>
           </div>
 
-          {/* Navigation Arrows - Desktop only */}
-          <div className="hidden sm:flex items-center justify-between absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 pointer-events-none">
+          {/* Navigation Arrows */}
+          <div className="hidden sm:flex items-center justify-between absolute inset-x-0 top-1/2 -translate-y-1/2 px-2 pointer-events-none">
             <button
               type="button"
-              onClick={goPrev}
-              className="w-12 h-12 rounded-full bg-black/80 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold pointer-events-auto hover:bg-amber-500/20 transition-colors"
+              onClick={scrollPrev}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500/90 to-amber-600/90 backdrop-blur-sm shadow-lg shadow-amber-500/30 flex items-center justify-center pointer-events-auto hover:from-amber-400/90 hover:to-amber-500/90 transition-all border border-amber-400/30"
             >
-              ‹
+              <ChevronLeft className="w-6 h-6 text-white" />
             </button>
             <button
               type="button"
-              onClick={goNext}
-              className="w-12 h-12 rounded-full bg-black/80 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold pointer-events-auto hover:bg-amber-500/20 transition-colors"
+              onClick={scrollNext}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500/90 to-amber-600/90 backdrop-blur-sm shadow-lg shadow-amber-500/30 flex items-center justify-center pointer-events-auto hover:from-amber-400/90 hover:to-amber-500/90 transition-all border border-amber-400/30"
             >
-              ›
+              <ChevronRight className="w-6 h-6 text-white" />
             </button>
           </div>
         </div>
@@ -730,16 +836,17 @@ const Global1738Section = ({ currentLang, t }) => {
             <button
               key={ctx.id}
               type="button"
-              onClick={() => {
-                setDirection(idx > activeIndex ? 1 : -1);
-                setActiveIndex(idx);
-              }}
-              className={`w-2 h-2 rounded-full transition-all ${idx === activeIndex ? 'bg-amber-400 w-6' : 'bg-white/30 hover:bg-white/50'}`}
+              onClick={() => scrollTo(idx)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === selectedIndex 
+                  ? 'bg-gradient-to-r from-amber-400 to-amber-500 w-6 shadow-lg shadow-amber-500/50' 
+                  : 'bg-white/30 hover:bg-white/50 w-2'
+              }`}
             />
           ))}
         </div>
         <p className="text-center text-xs text-white/40 mt-2">
-          ปัดซ้าย-ขวา หรือกดการ์ดข้างๆ เพื่อเปลี่ยน
+          {t?.global1738?.swipeHint || 'ปัดซ้าย-ขวา หรือกดปุ่มเพื่อเปลี่ยน'}
         </p>
       </div>
     </section>
@@ -1158,7 +1265,8 @@ const BlessingsSection = ({ cart, onToggleCart, onRemoveFromCart, onChangeQty, o
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
-              className="rounded-2xl border border-white/10 bg-black/40 overflow-hidden"
+              id={`category-${category.id}`}
+              className="rounded-2xl border border-white/10 bg-black/40 overflow-hidden scroll-mt-16"
             >
               {/* Sticky category header */}
               <div className="sticky top-0 z-10 bg-gradient-to-r from-gray-900/95 via-black/95 to-gray-900/95 backdrop-blur-sm border-b border-white/10 px-3 py-3 sm:px-4 sm:py-3">
@@ -1567,35 +1675,6 @@ const Footer = ({ t }) => {
   );
 };
 
-// Scroll to top button
-const ScrollToTop = () => {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 500);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 z-40 w-12 h-12 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transition-all"
-        >
-          <ArrowUp className="w-5 h-5 text-black" />
-        </motion.button>
-      )}
-    </AnimatePresence>
-  );
-};
-
 // Main App Component
 function App() {
   const [currentLang, setCurrentLang] = useState('th');
@@ -1697,11 +1776,13 @@ function App() {
         t={translation}
       />
       
-      <TempleGuide t={translation} />
+      <div id="temple-guide" className="scroll-mt-16">
+        <TempleGuide t={translation} />
+      </div>
       
       <Footer t={translation} />
       
-      <ScrollToTop />
+      <FloatingNav t={translation} currentLang={currentLang} />
 
       {/* Image preview modal */}
       <AnimatePresence>
