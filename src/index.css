@@ -12,6 +12,13 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 18px;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 17px;
+  }
 }
 
 body {
@@ -22,6 +29,7 @@ body {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #1a1a1a 100%);
   min-height: 100vh;
   color: #f9fafb;
+  overflow-x: hidden;
 }
 
 /* Thai font helpers */

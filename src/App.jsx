@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Heart, Shield, Car, GraduationCap, Baby, Dog, Stethoscope, 
@@ -61,6 +61,80 @@ const useFoundingDuration = () => {
 
   return duration;
 };
+const GLOBAL_1738_CONTEXTS = [
+  {
+    id: 'china',
+    icon: Globe,
+    flag: '\uD83C\uDDE8\uD83C\uDDF3',
+    title: 'จีนแผ่นดินใหญ่ – ราชวงศ์ชิง (ต้นรัชกาลเฉียนหลง)',
+    adYear: 1738,
+    beYear: 2281,
+    paragraphs: [
+      'จีนกำลังเข้าสู่ "High Qing" ยุคเฟื่องฟูด้านเศรษฐกิจและศิลปวัฒนธรรม จักรพรรดิเฉียนหลงเริ่มจัดระบบการค้ากับตะวันตกผ่านพ่อค้า Cohong ที่กวางโจว เมืองท่าใหญ่ของจักรวรรดิจีน.',
+      'ตอนที่วัดหลงซานถูกสร้าง ปักกิ่งคือศูนย์กลางจักรวรรดิ และจีนกำลังก้าวสู่ยุคทองของราชวงศ์ชิง.',
+    ],
+  },
+  {
+    id: 'japan',
+    icon: Globe,
+    flag: '\uD83C\uDDEF\uD83C\uDDF5',
+    title: 'ญี่ปุ่น – ยุคเอโดะ (สมัย Genbun)',
+    adYear: 1738,
+    beYear: 2281,
+    paragraphs: [
+      'ญี่ปุ่นปกครองโดยโชกุนตระกูลโทะกุงาวะ เป็นยุคสงบยาวนาน เมืองเอโดะและเกียวโตเฟื่องฟูเรื่องศิลปะและวัฒนธรรม แต่ประเทศยังปิดตนเองภายใต้นโยบาย sakoku.',
+      'ญี่ปุ่นในปี 1738 จึงเป็นยุคที่รุ่งเรืองอย่างเงียบ ๆ ต่างจากไต้หวันที่กำลังเปิดรับผู้อพยพจากฝูเจี้ยนมาสร้างวัดหลงซาน.',
+    ],
+  },
+  {
+    id: 'taiwan',
+    icon: MapPin,
+    flag: '\uD83C\uDDF9\uD83C\uDDFC',
+    title: 'ไต้หวัน – ชุมชนชายแดนของจักรวรรดิชิง',
+    adYear: 1738,
+    beYear: 2281,
+    paragraphs: [
+      'ไต้หวันอยู่ภายใต้การปกครองของราชวงศ์ชิงในฐานะมณฑลขึ้นกับฝูเจี้ยน มีการอพยพของชาวฮั่นจากฝูเจี้ยนและกวางตุ้งอย่างต่อเนื่อง ปี 1738 กลุ่มผู้อพยพจากฝูเจี้ยนร่วมกันสร้าง "วัดหลงซานแห่งมังเจีย" ในพื้นที่ที่ปัจจุบันคือว่านหัว ไทเป.',
+      'ขณะกรุงปักกิ่งคือศูนย์กลางจักรวรรดิ ไทเปยังเป็นชุมชนชายแดน และวัดหลงซานคือหัวใจทางจิตวิญญาณของคนกลุ่มนี้.',
+    ],
+  },
+  {
+    id: 'korea',
+    icon: Globe,
+    flag: '\uD83C\uDDF0\uD83C\uDDF7',
+    title: 'เกาหลี – ราชวงศ์โชซอน (กษัตริย์ยองโจ)',
+    adYear: 1738,
+    beYear: 2281,
+    paragraphs: [
+      'เกาหลียังอยู่ในอาณาจักรโชซอนภายใต้กษัตริย์ยองโจ หนึ่งในกษัตริย์สายปฏิรูปที่สำคัญที่สุดของโชซอน มีความพยายามปรับระบบภาษี ลดความเหลื่อมล้ำ และใช้นโยบาย Tangpyeong เพื่อลดความขัดแย้งของขุนนาง.',
+      'ในปีที่ไต้หวันสร้างวัดหลงซาน เกาหลียังคงยึดโครงสร้างรัฐขงจื๊อแบบเคร่งครัดเพื่อรักษาระเบียบสังคม.',
+    ],
+  },
+  {
+    id: 'siam',
+    icon: MapPin,
+    flag: '\uD83C\uDDF9\uD83C\uDDED',
+    title: 'สยาม – กรุงศรีอยุธยา (รัชกาลบรมโกศ)',
+    adYear: 1738,
+    beYear: 2281,
+    paragraphs: [
+      'สยามอยู่ในช่วงปลายสมัยกรุงศรีอยุธยา ภายใต้พระเจ้าอยู่หัวบรมโกศ ซึ่งมักถูกมองว่าเป็นยุคเฟื่องฟูครั้งสุดท้ายก่อนเสียกรุงในปี 1767 ทั้งด้านศิลปกรรม พระราชพิธี และความมั่งคั่งของราชธานีริมเจ้าพระยา.',
+      'ในขณะที่ไต้หวันสร้างวัดหลงซาน อยุธยากำลังส่องแสงครั้งสุดท้าย ก่อนเปลี่ยนผ่านสู่ยุครัตนโกสินทร์.',
+    ],
+  },
+  {
+    id: 'america',
+    icon: Globe,
+    flag: '\uD83C\uDDFA\uD83C\uDDF8',
+    title: 'อเมริกา – อาณานิคมอังกฤษ (ก่อนก่อตั้งสหรัฐฯ)',
+    adYear: 1738,
+    beYear: 2281,
+    paragraphs: [
+      'ทวีปอเมริกาเหนือยังเป็นอาณานิคมของอังกฤษ ช่วงปี 1730s–1740s กำลังเกิดคลื่นศาสนาคริสต์ครั้งใหญ่ "First Great Awakening" ที่เปลี่ยนภูมิทัศน์ทางศาสนาและการเมืองในอังกฤษและอาณานิคม.',
+      'ปี 1738 บาทหลวง George Whitefield เดินทางมาถึงจอร์เจียและเริ่มเทศน์ในอาณานิคม อีกเกือบสี่ทศวรรษกว่าชื่อ "United States" จะปรากฏในปี 1776.',
+    ],
+  },
+];
 // Temple blessing categories data
 const blessingCategories = [
   {
@@ -336,7 +410,7 @@ const souvenirItems = [
 ];
 
 // Hero Section Component
-const HeroSection = ({ heroText, currentLang }) => {
+const HeroSection = ({ heroText, currentLang, t }) => {
   const founding = useFoundingDuration();
   const chars = ['艋', '舺', '龍', '山', '寺'];
   const segments = heroText?.readingSegments || [];
@@ -374,7 +448,7 @@ const HeroSection = ({ heroText, currentLang }) => {
                   {ch}
                 </span>
                 {segments[idx] && (
-                  <span className="mt-1 text-[10px] sm:text-xs text-amber-100/90 font-thai-body">
+                  <span className="mt-1 text-xs sm:text-sm text-amber-100/90 font-thai-body">
                     {segments[idx]}
                   </span>
                 )}
@@ -386,26 +460,17 @@ const HeroSection = ({ heroText, currentLang }) => {
           </span>
         </motion.h1>
 
-        <motion.p
-          className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto mt-6 leading-relaxed"
-        >
-          Discover sacred blessings and authentic temple souvenirs from Taiwan's most revered temple, 
-          standing since 1738.
-        </motion.p>
+        
         <div className="mt-4 flex flex-col items-center gap-1 text-amber-100 font-thai-body">
-          <div className="px-3 py-1 rounded-full border border-amber-500/60 bg-black/60 text-[10px] sm:text-xs tracking-[0.25em] uppercase text-amber-300">
-            EST. 1738 · LONGSHAN TEMPLE
-          </div>
-          <div className="flex items-baseline gap-3 mt-1">
+          <span className="text-xs sm:text-sm tracking-[0.25em] uppercase text-amber-300">
+            {t?.hero?.badge}
+          </span>
+          <div className="flex items-center gap-2 mt-1 text-base sm:text-lg md:text-xl text-amber-100/90">
+            <span>{t?.hero?.yearsPrefix}</span>
             <span className="text-3xl sm:text-4xl md:text-5xl font-thai-display text-amber-200">
               {founding.years}
             </span>
-            <span className="text-sm sm:text-base md:text-lg text-amber-100/90">
-              ปีแห่งศรัทธา
-            </span>
-          </div>
-          <div className="text-[11px] sm:text-xs text-amber-100/80 mt-1">
-            ศาลเจ้าเก่าแก่ในย่านเหมิงเจียแห่งไทเป ดำรงศรัทธานี้มายาวนานกว่าสองศตวรรษครึ่ง
+            <span>{t?.hero?.yearsSuffix}</span>
           </div>
         </div>
       </div>
@@ -414,104 +479,189 @@ const HeroSection = ({ heroText, currentLang }) => {
 };
 
 // Global context around 1738
-const Global1738Section = () => {
+const Global1738Section = ({ currentLang, t }) => {
+  const primaryByLang = React.useMemo(
+    () => ({
+      th: 'siam',     // Thai language -> Siam (Ayutthaya)
+      ja: 'japan',    // Japanese -> Japan
+      ko: 'korea',    // Korean -> Korea
+      zh: 'taiwan',   // Chinese -> Taiwan (Longshan's home)
+      en: 'taiwan',   // English -> Taiwan as neutral/global default
+    }),
+    []
+  );
+
+  const contexts = t.global1738.contexts || [];
+  const iconById = React.useMemo(() => {
+    const map = {};
+    GLOBAL_1738_CONTEXTS.forEach(ctx => {
+      map[ctx.id] = ctx.icon;
+    });
+    return map;
+  }, []);
+  const indexById = React.useMemo(() => {
+    const map = {};
+    contexts.forEach((ctx, index) => {
+      map[ctx.id] = index;
+    });
+    return map;
+  }, [contexts]);
+
+  const getInitialIndex = React.useCallback(
+    (langCode) => {
+      const pid = primaryByLang[langCode] || 'taiwan';
+      return indexById[pid] ?? 0;
+    },
+    [indexById, primaryByLang]
+  );
+
+  const [activeIndex, setActiveIndex] = useState(() => getInitialIndex(currentLang));
+  const total = contexts.length;
+
+  useEffect(() => {
+    if (!total) return;
+    const targetIndex = getInitialIndex(currentLang);
+    setActiveIndex(targetIndex);
+  }, [currentLang, total, getInitialIndex]);
+
+  const goNext = React.useCallback(() => {
+    if (!total) return;
+    setActiveIndex(prev => (prev + 1 + total) % total);
+  }, [total]);
+
+  const goPrev = React.useCallback(() => {
+    if (!total) return;
+    setActiveIndex(prev => (prev - 1 + total) % total);
+  }, [total]);
+
+  const handleWheel = (event) => {
+    if (!total) return;
+    const { deltaX, deltaY } = event;
+
+    // Use whichever axis has the stronger intent so both
+    // horizontal (trackpad) and vertical (mouse wheel) can rotate
+    const horizontal = Math.abs(deltaX) >= Math.abs(deltaY);
+
+    if (!horizontal && Math.abs(deltaY) < 5) {
+      return;
+    }
+
+    // Prevent page scroll only when consumed for carousel navigation
+    event.preventDefault();
+
+    const directionValue = horizontal ? deltaX : deltaY;
+
+    if (directionValue > 0) {
+      goNext(); // scroll right / down
+    } else if (directionValue < 0) {
+      goPrev(); // scroll left / up
+    }
+  };
+
   return (
     <section className="py-16 px-4 bg-black/60 border-t border-white/10">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-6">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-thai-display text-white mb-3">
-            EST. 1738 – โลกกำลังอยู่ยุคไหนบ้าง
-          </h2>
-          <p className="text-sm sm:text-base text-white/80 font-thai-body">
-            ปี 1738 คือช่วงกลางศตวรรษที่ 18 วัดหลงซานถือกำเนิดในไทเปภายใต้ราชวงศ์ชิง
-            ขณะที่ภูมิภาคอื่น ๆ รอบโลกก็กำลังเปลี่ยนผ่านยุคประวัติศาสตร์สำคัญของตัวเองไปพร้อมกัน.
-          </p>
+            {t.global1738.heading}
+          </h2>       
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-white/85 font-thai-body">
-          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <Globe className="w-4 h-4 text-amber-400" />
-              <span className="font-semibold text-amber-300">จีนแผ่นดินใหญ่ – ราชวงศ์ชิง (ต้นรัชกาลเฉียนหลง)</span>
-            </div>
-            <p>
-              จีนกำลังเข้าสู่ "High Qing" ยุคเฟื่องฟูด้านเศรษฐกิจและศิลปวัฒนธรรม จักรพรรดิเฉียนหลงเริ่มจัดระบบการค้า
-              กับตะวันตกผ่านพ่อค้า Cohong ที่กวางโจว เมืองท่าใหญ่ของจักรวรรดิจีน.
-            </p>
-            <p className="text-white/70">
-              ตอนที่วัดหลงซานถูกสร้าง ปักกิ่งคือศูนย์กลางจักรวรรดิ และจีนกำลังก้าวสู่ยุคทองของราชวงศ์ชิง.
-            </p>
+        <div className="mt-10">
+          <div
+            className="relative h-[260px] sm:h-[280px] md:h-[300px] text-sm sm:text-base text-white/85 font-thai-body"
+            onWheel={handleWheel}
+          >
+            {contexts.map((ctx, index) => {
+              const Icon = iconById[ctx.id] || Globe;
+              const diff = (index - activeIndex + total) % total;
+
+              let x = 0;
+              let scale = 0.7;
+              let opacity = 0;
+              let rotateY = 0;
+              let zIndex = 0;
+
+              if (diff === 0) {
+                // center card
+                x = 0;
+                scale = 1;
+                opacity = 1;
+                rotateY = 0;
+                zIndex = 30;
+              } else if (diff === 1 || diff === total - 1) {
+                // neighbors left / right
+                const dir = diff === 1 ? 1 : -1;
+                // push side cards further out and slightly shrink
+                // so that blocks don't visually overlap too much
+                x = dir * 220;
+                scale = 0.8;
+                opacity = 0.85;
+                // keep cards visually straight; no Y-tilt
+                rotateY = 0;
+                zIndex = 20;
+              } else {
+                x = 0;
+                scale = 0.6;
+                opacity = 0;
+                rotateY = 0;
+                zIndex = 0;
+              }
+
+              return (
+                <motion.div
+                  key={ctx.id}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  initial={false}
+                  animate={{ x, scale, opacity, rotateY, zIndex }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <div className="w-[260px] sm:w-[320px] md:w-[360px] bg-black/80 border border-white/12 rounded-2xl p-4 space-y-2 shadow-xl shadow-black/40 pointer-events-auto">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-amber-200 uppercase tracking-[0.18em]">
+                      <span>{t.global1738.adLabel} {ctx.adYear}</span>
+                      <span>{t.global1738.beLabel} {ctx.beYear}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      {ctx.flag && (
+                        <span className="text-base sm:text-lg">
+                          {ctx.flag}
+                        </span>
+                      )}
+                      <Icon className="w-4 h-4 text-amber-400" />
+                      <span className="font-semibold text-amber-300 text-sm sm:text-base">
+                        {ctx.title}
+                      </span>
+                    </div>
+                    {ctx.paragraphs.map((para, idx) => (
+                      <p key={idx} className="text-white/80 text-sm leading-relaxed">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
-          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <Globe className="w-4 h-4 text-amber-400" />
-              <span className="font-semibold text-amber-300">ญี่ปุ่น – ยุคเอโดะ (สมัย Genbun)</span>
-            </div>
-            <p>
-              ญี่ปุ่นปกครองโดยโชกุนตระกูลโทะกุงาวะ เป็นยุคสงบยาวนาน เมืองเอโดะและเกียวโตเฟื่องฟูเรื่องศิลปะและวัฒนธรรม
-              แต่ประเทศยังปิดตนเองภายใต้นโยบาย <span className="italic">sakoku</span>.
-            </p>
-            <p className="text-white/70">
-              ญี่ปุ่นในปี 1738 จึงเป็นยุคที่รุ่งเรืองอย่างเงียบ ๆ ต่างจากไต้หวันที่กำลังเปิดรับผู้อพยพจากฝูเจี้ยนมาสร้างวัดหลงซาน.
-            </p>
-          </div>
-
-          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <MapPin className="w-4 h-4 text-amber-400" />
-              <span className="font-semibold text-amber-300">ไต้หวัน – ชุมชนชายแดนของจักรวรรดิชิง</span>
-            </div>
-            <p>
-              ไต้หวันอยู่ภายใต้การปกครองของราชวงศ์ชิงในฐานะมณฑลขึ้นกับฝูเจี้ยน มีการอพยพของชาวฮั่นจากฝูเจี้ยนและกวางตุ้งอย่างต่อเนื่อง
-              ปี 1738 กลุ่มผู้อพยพจากฝูเจี้ยนร่วมกันสร้าง "วัดหลงซานแห่งมังเจีย" ในพื้นที่ที่ปัจจุบันคือว่านหัว ไทเป.
-            </p>
-            <p className="text-white/70">
-              ขณะกรุงปักกิ่งคือศูนย์กลางจักรวรรดิ ไทเปยังเป็นชุมชนชายแดน และวัดหลงซานคือหัวใจทางจิตวิญญาณของคนกลุ่มนี้.
-            </p>
-          </div>
-
-          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <Globe className="w-4 h-4 text-amber-400" />
-              <span className="font-semibold text-amber-300">เกาหลี – ราชวงศ์โชซอน (กษัตริย์ยองโจ)</span>
-            </div>
-            <p>
-              เกาหลียังอยู่ในอาณาจักรโชซอนภายใต้กษัตริย์ยองโจ หนึ่งในกษัตริย์สายปฏิรูปที่สำคัญที่สุดของโชซอน
-              มีความพยายามปรับระบบภาษี ลดความเหลื่อมล้ำ และใช้นโยบาย Tangpyeong เพื่อลดความขัดแย้งของขุนนาง.
-            </p>
-            <p className="text-white/70">
-              ในปีที่ไต้หวันสร้างวัดหลงซาน เกาหลียังคงยึดโครงสร้างรัฐขงจื๊อแบบเคร่งครัดเพื่อรักษาระเบียบสังคม.
-            </p>
-          </div>
-
-          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <MapPin className="w-4 h-4 text-amber-400" />
-              <span className="font-semibold text-amber-300">สยาม – กรุงศรีอยุธยา (รัชกาลบรมโกศ)</span>
-            </div>
-            <p>
-              สยามอยู่ในช่วงปลายสมัยกรุงศรีอยุธยา ภายใต้พระเจ้าอยู่หัวบรมโกศ ซึ่งมักถูกมองว่าเป็นยุคเฟื่องฟูครั้งสุดท้าย
-              ก่อนเสียกรุงในปี 1767 ทั้งด้านศิลปกรรม พระราชพิธี และความมั่งคั่งของราชธานีริมเจ้าพระยา.
-            </p>
-            <p className="text-white/70">
-              ในขณะที่ไต้หวันสร้างวัดหลงซาน อยุธยากำลังส่องแสงครั้งสุดท้าย ก่อนเปลี่ยนผ่านสู่ยุครัตนโกสินทร์.
-            </p>
-          </div>
-
-          <div className="bg-black/70 border border-white/12 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <Globe className="w-4 h-4 text-amber-400" />
-              <span className="font-semibold text-amber-300">อเมริกา – อาณานิคมอังกฤษ (ก่อนก่อตั้งสหรัฐฯ)</span>
-            </div>
-            <p>
-              ทวีปอเมริกาเหนือยังเป็นอาณานิคมของอังกฤษ ช่วงปี 1730s–1740s กำลังเกิดคลื่นศาสนาคริสต์ครั้งใหญ่
-              "First Great Awakening" ที่เปลี่ยนภูมิทัศน์ทางศาสนาและการเมืองในอังกฤษและอาณานิคม.
-            </p>
-            <p className="text-white/70">
-              ปี 1738 บาทหลวง George Whitefield เดินทางมาถึงจอร์เจียและเริ่มเทศน์ในอาณานิคม
-              อีกเกือบสี่ทศวรรษกว่าชื่อ "United States" จะปรากฏในปี 1776.
-            </p>
+          <div className="mt-6 flex items-center justify-center gap-4 text-sm sm:text-xs text-white/70">
+            <button
+              type="button"
+              onClick={goPrev}
+              className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10"
+            >
+              <ChevronDown className="w-4 h-4 rotate-90" />
+            </button>
+            <span className="uppercase tracking-[0.2em] text-white/50">
+              {activeIndex + 1} / {total}
+            </span>
+            <button
+              type="button"
+              onClick={goNext}
+              className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10"
+            >
+              <ChevronDown className="w-4 h-4 -rotate-90" />
+            </button>
           </div>
         </div>
       </div>
@@ -520,127 +670,182 @@ const Global1738Section = () => {
 };
 
 // Cart summary bar (local cart for selected amulets)
-const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'small' }) => {
+const CartBar = ({ cart, onToggleCart, onChangeQty, onClearCart, imageSize = 'small', t }) => {
   const items = Object.values(cart || {});
   const totalPieces = items.reduce((sum, item) => sum + (item.qty || 1), 0);
   const [open, setOpen] = useState(false);
 
   if (!items.length) return null;
 
-  return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-xl w-[calc(100%-2rem)] sm:w-auto sm:left-4 sm:translate-x-0">
-      <div className="bg-black/90 border border-amber-500/40 rounded-2xl px-4 py-3 shadow-lg shadow-amber-500/30">
-        <button
-          type="button"
-          onClick={() => setOpen(prev => !prev)}
-          className="flex items-center justify-between gap-3 w-full"
-        >
-          <div className="flex items-center gap-2">
-            <ShoppingCart className="w-5 h-5 text-amber-400" />
-            <span className="text-sm text-white/90">
-              เลือกไว้ <span className="font-semibold text-amber-300">{totalPieces}</span> ชิ้น
-              <span className="text-white/50 text-[11px] ml-1">({items.length} รายการ)</span>
-            </span>
-          </div>
-          <ChevronUp
-            className={`w-4 h-4 text-white/60 transition-transform ${open ? '' : 'rotate-180'}`}
-          />
-        </button>
+  const groupedItems = React.useMemo(() => {
+    const groups = {};
 
-        {open && (
-          <div className="mt-3 max-h-64 overflow-y-auto text-xs sm:text-sm text-white/80 space-y-2">
-            {items.map(item => {
-              const code = item.imageUrl?.split('/').pop();
-              const isBlessing = item.section === 'blessing';
-              const tagText = isBlessing
-                ? `ช่วยเรื่อง: ${item.categoryTitleTh || item.categoryTitleEn || ''}`
-                : 'ช่วยเรื่อง: ของที่ระลึกจากวัด';
-              return (
-                <div
-                  key={item.key}
-                  className="flex items-start justify-between gap-2 border-t border-white/10 pt-2 first:border-t-0 first:pt-0"
-                >
-                  <div className="flex items-start gap-2">
-                    <div className={`${summaryThumbSize[imageSize]} rounded-xl overflow-hidden bg-white/90 shrink-0`}>
-                      <img
-                        src={item.imageUrl}
-                        alt={item.categoryTitleEn || item.titleEn || 'Selected amulet'}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-amber-300">
-                        {isBlessing ? item.categoryTitleZh : item.titleZh}
-                      </div>
-                      <div>
-                        {isBlessing ? item.categoryTitleEn : item.titleEn}
-                      </div>
-                      {isBlessing && item.categoryTitleTh && (
-                        <div className="text-white/60">
-                          {item.categoryTitleTh}
-                        </div>
-                      )}
-                      {code && (
-                        <div className="text-white/40 mt-0.5">
-                          Code: {code}
-                        </div>
-                      )}
-                      <div className="mt-1">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-400/40 text-[10px] text-amber-200">
-                          {tagText}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end gap-1 shrink-0">
-                    <div className="flex items-center gap-1">
-                      <button
-                        type="button"
-                        onClick={() => onChangeQty?.(item, -1)}
-                        disabled={(item.qty || 1) <= 1}
-                        className="w-6 h-6 flex items-center justify-center rounded-full border border-white/30 text-white/70 hover:bg-white/10 disabled:opacity-40 disabled:hover:bg-transparent"
-                      >
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="px-2 text-white/90 text-xs">
-                        x{item.qty || 1}
+    items.forEach(item => {
+      const isBlessing = item.section === 'blessing';
+      const baseKey = isBlessing
+        ? item.categoryId || item.categoryTitleEn || item.categoryTitleZh || 'unknown'
+        : item.souvenirId || item.titleEn || item.titleZh || 'souvenir';
+      const groupKey = `${item.section}:${baseKey}`;
+
+      if (!groups[groupKey]) {
+        groups[groupKey] = {
+          key: groupKey,
+          section: item.section,
+          categoryId: item.categoryId,
+          titleZh: isBlessing ? item.categoryTitleZh : item.titleZh,
+          titleEn: isBlessing ? item.categoryTitleEn : item.titleEn,
+          titleTh: isBlessing ? item.categoryTitleTh : undefined,
+          items: [],
+        };
+      }
+
+      groups[groupKey].items.push(item);
+    });
+
+    return Object.values(groups);
+  }, [items]);
+
+  return (
+    <>
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-xl w-[calc(100%-2rem)] sm:w-auto sm:left-4 sm:translate-x-0">
+        <div className="bg-black/90 border border-amber-500/40 rounded-2xl px-4 py-3 shadow-lg shadow-amber-500/30">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="flex items-center justify-between gap-3 w-full"
+          >
+            <div className="flex items-center gap-2">
+              <ShoppingCart className="w-5 h-5 text-amber-400" />
+              <span className="text-sm text-white/90">
+                {t.cart.selected} <span className="font-semibold text-amber-300">{totalPieces}</span> {t.cart.pieces}
+                <span className="text-white/50 text-[11px] ml-1">({items.length} {t.cart.items})</span>
+              </span>
+            </div>
+            <span className="text-[11px] text-white/60">
+              {t.cart.tapToOpen}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative max-w-3xl w-full max-h-[80vh] mx-3 sm:mx-4 bg-black/95 border border-amber-500/40 rounded-2xl p-4 sm:p-6 overflow-y-auto text-sm sm:text-base text-white/80 space-y-3"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <ShoppingCart className="w-5 h-5 text-amber-400" />
+                <div className="text-sm sm:text-base">
+                  {t.cart.title}
+                  <span className="ml-2 text-white/60 text-xs">
+                    {t.cart.total} <span className="text-amber-300 font-semibold">{totalPieces}</span> {t.cart.pieces} ({items.length} {t.cart.items})
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-white/30 text-white/70 hover:bg-white/10"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {groupedItems.map((group, groupIndex) => (
+              <div
+                key={group.key}
+                className={`pt-3 ${groupIndex === 0 ? '' : 'mt-3 border-t border-white/10'}`}
+              >
+                <div className="mb-3 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <div className="flex flex-col text-left">
+                    {group.titleZh && (
+                      <span className="text-amber-300 font-thai-display text-base sm:text-lg">
+                        {group.titleZh}
                       </span>
-                      <button
-                        type="button"
-                        onClick={() => onChangeQty?.(item, 1)}
-                        className="w-6 h-6 flex items-center justify-center rounded-full border border-white/30 text-white/70 hover:bg-white/10"
-                      >
-                        <Plus className="w-3 h-3" />
-                      </button>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => onToggleCart(item)}
-                      className="px-2 py-1 rounded-full border border-white/30 text-[11px] text-white/70 hover:bg-white/10"
-                    >
-                      ลบรายการ
-                    </button>
+                    )}
+                    <span className="text-white/80 text-xs sm:text-sm">
+                      {group.titleTh || group.titleEn}
+                    </span>
                   </div>
                 </div>
-              );
-            })}
-            <div className="mt-3 flex items-center justify-between gap-3 text-[11px] text-white/50">
-              <span>
-                ใช้หน้านี้เพื่อจดรหัสและชื่อเครื่องรางใส่กระดาษ แล้วนำไปให้เจ้าหน้าที่ที่วัด
-              </span>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {group.items.map(item => {
+                    const isBlessing = item.section === 'blessing';
+                    const tagText = isBlessing
+                      ? `${t.cart.helpsWithBlessing} ${item.categoryTitleTh || item.categoryTitleEn || ''}`
+                      : t.cart.helpsWithSouvenir;
+
+                    return (
+                      <div
+                        key={item.key}
+                        className="flex flex-col sm:flex-row items-center gap-3 rounded-2xl bg-white/5 border border-white/10 p-3"
+                      >
+                        <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden bg-white/90 shrink-0">
+                          <img
+                            src={item.imageUrl}
+                            alt={item.categoryTitleEn || item.titleEn || t.cart.selectedAlt}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="flex-1 flex flex-col items-center sm:items-end gap-2">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-[11px] sm:text-xs text-amber-200">
+                            {tagText}
+                          </span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => onChangeQty?.(item, -1)}
+                              disabled={(item.qty || 1) <= 1}
+                              className="w-8 h-8 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/10 disabled:opacity-40 disabled:hover:bg-transparent"
+                            >
+                              <Minus className="w-4 h-4" />
+                            </button>
+                            <span className="px-3 text-white font-semibold text-base sm:text-lg">
+                              x{item.qty || 1}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => onChangeQty?.(item, 1)}
+                              className="w-8 h-8 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/10"
+                            >
+                              <Plus className="w-4 h-4" />
+                            </button>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => onToggleCart(item)}
+                            className="px-2.5 py-1 rounded-full border border-white/30 text-[11px] sm:text-xs text-white/70 hover:bg-white/10"
+                          >
+                            {t.cart.removeItem}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+
+            <div className="mt-3 flex items-center justify-end gap-3 text-[11px] sm:text-xs text-white/60">
               <button
                 type="button"
                 onClick={onClearCart}
                 className="shrink-0 px-3 py-1 rounded-full border border-amber-400 text-amber-300 hover:bg-amber-500/10"
               >
-                Clear all
+                {t.cart.clearAll}
               </button>
             </div>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -679,8 +884,8 @@ const CategoryCard = ({ category, index }) => {
           {/* Thumbnails catalog */}
           <div className="mt-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] text-white/50">All items in this blessing</span>
-              <span className="text-[11px] text-white/60">{category.images.length} items</span>
+              <span className="text-sm text-white/50">All items in this blessing</span>
+              <span className="text-sm text-white/60">{category.images.length} items</span>
             </div>
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
               {category.images.map((img, idx) => (
@@ -813,25 +1018,19 @@ const ImageModal = ({ category, onClose }) => {
 };
 
 // Blessings Section - table-like layout (label + images)
-const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', setImageSize }) => {
+const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', setImageSize, t }) => {
   return (
     <section id="blessings" className="py-16 px-4 sm:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
-        <motion.div className="text-center mb-10 sm:mb-12">
-          <span className="inline-block px-4 py-1 bg-amber-500/10 rounded-full text-amber-400 text-sm tracking-wider uppercase mb-4">
-            Sacred Collection
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-3 font-thai-display">
-            Temple <span className="text-amber-400">Blessings</span>
+        <motion.div className="text-center mb-10 sm:mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-4 font-thai-display">
+            {t?.blessings?.heading || 'Longshan Temple Amulets'}
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto text-sm sm:text-base">
-            Layout inspired by the official Longshan Temple catalog: each row shows one blessing type and all related blessed items clearly.
-          </p>
           {/* Image size selector */}
           {setImageSize && (
             <div className="mt-4 flex items-center justify-center gap-2 text-[11px] text-white/60">
-              <span className="mr-1">ขนาดรูป:</span>
+              <span className="mr-1 text-sm">{t?.blessings?.imageSize || 'Image size:'}</span>
               {IMAGE_SIZES.map(size => (
                 <button
                   key={size}
@@ -843,9 +1042,9 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
                       : 'bg-white/5 text-white/60 border-white/20 hover:bg-white/10'
                   }`}
                 >
-                  {size === 'small' && 'เล็ก'}
-                  {size === 'medium' && 'กลาง'}
-                  {size === 'large' && 'ใหญ่'}
+                  {size === 'small' && (t?.blessings?.sizeSmall || 'Small')}
+                  {size === 'medium' && (t?.blessings?.sizeMedium || 'Medium')}
+                  {size === 'large' && (t?.blessings?.sizeLarge || 'Large')}
                 </button>
               ))}
             </div>
@@ -870,10 +1069,10 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
                       {category.titleZh}
                     </span>
                   </div>
-                  <span className="text-white/80 text-xs sm:text-sm">
+                  <span className="text-white/80 text-sm sm:text-base">
                     {category.titleEn}
                   </span>
-                  <span className="text-white/60 text-[11px] sm:text-xs">
+                  <span className="text-white/60 text-sm sm:text-sm">
                     {category.titleTh}
                   </span>
                 </div>
@@ -945,20 +1144,20 @@ const BlessingsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small
 };
 
 // Souvenirs Section
-const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small' }) => {
+const SouvenirsSection = ({ cart, onToggleCart, onImageClick, imageSize = 'small', t }) => {
   return (
     <section id="souvenirs" className="py-16 px-4 sm:py-20 lg:py-24 bg-gradient-to-b from-transparent via-amber-900/10 to-transparent">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div className="text-center mb-16">
           <span className="inline-block px-4 py-1 bg-amber-500/10 rounded-full text-amber-400 text-sm tracking-wider uppercase mb-4">
-            Exclusive Items
+            {t?.souvenirs?.badge || 'Exclusive Items'}
           </span>
           <h2 className="text-4xl md:text-5xl font-serif text-white mb-4 font-thai-display">
-            Temple <span className="text-amber-400">Souvenirs</span>
+            {t?.souvenirs?.heading || 'Temple Souvenirs'}
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto">
-            Take home a piece of Longshan Temple's rich heritage with these beautifully crafted souvenirs.
+            {t?.souvenirs?.description || "Take home a piece of Longshan Temple's rich heritage with these beautifully crafted souvenirs."}
           </p>
         </motion.div>
 
@@ -1157,7 +1356,7 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
 };
 
 // Footer Component
-const Footer = () => {
+const Footer = ({ t }) => {
   return (
     <footer id="about" className="py-16 px-4 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
@@ -1181,7 +1380,7 @@ const Footer = () => {
 
           {/* Contact info */}
           <div>
-            <h4 className="text-white font-semibold mb-4 font-thai-display">Visit Us</h4>
+            <h4 className="text-white font-semibold mb-4 font-thai-display">{t?.footer?.visitUs || 'Visit Us'}</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-white/60 text-sm">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5" />
@@ -1200,19 +1399,19 @@ const Footer = () => {
 
           {/* Features */}
           <div>
-            <h4 className="text-white font-semibold mb-4 font-thai-display">Features</h4>
+            <h4 className="text-white font-semibold mb-4 font-thai-display">{t?.footer?.features || 'Features'}</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-white/60 text-sm">
                 <Star className="w-4 h-4 text-amber-400" />
-                <span>Authentic Temple Blessings</span>
+                <span>{t?.footer?.authenticBlessings || 'Authentic Temple Blessings'}</span>
               </div>
               <div className="flex items-center gap-2 text-white/60 text-sm">
                 <CreditCard className="w-4 h-4 text-amber-400" />
-                <span>Credit Card Accepted</span>
+                <span>{t?.footer?.creditCardAccepted || 'Credit Card Accepted'}</span>
               </div>
               <div className="flex items-center gap-2 text-white/60 text-sm">
                 <Globe className="w-4 h-4 text-amber-400" />
-                <span>Multi-language Support</span>
+                <span>{t?.footer?.multiLanguage || 'Multi-language Support'}</span>
               </div>
             </div>
           </div>
@@ -1221,11 +1420,10 @@ const Footer = () => {
         {/* Credit & disclaimer */}
         <div className="mt-10 pt-6 border-t border-white/10 text-xs text-white/60 space-y-2 font-thai-legal">
           <p>
-            เครื่องมือเลือกเครื่องรางหน้านี้จัดทำขึ้นเพื่อช่วยให้ผู้ศรัทธาเลือกและจดรายการได้สะดวกขึ้น
-            ไม่ใช่เว็บไซต์อย่างเป็นทางการของวัด
+            {t?.footer?.disclaimer || 'This amulet selection tool is created to help devotees choose and note items conveniently. It is not the official temple website.'}
           </p>
           <p>
-            ข้อมูลเนื้อหาและรูปภาพอ้างอิงและดึงมาจากเว็บไซต์ทางการของวัด:
+            {t?.footer?.dataSource || 'Content and images are referenced from the official temple website:'}
             {" "}
             <a
               href="https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t.php#"
@@ -1235,14 +1433,12 @@ const Footer = () => {
             >
               https://lungshan.org.tw/...
             </a>
-            {" "}
-            ซึ่งยังคงเป็นแหล่งข้อมูลทางการและอัปเดตล่าสุดเสมอ
           </p>
         </div>
 
         {/* Copyright */}
         <div className="mt-6 pt-4 border-t border-white/10 text-center text-white/40 text-sm">
-          <p>© 2024 Monga Longshan Temple. All sacred items are blessed at the temple.</p>
+          <p>{t?.footer?.copyright || '© 2024 Monga Longshan Temple. All sacred items are blessed at the temple.'}</p>
         </div>
       </div>
     </footer>
@@ -1324,6 +1520,13 @@ function App() {
     setPreviewItem(item);
   };
 
+  const getCartItemFor = (item) => {
+    if (!item) return null;
+    const baseId = item.categoryId || item.souvenirId || item.categoryTitleEn || item.titleEn || 'item';
+    const key = buildCartKey(item.section, baseId, item.imageUrl);
+    return cart[key] || null;
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation currentLang={currentLang} setCurrentLang={setCurrentLang} t={translation} />
@@ -1332,7 +1535,7 @@ function App() {
       <div className="mt-16 md:mt-20 px-4 font-thai-legal">
         <div className="max-w-7xl mx-auto">
           <div className="bg-black/80 border border-amber-500/40 rounded-xl px-3 py-2 text-[11px] sm:text-xs text-white/70 text-center">
-            ข้อมูลเนื้อหาและรูปภาพอ้างอิงและดึงมาจากเว็บไซต์ทางการของวัด:
+            {translation?.footer?.dataSource || 'Content and images are referenced from the official temple website:'}
             {' '}
             <a
               href="https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t.php#"
@@ -1342,15 +1545,13 @@ function App() {
             >
               https://lungshan.org.tw/...
             </a>
-            {' '}
-            ซึ่งยังคงเป็นแหล่งข้อมูลทางการและอัปเดตล่าสุดเสมอ
           </div>
         </div>
       </div>
       
-      <HeroSection heroText={translation.hero} currentLang={currentLang} />
+      <HeroSection heroText={translation.hero} currentLang={currentLang} t={translation} />
       
-      <Global1738Section />
+      <Global1738Section currentLang={currentLang} t={translation} />
       
       <BlessingsSection
         cart={cart}
@@ -1358,6 +1559,7 @@ function App() {
         onImageClick={handleImageClick}
         imageSize={imageSize}
         setImageSize={setImageSize}
+        t={translation}
       />
       
       <SouvenirsSection
@@ -1365,11 +1567,12 @@ function App() {
         onToggleCart={handleToggleCart}
         onImageClick={handleImageClick}
         imageSize={imageSize}
+        t={translation}
       />
       
       <TempleGuide />
       
-      <Footer />
+      <Footer t={translation} />
       
       <ScrollToTop />
 
@@ -1403,18 +1606,61 @@ function App() {
                   alt={previewItem.categoryTitleEn || previewItem.titleEn || 'Selected item'}
                   className="max-h-[70vh] w-full object-contain rounded-xl bg-white"
                 />
-                <div className="w-full text-center text-white/80 text-sm space-y-1">
-                  <div className="font-serif text-base text-amber-300">
-                    {previewItem.categoryTitleZh || previewItem.titleZh}
-                  </div>
-                  <div>
-                    {previewItem.categoryTitleEn || previewItem.titleEn}
-                  </div>
-                  {previewItem.categoryTitleTh && (
-                    <div className="text-white/60 text-xs">
-                      {previewItem.categoryTitleTh}
+                <div className="w-full text-center text-white/80 text-sm space-y-2">
+                  <div className="space-y-1">
+                    <div className="font-serif text-base text-amber-300">
+                      {previewItem.categoryTitleZh || previewItem.titleZh}
                     </div>
-                  )}
+                    <div>
+                      {previewItem.categoryTitleEn || previewItem.titleEn}
+                    </div>
+                    {previewItem.categoryTitleTh && (
+                      <div className="text-white/60 text-xs">
+                        {previewItem.categoryTitleTh}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-2 flex flex-col items-center gap-2 text-xs sm:text-sm">
+                    {getCartItemFor(previewItem) ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleChangeQty(previewItem, -1)}
+                          disabled={(getCartItemFor(previewItem)?.qty || 1) <= 1}
+                          className="w-8 h-8 flex items-center justify-center rounded-full border border-white/30 text-white/80 hover:bg-white/10 disabled:opacity-40 disabled:hover:bg-transparent"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="px-2 text-white/90 text-sm">
+                          x{getCartItemFor(previewItem)?.qty || 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleChangeQty(previewItem, 1)}
+                          className="w-8 h-8 flex items-center justify-center rounded-full border border-white/30 text-white/80 hover:bg-white/10"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleToggleCart(previewItem)}
+                          className="ml-3 px-3 py-1 rounded-full border border-white/30 text-[11px] text-white/80 hover:bg-white/10"
+                        >
+                          {translation?.cart?.removeItem || 'Remove'}
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleToggleCart(previewItem)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-400 bg-amber-500/10 text-amber-200 hover:bg-amber-500/20 text-xs sm:text-sm"
+                      >
+                        <ShoppingCart className="w-4 h-4" />
+                        {translation?.cart?.addToCart || 'Add to cart'}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -1429,6 +1675,7 @@ function App() {
         onChangeQty={handleChangeQty}
         onClearCart={handleClearCart}
         imageSize={imageSize}
+        t={translation}
       />
     </div>
   );

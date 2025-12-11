@@ -223,100 +223,6 @@ const TempleGuide = () => {
           </ol>
         </div>
 
-        {/* Amulet types summary (for recommendation logic) */}
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold text-amber-300 flex items-center gap-2">
-            <BookOpenCheck className="w-5 h-5" />
-            ภาพรวมประเภทเครื่องรางของวัดหลงซาน
-          </h3>
-          <p className="text-white/70 text-sm sm:text-base">
-            ข้อมูลนี้ย่อมาจากร้านค้าออนไลน์ทางการของวัด บล็อกชาวไต้หวัน และแพลตฟอร์มช้อปปิ้งในไต้หวัน
-            เพื่อช่วยให้คุณเข้าใจภาพรวมและเลือกเครื่องรางได้ตรงตามเป้าหมาย.
-          </p>
-          <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-white/80">
-            <li>
-              <span className="font-semibold">ช่วงราคา:</span> โดยทั่วไปประมาณ <span className="text-emerald-300">~25–200 NT$</span>
-              ต่อชิ้น (ข้อมูลปี 2025) ราคาที่เคาน์เตอร์จริงมักถูกกว่าราคาขายต่อออนไลน์.
-            </li>
-            <li>
-              <span className="font-semibold">香火袋 / 平安符 – ถุงเครื่องรางความปลอดภัย:</span>
-              ถุงผ้าเล็ก ๆ คล้าย omamori ข้างในใส่ "符" หรือผงธูป เหมาะพกติดตัว ห้อยกระเป๋า หรือติดในรถ.
-            </li>
-            <li>
-              <span className="font-semibold">姻緣袋 – ถุงความรัก:</span> เครื่องรางเฉพาะเรื่องความรัก มักใช้คู่กับ
-              เส้นแดงเยวี่ยเหล่า เหมาะสำหรับคนโสดหรือคู่รัก.
-            </li>
-            <li>
-              <span className="font-semibold">เครื่องรางสัตว์เลี้ยง (寵物御守):</span> เครื่องรางรูปอุ้งเท้าสำหรับสัตว์เลี้ยง
-              ใช้ติดปลอกคอ กรง หรือสายจูง เพื่อขอให้ปลอดภัยและสุขภาพดี.
-            </li>
-            <li>
-              <span className="font-semibold">ของมงคลอื่น ๆ:</span> ซองอั่งเปา พวงกุญแจ การ์ดพร และของฝากมงคลทั่วไป
-              ซึ่งในเว็บของคุณสามารถจัดอยู่ในหมวด "ของที่ระลึก".
-            </li>
-          </ul>
-        </div>
-
-        {/* Short recommendation table text */}
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold text-amber-300 flex items-center gap-2">
-            <Shield className="w-5 h-5" />
-            แนะนำเครื่องรางตามโจทย์ยอดฮิต (แนวทาง)
-          </h3>
-          <p className="text-white/70 text-xs sm:text-sm">
-            ด้านล่างนี้เป็นแนวทางจับคู่ "คำขอ" กับโซนในวัดและประเภทเครื่องราง
-            เพื่อใช้ร่วมกับระบบเลือกบนเว็บ (ไม่ใช่ข้อบังคับ)
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-white/80">
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">ความรัก / คนโสดอยากมีคู่</div>
-              <p>
-                ควรไปไหว้เยวี่ยเหล่า + เจ้าแม่กวนอิม ใช้เส้นแดงเยวี่ยเหล่า (ฟรี) คู่กับถุง "Happiness/姻緣".
-              </p>
-            </div>
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">คู่รัก/คู่แต่งงานอยากความสัมพันธ์มั่นคง</div>
-              <p>
-                เยวี่ยเหล่า + กวนอู ใช้ถุง "Happiness" หรือเครื่องรางที่สื่อถึงความสามัคคี ซื้อเป็นคู่ 2 ชิ้น.
-              </p>
-            </div>
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">สุขภาพ / ผ่าตัด / คนป่วย</div>
-              <p>
-                ไหว้หมอฮั่วถัว + เจ้าแม่กวนอิม ใช้ถุง "平安 / 安康" หรือถุงพื้นฐานที่มีผงธูป
-                แนะนำให้พกใกล้ตัวหรือวางหัวเตียง.
-              </p>
-            </div>
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">การเรียน / สอบ / เลื่อนตำแหน่ง</div>
-              <p>
-                ไหว้เวิ่นฉาง ใช้ถุง "平安" หรือเครื่องรางหมวด Good Luck ที่เน้นเรื่องเรียน/งาน
-                พกในกระเป๋าดินสอหรือกระเป๋าทำงาน.
-              </p>
-            </div>
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">การเงิน / โชคลาภ / ค้าขาย</div>
-              <p>
-                ไหว้เจ้าแม่กวนอิม + Jade Emperor + กวนตี้ ใช้ถุงความปลอดภัยโทนแดง/ทอง
-                อาจเลือกทั้งแบบพกตัวเองและแบบแขวนร้าน/บ้าน.
-              </p>
-            </div>
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">การเดินทาง / ขับรถ / บินบ่อย</div>
-              <p>
-                เน้นไหว้เจ้าแม่มาจู่ เลือกถุง "平安" สำหรับห้อยในรถ หรือเครื่องรางที่พกติดตัวเวลาเดินทาง.
-              </p>
-            </div>
-            <div className="bg-black/70 border border-white/10 rounded-2xl p-4 space-y-1">
-              <div className="font-semibold text-amber-300">สัตว์เลี้ยง</div>
-              <p>
-                ไหว้รวมหน้าศาลาเจ้าแม่กวนอิม ขอพรภาพรวม จากนั้นเลือก "寵物御守" และติดปลอกคอ/กรง
-                โดยคำนึงถึงความปลอดภัยของสัตว์.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Closing checklist */}
         <div className="space-y-3">
           <h3 className="text-xl font-semibold text-amber-300 flex items-center gap-2">
@@ -324,10 +230,22 @@ const TempleGuide = () => {
             เช็กลิสต์ปิดจบการเลือกเครื่องราง
           </h3>
           <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-white/80">
-            <li>ไหว้ครบตามลำดับหลัก (ศาลาหน้า → ศาลาหลวง → เงยหน้าขอฟ้า → ฮอลล์ด้านหลัง)</li>
-            <li>ถ้าต้องการ ขอพรเฉพาะ เช่น ความรัก/เส้นแดง/เซียมซี ให้ทำพิธีตรงจุดที่กำหนดให้ครบ</li>
-            <li>เลือกเครื่องรางจากเคาน์เตอร์ โดยอิงหมวดคำขอจากฟอร์ม "求好運表格" และรูปแบบที่ตรงโจทย์</li>
-            <li>ชำระเงิน แล้วนำเครื่องรางไปวนเหนือกระถางใหญ่ 3 รอบ ก่อนนำกลับไปพก/ให้คนสำคัญ</li>
+            <li>
+              ไหว้ให้ครบตามลำดับหลัก
+              (ศาลาหน้า → ศาลาหลวง → เงยหน้าขอฟ้า → ไปยังฮอลล์ด้านหลังที่ตรงกับคำขอของเรา)
+            </li>
+            <li>
+              ถ้ามีพิธีเฉพาะจุด (เช่น ขอความรัก เส้นแดง เสี่ยงเซียมซี)
+              ให้ทำตามป้ายหรือคำแนะนำของวัดให้ครบก่อน แล้วค่อยไปเลือกเครื่องราง
+            </li>
+            <li>
+              ไปที่เคาน์เตอร์ เลือกเครื่องรางจากหมวดที่ตรงกับสิ่งที่ขอ
+              ใช้หมวดบนเว็บนี้ช่วยเช็กชื่อหมวด/ประเภทให้ตรงกับโจทย์ของเราอีกครั้ง
+            </li>
+            <li>
+              ชำระเงิน จากนั้นนำเครื่องรางไปวนเหนือกระถางธูปใหญ่ 3 รอบ พร้อมตั้งใจอธิษฐาน
+              แล้วค่อยนำกลับไปพกติดตัว หรือมอบให้คนสำคัญที่เราตั้งใจซื้อให้
+            </li>
           </ul>
         </div>
       </div>
