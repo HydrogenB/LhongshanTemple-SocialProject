@@ -721,6 +721,16 @@ const Global1738Section = ({ currentLang, t }) => {
   const [selectedIndex, setSelectedIndex] = useState(getInitialIndex());
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+  const cardElsRef = useRef([]);
+  const [cardMinHeight, setCardMinHeight] = useState(0);
+
+  const computeCardMinHeight = useCallback(() => {
+    const heights = cardElsRef.current
+      .map((el) => (el ? el.getBoundingClientRect().height : 0))
+      .filter((h) => h > 0);
+    const max = heights.length ? Math.max(...heights) : 0;
+    setCardMinHeight(max ? Math.ceil(max) : 0);
+  }, []);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -752,6 +762,21 @@ const Global1738Section = ({ currentLang, t }) => {
     }
   }, [currentLang, emblaApi, getInitialIndex]);
 
+  useEffect(() => {
+    if (!emblaApi || typeof window === 'undefined') return;
+    const measure = () => computeCardMinHeight();
+    const raf = requestAnimationFrame(measure);
+    emblaApi.on('reInit', measure);
+    emblaApi.on('resize', measure);
+    window.addEventListener('resize', measure);
+    return () => {
+      cancelAnimationFrame(raf);
+      emblaApi.off('reInit', measure);
+      emblaApi.off('resize', measure);
+      window.removeEventListener('resize', measure);
+    };
+  }, [emblaApi, computeCardMinHeight, currentLang, total]);
+
   if (!total) return null;
 
   return (
@@ -776,9 +801,15 @@ const Global1738Section = ({ currentLang, t }) => {
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {contexts.map((ctx, idx) => (
-                <div key={ctx.id} className="flex-[0_0_85%] sm:flex-[0_0_70%] min-w-0 pl-3 sm:pl-4">
-                  <div className="">
-                    <div className="bg-gradient-to-br from-gray-900/90 to-black border border-amber-500/30 rounded-2xl p-5 sm:p-8 shadow-xl shadow-amber-500/5">
+                <div key={ctx.id} className="flex-[0_0_85%] sm:flex-[0_0_70%] min-w-0 pl-3 sm:pl-4 flex">
+                  <div className="w-full">
+                    <div
+                      ref={(el) => {
+                        cardElsRef.current[idx] = el;
+                      }}
+                      style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}
+                      className="h-full bg-gradient-to-br from-gray-900/90 to-black border border-amber-500/30 rounded-2xl p-5 sm:p-8 shadow-xl shadow-amber-500/5"
+                    >
                       {/* Card Header */}
                       <div className="flex items-start gap-4 mb-5">
                         <span className="text-5xl sm:text-6xl">{ctx.flag}</span>

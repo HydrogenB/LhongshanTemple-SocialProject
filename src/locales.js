@@ -35,8 +35,8 @@ export const translations = {
       readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì']
     },
     floatingNav: {
-      choose: 'Choose',
-      one: 'One',
+      choose: 'Jump',
+      one: 'To',
       hero: 'Home',
       history: '1738',
       blessings: 'Amulets',
@@ -45,14 +45,14 @@ export const translations = {
     },
     header: {
       title: 'Longshan Temple Amulets',
-      subtitle: 'Amulet selection helper & prayer guide for Longshan Temple',
+      subtitle: 'Amulet picker · Temple visit guide',
     },
     global1738: {
       heading: 'Year 1738 – What Was Happening Around the World?',
       description: '1738 was the mid-18th century. Longshan Temple was founded in Taipei under the Qing Dynasty, while other regions around the world were also going through their own significant historical transitions.',
       adLabel: 'AD',
       beLabel: 'BE',
-      swipeHint: 'Swipe left-right or tap buttons to change',
+      swipeHint: 'Swipe left/right (or use the arrows) to switch',
       contexts: [
         {
           id: 'china',
@@ -129,14 +129,14 @@ export const translations = {
       total: 'Total',
       pieces: 'pcs',
       items: 'items',
-      selected: 'Selected',
-      tapToOpen: 'Tap to open full cart',
-      helpsWithBlessing: 'Helps with:',
+      selected: 'In cart',
+      tapToOpen: 'Tap to view cart',
+      helpsWithBlessing: 'For:',
       helpsWithSouvenir: 'Souvenir:',
       removeItem: 'Remove',
-      clearAll: 'Clear All',
-      addToCart: 'Add to Cart',
-      selectedAlt: 'Selected Amulet',
+      clearAll: 'Clear cart',
+      addToCart: 'Add to cart',
+      selectedAlt: 'Selected amulet',
     },
     categories: {
       education: {
@@ -285,8 +285,8 @@ export const translations = {
       readingSegments: ['Měng', 'jiǎ', 'Lóng', 'shān', 'sì'],
     },
     floatingNav: {
-      choose: '選擇',
-      one: '區域',
+      choose: '前往',
+      one: '區段',
       hero: '首頁',
       history: '1738',
       blessings: '加持品',
@@ -295,14 +295,14 @@ export const translations = {
     },
     header: {
       title: '龍山寺加持品',
-      subtitle: '龍山寺加持品選擇助手 & 參拜指南',
+      subtitle: '加持品選擇助手 · 參拜指南',
     },
     global1738: {
       heading: '1738年 – 世界正處於什麼時代？',
       description: '1738年是18世紀中期。龍山寺在清朝統治下的台北創建，而世界其他地區也正經歷各自重要的歷史轉變。',
       adLabel: '西元',
       beLabel: '佛曆',
-      swipeHint: '左右滑動或點擊按鈕切換',
+      swipeHint: '左右滑動（或點擊箭頭）切換',
       contexts: [
         {
           id: 'china',
@@ -375,18 +375,18 @@ export const translations = {
       description: '帶回龍山寺豐富傳統的精美紀念品。',
     },
     cart: {
-      title: '加持品購物車',
-      total: '共計',
+      title: '加持品清單',
+      total: '合計',
       pieces: '件',
       items: '項',
-      selected: '已選擇',
-      tapToOpen: '點擊打開完整購物車',
-      helpsWithBlessing: '加持:',
-      helpsWithSouvenir: '加持:寺廟紀念品',
+      selected: '已加入',
+      tapToOpen: '點擊查看清單',
+      helpsWithBlessing: '用途：',
+      helpsWithSouvenir: '用途：寺廟紀念品',
       removeItem: '移除',
-      clearAll: '清除全部',
-      addToCart: '加入購物車',
-      selectedAlt: '選中的護身符',
+      clearAll: '清空清單',
+      addToCart: '加入清單',
+      selectedAlt: '已選擇的護身符',
     },
     categories: {
       education: {
@@ -534,8 +534,8 @@ export const translations = {
       readingSegments: ['เหมิง', 'เจีย', 'หลง', 'ซาน', 'ซื่อ'],
     },
     floatingNav: {
-      choose: 'เลือก',
-      one: 'หมวด',
+      choose: 'ไปที่',
+      one: 'หัวข้อ',
       hero: 'หน้าแรก',
       history: '1738',
       blessings: 'เครื่องราง',
@@ -544,14 +544,14 @@ export const translations = {
     },
     header: {
       title: 'เครื่องรางวัดหลงซาน',
-      subtitle: 'ตัวช่วยเลือกเครื่องราง & วิธีไหว้ วัดหลงซาน',
+      subtitle: 'ตัวช่วยเลือกเครื่องราง · คู่มือไหว้พระวัดหลงซาน',
     },
     global1738: {
       heading: 'ปี 1738 – โลกกำลังอยู่ยุคไหนบ้าง',
       description: 'ปี 1738 คือช่วงกลางศตวรรษที่ 18 วัดหลงซานถือกำเนิดในไทเปภายใต้ราชวงศ์ชิง ขณะที่ภูมิภาคอื่น ๆ รอบโลกก็กำลังเปลี่ยนผ่านยุคประวัติศาสตร์สำคัญของตัวเองไปพร้อมกัน.',
       adLabel: 'ค.ศ.',
       beLabel: 'พ.ศ.',
-      swipeHint: 'ปัดซ้าย-ขวา หรือกดปุ่มเพื่อเปลี่ยน',
+      swipeHint: 'ปัดซ้าย-ขวา (หรือกดลูกศร) เพื่อเปลี่ยน',
       contexts: [
         {
           id: 'china',
@@ -628,13 +628,13 @@ export const translations = {
       total: 'รวม',
       pieces: 'ชิ้น',
       items: 'รายการ',
-      selected: 'เลือกไว้',
-      tapToOpen: 'แตะเพื่อเปิดตะกร้าเต็ม',
+      selected: 'ในตะกร้า',
+      tapToOpen: 'แตะเพื่อดูตะกร้า',
       helpsWithBlessing: 'ช่วยเรื่อง:',
       helpsWithSouvenir: 'ช่วยเรื่อง: ของที่ระลึกจากวัด',
-      removeItem: 'ลบรายการ',
-      clearAll: 'ล้างทั้งหมด',
-      addToCart: 'เพิ่มลงในตะกร้า',
+      removeItem: 'เอาออก',
+      clearAll: 'ล้างตะกร้า',
+      addToCart: 'ใส่ตะกร้า',
       selectedAlt: 'เครื่องรางที่เลือก',
     },
     categories: {
@@ -784,8 +784,8 @@ export const translations = {
       readingSegments: ['メン', 'ジャー', 'ロン', 'シャン', 'スー'],
     },
     floatingNav: {
-      choose: '選択',
-      one: 'する',
+      choose: '移動',
+      one: '先',
       hero: 'ホーム',
       history: '1738',
       blessings: 'お守り',
@@ -794,14 +794,14 @@ export const translations = {
     },
     header: {
       title: '龍山寺のお守り',
-      subtitle: '龍山寺のお守り選び & 参拝ガイド',
+      subtitle: 'お守り選び・参拝ガイド',
     },
     global1738: {
       heading: '1738年 – 世界はどんな時代だったのか？',
       description: '1738年は18世紀半ば。龍山寺は清朝統治下の台北で創建されました。世界の他の地域も、それぞれ重要な歴史的転換期を迎えていました。',
       adLabel: '西暦',
       beLabel: '仏暦',
-      swipeHint: '左右にスワイプまたはボタンをタップして切り替え',
+      swipeHint: '左右にスワイプ（または矢印で切り替え）',
       contexts: [
         {
           id: 'china',
@@ -878,13 +878,13 @@ export const translations = {
       total: '合計',
       pieces: '点',
       items: '項目',
-      selected: '選択済み',
-      tapToOpen: 'タップして全カートを開く',
+      selected: 'カート内',
+      tapToOpen: 'タップしてカートを見る',
       helpsWithBlessing: 'ご利益：',
       helpsWithSouvenir: 'ご利益：寺院のお土産',
       removeItem: '削除',
-      clearAll: 'すべてクリア',
-      addToCart: 'カートに追加',
+      clearAll: 'カートを空にする',
+      addToCart: 'カートに入れる',
       selectedAlt: '選択されたお守り',
     },
     categories: {
@@ -1034,8 +1034,8 @@ export const translations = {
       readingSegments: ['멍', '자', '룽', '산', '스'],
     },
     floatingNav: {
-      choose: '선택',
-      one: '하기',
+      choose: '바로',
+      one: '가기',
       hero: '홈',
       history: '1738',
       blessings: '부적',
@@ -1044,14 +1044,14 @@ export const translations = {
     },
     header: {
       title: '룽산사 부적',
-      subtitle: '룽산사 부적 선택 도우미 & 참배 가이드',
+      subtitle: '부적 선택 도우미 · 참배 가이드',
     },
     global1738: {
       heading: '1738년 – 세계는 어떤 시대였을까?',
       description: '1738년은 18세기 중반이었습니다. 룽산사는 청나라 통치 하의 타이베이에서 창건되었고, 세계 다른 지역들도 각자의 중요한 역사적 전환기를 겪고 있었습니다.',
       adLabel: '서기',
       beLabel: '불기',
-      swipeHint: '좌우로 스와이프하거나 버튼을 탭하여 전환',
+      swipeHint: '좌우로 스와이프(또는 화살표로 전환)',
       contexts: [
         {
           id: 'china',
@@ -1126,15 +1126,15 @@ export const translations = {
     cart: {
       title: '부적 장바구니',
       total: '합계',
-      pieces: '점',
+      pieces: '개',
       items: '항목',
-      selected: '선택됨',
-      tapToOpen: '전체 장바구니 열기',
+      selected: '담김',
+      tapToOpen: '탭하여 장바구니 보기',
       helpsWithBlessing: '효과:',
       helpsWithSouvenir: '효과: 사원 기념품',
       removeItem: '삭제',
-      clearAll: '모두 지우기',
-      addToCart: '장바구니에 추가',
+      clearAll: '장바구니 비우기',
+      addToCart: '담기',
       selectedAlt: '선택된 부적',
     },
     categories: {
