@@ -608,7 +608,7 @@ const HeroSection = ({ heroText, currentLang, t }) => {
             ))}
           </div>
           <p className="text-xs sm:text-sm text-white/60 tracking-wide uppercase">
-            Longshan Temple · {t?.hero?.badge || 'ก่อตั้ง ค.ศ. 1738'}
+            Longshan Temple · {t?.hero?.badge || 'EST. 1738'}
           </p>
         </div>
 
@@ -616,7 +616,7 @@ const HeroSection = ({ heroText, currentLang, t }) => {
         <div className="space-y-5">
           {/* Heading for counter */}
           <h2 className="text-lg sm:text-xl text-amber-200/90 font-medium">
-            {t?.hero?.ageHeading || 'อายุวัดหลงซานจนถึงวันนี้'}
+            {t?.hero?.ageHeading || 'Age of Longshan Temple'}
           </h2>
           
           {/* Duration Counter - Modern Glassmorphism */}
@@ -633,7 +633,7 @@ const HeroSection = ({ heroText, currentLang, t }) => {
                   {displayYears}
                 </span>
                 <span className="block mt-2 text-base sm:text-lg text-amber-200/80 font-semibold">
-                  {t?.hero?.yearsSuffix || 'ปี'}
+                  {t?.hero?.yearsSuffix || 'years'}
                 </span>
               </div>
             </motion.div>
@@ -650,7 +650,7 @@ const HeroSection = ({ heroText, currentLang, t }) => {
                   {String(displayMonths).padStart(2, '0')}
                 </span>
                 <span className="block mt-2 text-base sm:text-lg text-amber-200/80 font-semibold">
-                  {t?.hero?.monthsLabel || 'เดือน'}
+                  {t?.hero?.monthsLabel || 'months'}
                 </span>
               </div>
             </motion.div>
@@ -667,7 +667,7 @@ const HeroSection = ({ heroText, currentLang, t }) => {
                   {String(displayDays).padStart(2, '0')}
                 </span>
                 <span className="block mt-2 text-base sm:text-lg text-amber-200/80 font-semibold">
-                  {t?.hero?.daysLabel || 'วัน'}
+                  {t?.hero?.daysLabel || 'days'}
                 </span>
               </div>
             </motion.div>
@@ -677,11 +677,11 @@ const HeroSection = ({ heroText, currentLang, t }) => {
         {/* Founding Date - Two lines with bold highlight */}
         <div className="text-center space-y-1">
           <p className="text-base sm:text-lg text-white/80">
-            {t?.hero?.foundingLine1 || 'เริ่มสร้างเมื่อ'}{' '}
-            <span className="font-bold text-amber-300">{t?.hero?.foundingDateBold || '18 พฤษภาคม ค.ศ. 1738'}</span>
+            {t?.hero?.foundingLine1 || 'Founded on'}{' '}
+            <span className="font-bold text-amber-300">{t?.hero?.foundingDateBold || 'May 18, 1738'}</span>
           </p>
           <p className="text-sm sm:text-base text-white/50">
-            {t?.hero?.foundingLine2 || 'ตรงกับปีเฉียนหลงที่ 3 ของราชวงศ์ชิง'}
+            {t?.hero?.foundingLine2 || 'Qianlong Year 3, Qing Dynasty'}
           </p>
         </div>
       </div>
@@ -762,12 +762,12 @@ const Global1738Section = ({ currentLang, t }) => {
           <div className="inline-flex items-center gap-3 px-5 py-2 bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-amber-500/20 rounded-full border border-amber-500/30 mb-5">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             <span className="text-sm sm:text-base text-amber-300 font-medium tracking-wider">
-              ค.ศ. 1738 · พ.ศ. 2281
+              {t?.global1738?.adLabel || 'AD'} 1738 · {t?.global1738?.beLabel || 'BE'} 2281
             </span>
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-thai-display mb-3">
-            {t?.global1738?.heading || 'ปี 1738 – โลกกำลังอยู่ยุคไหนบ้าง'}
+            {t?.global1738?.heading || 'Year 1738 – What Was Happening?'}
           </h2>
         </div>
 
@@ -847,7 +847,7 @@ const Global1738Section = ({ currentLang, t }) => {
           ))}
         </div>
         <p className="text-center text-xs text-white/40 mt-2">
-          {t?.global1738?.swipeHint || 'ปัดซ้าย-ขวา หรือกดปุ่มเพื่อเปลี่ยน'}
+          {t?.global1738?.swipeHint || 'Swipe or tap to change'}
         </p>
       </div>
     </section>
@@ -1515,7 +1515,7 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
             {t?.header?.title || 'Longshan Temple Amulets'}
           </span>
           <span className="text-[11px] sm:text-xs text-white/60">
-            {t?.header?.subtitle || 'ตัวช่วยเลือกเครื่องราง & วิธีไหว้ วัดหลงซาน'}
+            {t?.header?.subtitle || 'Amulet selection helper & prayer guide'}
           </span>
         </div>
 
@@ -1566,7 +1566,7 @@ const Navigation = ({ currentLang, setCurrentLang, t }) => {
       <div className="px-3 sm:px-4 pb-3 font-thai-legal">
         <div className="max-w-7xl mx-auto">
           <div className="bg-black/85 border border-amber-500/40 rounded-lg px-3 py-2 text-[11px] sm:text-xs text-white/70 text-center">
-            {t?.footer?.dataSource || 'อ้างอิงข้อมูลและภาพจากเว็บไซต์ทางการของวัด:'}{' '}
+            {t?.footer?.dataSource || 'Content and images referenced from:'}{' '}
             <a
               href="https://lungshan.org.tw/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t/S2i0g1h9t1s1e2e1i1n2g0G0i0f0t.php#"
               target="_blank"

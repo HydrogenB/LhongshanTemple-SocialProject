@@ -43,11 +43,16 @@ export const translations = {
       souvenirs: 'Souvenirs',
       templeGuide: 'Guide',
     },
+    header: {
+      title: 'Longshan Temple Amulets',
+      subtitle: 'Amulet selection helper & prayer guide for Longshan Temple',
+    },
     global1738: {
       heading: 'Year 1738 – What Was Happening Around the World?',
       description: '1738 was the mid-18th century. Longshan Temple was founded in Taipei under the Qing Dynasty, while other regions around the world were also going through their own significant historical transitions.',
       adLabel: 'AD',
       beLabel: 'BE',
+      swipeHint: 'Swipe left-right or tap buttons to change',
       contexts: [
         {
           id: 'china',
@@ -288,11 +293,16 @@ export const translations = {
       souvenirs: '紀念品',
       templeGuide: '指南',
     },
+    header: {
+      title: '龍山寺加持品',
+      subtitle: '龍山寺加持品選擇助手 & 參拜指南',
+    },
     global1738: {
       heading: '1738年 – 世界正處於什麼時代？',
       description: '1738年是18世紀中期。龍山寺在清朝統治下的台北創建，而世界其他地區也正經歷各自重要的歷史轉變。',
       adLabel: '西元',
       beLabel: '佛曆',
+      swipeHint: '左右滑動或點擊按鈕切換',
       contexts: [
         {
           id: 'china',
@@ -532,11 +542,16 @@ export const translations = {
       souvenirs: 'ของที่ระลึก',
       templeGuide: 'คู่มือ',
     },
+    header: {
+      title: 'เครื่องรางวัดหลงซาน',
+      subtitle: 'ตัวช่วยเลือกเครื่องราง & วิธีไหว้ วัดหลงซาน',
+    },
     global1738: {
       heading: 'ปี 1738 – โลกกำลังอยู่ยุคไหนบ้าง',
       description: 'ปี 1738 คือช่วงกลางศตวรรษที่ 18 วัดหลงซานถือกำเนิดในไทเปภายใต้ราชวงศ์ชิง ขณะที่ภูมิภาคอื่น ๆ รอบโลกก็กำลังเปลี่ยนผ่านยุคประวัติศาสตร์สำคัญของตัวเองไปพร้อมกัน.',
       adLabel: 'ค.ศ.',
       beLabel: 'พ.ศ.',
+      swipeHint: 'ปัดซ้าย-ขวา หรือกดปุ่มเพื่อเปลี่ยน',
       contexts: [
         {
           id: 'china',
@@ -777,11 +792,16 @@ export const translations = {
       souvenirs: 'お土産',
       templeGuide: 'ガイド',
     },
+    header: {
+      title: '龍山寺のお守り',
+      subtitle: '龍山寺のお守り選び & 参拝ガイド',
+    },
     global1738: {
       heading: '1738年 – 世界はどんな時代だったのか？',
       description: '1738年は18世紀半ば。龍山寺は清朝統治下の台北で創建されました。世界の他の地域も、それぞれ重要な歴史的転換期を迎えていました。',
       adLabel: '西暦',
       beLabel: '仏暦',
+      swipeHint: '左右にスワイプまたはボタンをタップして切り替え',
       contexts: [
         {
           id: 'china',
@@ -1022,11 +1042,16 @@ export const translations = {
       souvenirs: '기념품',
       templeGuide: '가이드',
     },
+    header: {
+      title: '룽산사 부적',
+      subtitle: '룽산사 부적 선택 도우미 & 참배 가이드',
+    },
     global1738: {
       heading: '1738년 – 세계는 어떤 시대였을까?',
       description: '1738년은 18세기 중반이었습니다. 룽산사는 청나라 통치 하의 타이베이에서 창건되었고, 세계 다른 지역들도 각자의 중요한 역사적 전환기를 겪고 있었습니다.',
       adLabel: '서기',
       beLabel: '불기',
+      swipeHint: '좌우로 스와이프하거나 버튼을 탭하여 전환',
       contexts: [
         {
           id: 'china',
